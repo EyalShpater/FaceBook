@@ -9,7 +9,7 @@ class FansPage {
     Member** theMember; 
     int numOfMembers;
     int maxMembers;
-    Billboard theBillboard; 
+    Billboard* theBillboard; 
    
 };
 

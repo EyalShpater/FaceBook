@@ -1,14 +1,13 @@
-#include "billboard.h"
-
-#include <iostream>
-using namespace std;
+#include "fansPageArray.h"
+#include "fansPage.h"
 
 const int DEFAULT_PHYS_SIZE = 2;
 const int DEFAULT_LOG_SIZE = 0;
 
-Billboard::Billboard()
+FansPageArray::FansPageArray()
 {
 	physSize = DEFAULT_PHYS_SIZE;
 	logSize = DEFAULT_LOG_SIZE;
-	theStatus = new Status*[physSize];
+	theFansPageArray = new FansPage* [physSize];
 }
+

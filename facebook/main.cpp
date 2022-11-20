@@ -3,14 +3,16 @@
 #include <iostream>
 #include <ctime>
 
-#include "time.h"
-#include "date.h"
+//#include "time.h"
+//#include "date.h"
+
+#include "admin.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "hello" << endl;
+    /*cout << "hello" << endl;
     Time t(22, 00, 32);
     Date d(19, 11, 2021);
 
@@ -25,6 +27,11 @@ int main()
     cout << "ver 2" << endl;
     cout << "ver3" << endl;
     cout << "ver4" << endl;
+    */
+
+    Admin a;
+
+    a.menu();
 
     return 0;
 }

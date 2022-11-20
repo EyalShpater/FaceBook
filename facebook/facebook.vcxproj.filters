@@ -36,6 +36,15 @@
     <ClCompile Include="member.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="memberArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fansPageArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="admin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="time.h">
@@ -54,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="member.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memberArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fansPageArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,9 @@ class Billboard {
     Status** theStatus; 
     int logSize;
     int physSize;
+
+public:
+    Billboard();
 };
 
 

@@ -3,33 +3,28 @@
 
 #include "date.h"
 #include "billboard.h"
+#include "memberArray.h"
+#include "fansPageArray.h"
 
-class fansPage;
+class Status;
 
 class Member
 {
 	char* name;
 	const Date dateOfBirth;
 	Billboard theBillboard;
-	Member** friends;
-	int numOfFriends;
-	int maxFriends;
-	fansPage** fansPageArray;
-	int numOfFansPage;
-	int maxFansPage;
-
+	MemberArray members;
+	FansPageArray fansPages;
+	
 public:
 	Member(const char* name, const Date& birthDate);
 	~Member();
 
 	const char* getName() const { return name; }
 	const Date& getDateOfBirth() const { return dateOfBirth; }
-	Member** getFriends() const { return friends; }
-	int getNumOfFriends() const { return numOfFriends; }
-	fansPage** getFansPage() const { return fansPageArray; }
-	int getNumOfFansPage() const { return numOfFansPage; }
-
-
+	
+	void addStatusToBillboard(const Status& newStatus);
+	
 
 
 private:
