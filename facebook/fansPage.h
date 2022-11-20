@@ -6,9 +6,9 @@ class Billboard;
 
 class FansPage {
     char* name;
-    Member** theMember; 
-    int numOfMembers;
-    int maxMembers;
+    Member** theMember; //memberArray
+    int numOfMembers; //delete
+    int maxMembers; //delete
     Billboard* theBillboard; 
 
     /**** functions ******/
