@@ -21,5 +21,8 @@ int main()
     t1 = time(nullptr);
 
     cout << asctime(localtime(&t1));
+
+    cout << "ver 2";
+
     return 0;
 }
