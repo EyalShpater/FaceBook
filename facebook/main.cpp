@@ -22,7 +22,8 @@ int main()
 
     cout << asctime(localtime(&t1));
 
-    cout << "ver 2";
+    cout << "ver 2" << endl;
+    cout << "ver3" << endl;
 
     return 0;
 }
