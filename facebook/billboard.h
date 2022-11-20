@@ -10,6 +10,21 @@ class Billboard {
 
 public:
     Billboard();
+    // add d'tor
+
+    /*****  functions  ******/
+
+    /* 
+    push() //add Status to last place
+    showAllStatus()
+    showLatest10thStatus()
+    size() //return logSize
+    capacity() //return physSize
+    reserve(int n) //make the array bigger ig log=phys
+    */
+
+    //we need to delete copy c'tor
+
 };
 
 

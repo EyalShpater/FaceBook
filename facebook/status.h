@@ -12,6 +12,9 @@ class Status {
     const Time theTime;
     char* text;
 
+    //add c'tor, d'tor
+    //we need to choose if we want to delete the copy c'tor
+
 };
 
 

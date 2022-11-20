@@ -24,6 +24,8 @@ public:
 	const Date& getDateOfBirth() const { return dateOfBirth; }
 	
 	void addStatusToBillboard(const Status& newStatus);
+	// showAllStatus
+	//showLatest10thStatus
 	
 
 

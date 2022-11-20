@@ -10,6 +10,15 @@ class FansPage {
     int numOfMembers;
     int maxMembers;
     Billboard* theBillboard; 
+
+    /**** functions ******/
+
+    //c'tor, d'tor
+    // delete copy c'tor
+
+    //addStatus 
+    // showAllStatus
+    //showLatest10thStatus
    
 };
 

@@ -16,6 +16,17 @@ public:
 	MemberArray();
 	Member** getFriends() const { return friends; }
 	int getNumOfFriends() const { return numOfFriends; }
+
+    /*****  functions  ******/
+
+  /*
+  push() //add Status to last place
+  showAllStatus()
+  showLatest10thStatus()
+  size() //return logSize
+  capacity() //return physSize
+  reserve(int n) //make the array bigger ig log=phys
+  */
 };
 
 #endif //__MEMBERARRAY_H
