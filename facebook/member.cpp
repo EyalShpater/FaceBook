@@ -1,3 +1,5 @@
+#pragma warning (disable:4996)
+
 #include "member.h"
 
 #include <iostream>

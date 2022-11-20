@@ -4,7 +4,8 @@
 #include <iostream>
 using namespace std;
 
-#include "member.h"
+//#include "member.h"
+class Member;
 
 class MemberArray
 {

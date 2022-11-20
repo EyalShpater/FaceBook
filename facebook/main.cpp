@@ -3,8 +3,8 @@
 #include <iostream>
 #include <ctime>
 
-//#include "time.h"
-//#include "date.h"
+#include "time.h"
+#include "date.h"
 
 #include "admin.h"
 
@@ -29,9 +29,21 @@ int main()
     cout << "ver4" << endl;
     */
 
-    Admin a;
+    //Admin a;
 
-    a.menu();
+   // a.menu();
+
+    time_t now = time(0);
+    struct tm* st = localtime(&now);
+    cout << ctime(&now);
+
+    Date d(st->tm_mday, st->tm_mon + 1, st->tm_year + 1900);
+    Time t(st->tm_hour, st->tm_min, st->tm_sec);
+
+    d.show();
+    t.show();
+
+    system("pause");
 
     return 0;
 }

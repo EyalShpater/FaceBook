@@ -25,7 +25,7 @@ public:
 	
 	void addStatusToBillboard(const Status& newStatus);
 	// showAllStatus
-	//showLatest10thStatus
+	// showLatest10thStatus
 	
 
 
