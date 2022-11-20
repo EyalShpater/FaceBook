@@ -6,9 +6,11 @@ class Billboard;
 
 class FansPage {
     char* name;
-    Member* theMember; // list
-    Billboard* theBillboard; // list
-
+    Member** theMember; 
+    int numOfMembers;
+    int maxMembers;
+    Billboard theBillboard; 
+   
 };
 
 

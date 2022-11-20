@@ -4,7 +4,9 @@
 class Status;
 
 class Billboard {
-    Status* theStatus; // list
+    Status** theStatus; 
+    int logSize;
+    int physSize;
 };
 
 
