@@ -12,9 +12,12 @@ class Status {
     const Time theTime;
     char* text;
 
-    //add c'tor, d'tor
-    //we need to choose if we want to delete the copy c'tor
+public:
+    Status(const char* text);
+    Status(const Status& other);
+    ~Status();
 
+    void show();
 };
 
 

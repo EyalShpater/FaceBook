@@ -41,6 +41,7 @@ int main()
     Time t(st->tm_hour, st->tm_min, st->tm_sec);
     Time t1(t);
 
+
     d.show();
     t.show();
 
