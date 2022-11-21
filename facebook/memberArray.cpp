@@ -8,8 +8,8 @@ const int DEFAULT_LOG_SIZE = 0;
 
 MemberArray::MemberArray()
 {
-	maxFriends = DEFAULT_PHYS_SIZE;
-	numOfFriends = DEFAULT_LOG_SIZE;
-	friends = new Member* [maxFriends];
+	physSize = DEFAULT_PHYS_SIZE;
+	logSize = DEFAULT_LOG_SIZE;
+	friends = new Member* [physSize];
 }
 

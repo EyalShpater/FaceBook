@@ -2,12 +2,12 @@
 #define __FANSPAGEARRAY_H
 
 class FansPage;
+
 class FansPageArray
 {
 	FansPage** theFansPageArray;
 	int logSize;
 	int physSize;
-
 
 public:
 	FansPageArray();
@@ -16,7 +16,7 @@ public:
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
 
-	void push(const Status& status);
+	void push(const FansPage& newFansPage);
 	void showAllStatus() const;
 	void showLatest10thStatus() const;
 	void pop(const char* name);

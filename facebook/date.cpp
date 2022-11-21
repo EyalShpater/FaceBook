@@ -1,5 +1,8 @@
+#pragma warning (disable:4996)
+
 #include "date.h"
 
+#include <ctime>
 #include <iostream>
 using namespace std;
 
@@ -9,38 +12,50 @@ const int MIN_MONTH = 1;
 const int MAX_MONTH = 31;
 const int MIN_YEAR = 1000;
 const int MAX_YEAR = 3000;
+const int CTIME_START_YEAR_COUNT = 1900;
+const int CTIME_START_MONTH_COUNT = 1;
 
-Date::Date(int d, int m, int y)
+Date::Date()
 {
-    setDay(d);
-    setMonth(m);
-    setYear(y);
+    time_t now = time(0);
+    tm* temp = localtime(&now);
+
+    year = temp->tm_year + CTIME_START_YEAR_COUNT;
+    month = temp->tm_mon + CTIME_START_MONTH_COUNT;
+    day = temp->tm_mday;
 }
 
-bool Date::setDay(int d)
+Date::Date(int day, int month, int year)
 {
-    if (d < MIN_DAY || d > MAX_DAY)
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+}
+
+bool Date::setDay(int day)
+{
+    if (day < MIN_DAY || day > MAX_DAY)
         return false;
 
-    day = d;
+    this->day = day;
     return true;
 }
 
-bool Date::setMonth(int m)
+bool Date::setMonth(int month)
 {
-    if (m < MIN_MONTH || m > MAX_MONTH)
+    if (month < MIN_MONTH || month > MAX_MONTH)
         return false;
 
-    month = m;
+    this->month = month;
     return true;
 }
 
-bool Date::setYear(int y)
+bool Date::setYear(int year)
 {
-    if (y < MIN_YEAR || y > MAX_YEAR)
+    if (year < MIN_YEAR || year > MAX_YEAR)
         return false;
 
-    year = y;
+    this->year = year;
     return true;
 }
 

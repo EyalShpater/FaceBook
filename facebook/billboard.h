@@ -19,7 +19,6 @@ public:
     void showAllStatus() const; 
     void showLatest10thStatus() const;
    
-
 private:
     Billboard(const Billboard&);
     void reserve();

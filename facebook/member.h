@@ -15,7 +15,7 @@ class Member
 	Billboard theBillboard;
 	MemberArray members;
 	FansPageArray fansPages;
-	
+
 public:
 	Member(const char* name, const Date& birthDate);
 	~Member();
@@ -32,7 +32,7 @@ public:
 	void showAllFriend() const;
 	
 private:
-	Member(const Member&);
+	Member(const Member&); 
 };
 
 

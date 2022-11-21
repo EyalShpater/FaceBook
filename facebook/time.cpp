@@ -1,4 +1,8 @@
+#pragma warning (disable:4996)
+
 #include "time.h"
+
+#include <ctime>
 #include <iostream>
 using namespace std;
 
@@ -9,34 +13,45 @@ const int MAX_MIN = 59;
 const int MIN_SEC = 0;
 const int MAX_SEC = 59;
 
-Time::Time(int h, int m, int s)
+Time::Time(int hour, int minutes, int seconds)
 {
-    setHour(h);
-    setMinutes(m);
-    setSeconds(s);
+    setHour(hour);
+    setMinutes(minutes);
+    setSeconds(seconds);
 }
-bool Time::setHour(int h)
+
+Time::Time() 
 {
-    if (h < MIN_HOUR || h > MAX_HOUR)
+    time_t now = time(0);
+    tm* temp = localtime(&now);
+
+    hour = temp->tm_hour;
+    minutes = temp->tm_min;
+    seconds = temp->tm_sec;
+}
+
+bool Time::setHour(int hour)
+{
+    if (hour < MIN_HOUR || hour > MAX_HOUR)
         return false;
 
-    hour = h;
+    this->hour = hour;
     return true;
 }
-bool Time::setMinutes(int m)
+bool Time::setMinutes(int minutes)
 {
-    if (m < MIN_MIN || m > MAX_MIN)
+    if (minutes < MIN_MIN || minutes > MAX_MIN)
         return false;
 
-    minutes = m;
+    this->minutes = minutes;
     return true;
 }
-bool Time::setSeconds(int s)
+bool Time::setSeconds(int seconds)
 {
-    if (s < MIN_SEC || s > MAX_SEC)
+    if (seconds < MIN_SEC || seconds > MAX_SEC)
         return false;
 
-    seconds = s;
+    this->seconds = seconds;
     return true;
 }
 

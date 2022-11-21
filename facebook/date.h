@@ -4,15 +4,16 @@
 class Date {
     int day, month, year;
 public:
-    Date(int d, int m, int y);
+    Date();
+    Date(int day, int month, int year);
 
     int getDay() const { return day; }
     int getMonth() const { return month; }
     int getYear() const { return year; }
 
-    bool setDay(int d);
-    bool setMonth(int m);
-    bool setYear(int y);
+    bool setDay(int day);
+    bool setMonth(int month);
+    bool setYear(int year);
 
     void show() const;
 };

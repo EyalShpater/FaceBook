@@ -4,7 +4,8 @@
 class Time {
     int hour, minutes, seconds;
 public:
-    Time(int h, int m, int s);
+    Time(int hour, int minutes, int seconds);
+    Time();
 
     int getHour() const { return hour; }
     int getMinutes() const { return minutes; }
