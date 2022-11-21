@@ -35,8 +35,8 @@ void Billboard::showAllStatus() const
 
 void Billboard::showLatest10thStatus() const
 {
-	for (int i = 0; i < DEFAULT_NUM_OF_STATUS_TO_SHOW; i++)
-		theStatus[i]->show();
+	for (int i = 1; i <= DEFAULT_NUM_OF_STATUS_TO_SHOW && i < logSize; i++)
+		theStatus[DEFAULT_NUM_OF_STATUS_TO_SHOW - i]->show();
 }
 
 void Billboard::reserve()
