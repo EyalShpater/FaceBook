@@ -10,21 +10,21 @@ class Billboard {
 
 public:
     Billboard();
-    // add d'tor
+    ~Billboard();
+   
 
-    /*****  functions  ******/
+    int getLogSize() const { return logSize; }
+    int getPhysSize() const { return physSize; }
 
-    /* 
-    push() //add Status to last place
-    showAllStatus()
-    showLatest10thStatus()
-    size() //return logSize
-    capacity() //return physSize
-    reserve(int n) //make the array bigger ig log=phys
-    */
+     
+    void push(const Status& status);
+    void showAllStatus() const; 
+    void showLatest10thStatus() const;
+   
 
-    //we need to delete copy c'tor
-
+private:
+    Billboard(const Billboard&);
+    void reserve();
 };
 
 

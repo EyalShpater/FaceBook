@@ -1,25 +1,25 @@
 #ifndef __FANSPAGE_H
 #define __FANSPAGE_H
 
-class Member;
-class Billboard;
+#include "memberArray.h"
+#include "billboard.h"
+
 
 class FansPage {
     char* name;
-    Member** theMember; //memberArray
-    int numOfMembers; //delete
-    int maxMembers; //delete
-    Billboard* theBillboard; 
-
-    /**** functions ******/
-
-    //c'tor, d'tor
-    // delete copy c'tor
-
-    //addStatus 
-    // showAllStatus
-    //showLatest10thStatus
+    Billboard theBillboard; 
+    MemberArray members;
    
+public:
+    FansPage(const char* name);
+    ~FansPage();
+
+    void addStatus(const Status& newStatus);
+    void showAllStatus() const;
+    void addFriend(const Member& newFriend);
+    
+private:
+    FansPage(const FansPage&);
 };
 
 

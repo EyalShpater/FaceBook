@@ -35,10 +35,11 @@ int main()
 
     time_t now = time(0);
     struct tm* st = localtime(&now);
-    cout << ctime(&now);
+    //cout << ctime(&now);
 
     Date d(st->tm_mday, st->tm_mon + 1, st->tm_year + 1900);
     Time t(st->tm_hour, st->tm_min, st->tm_sec);
+    Time t1(t);
 
     d.show();
     t.show();

@@ -4,30 +4,28 @@
 #include <iostream>
 using namespace std;
 
-//#include "member.h"
 class Member;
 
 class MemberArray
 {
 	Member** friends;
-	int numOfFriends;
-	int maxFriends;
+	int logSize;
+	int physSize;
 
 public:
 	MemberArray();
 	Member** getFriends() const { return friends; }
 	int getNumOfFriends() const { return numOfFriends; }
 
-    /*****  functions  ******/
+	int getLogSize() const { return logSize; }
+	int getPhysSize() const { return physSize; }
 
-  /*
-  push() //add Status to last place
-  showAllStatus()
-  showLatest10thStatus()
-  size() //return logSize
-  capacity() //return physSize
-  reserve(int n) //make the array bigger ig log=phys
-  */
+	void push(const Member& newMember);
+	void showAllMembers() const;
+	
+private:
+	MemberArray(const MemberArray&);
+	void reserve();
 };
 
 #endif //__MEMBERARRAY_H
