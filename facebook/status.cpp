@@ -21,7 +21,7 @@ Status::~Status()
 void Status::show()
 {
 	cout << text << endl;
-	cout << "published on:";
+	cout << "published on: ";
 	theDate.show();
 	theTime.show();
 }
