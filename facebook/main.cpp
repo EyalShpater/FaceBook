@@ -40,12 +40,16 @@ int main()
     Date d(st->tm_mday, st->tm_mon + 1, st->tm_year + 1900);
     Time t(st->tm_hour, st->tm_min, st->tm_sec);
     Time t1(t);
+    
 
 
     d.show();
     t.show();
-
-    system("pause");
+    t1.show();
+    Time t2;
+    Date d2;
+    d2.show();
+    t2.show();
 
     return 0;
 }

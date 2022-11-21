@@ -5,7 +5,7 @@ class FansPage;
 
 class FansPageArray
 {
-	FansPage** theFansPageArray;
+	const FansPage** theFansPageArray;
 	int logSize;
 	int physSize;
 
@@ -17,14 +17,13 @@ public:
 	int getPhysSize() const { return physSize; }
 
 	void push(const FansPage& newFansPage);
-	void showAllStatus() const;
-	void showLatest10thStatus() const;
 	void pop(const char* name);
 	int findPage(const char* name);
 
 private:
 	FansPageArray(const FansPageArray&);
 	void reserve();
+	void myRealoc(int newSize);
 };
 
 #endif // __FANSPAGEARRAY_H

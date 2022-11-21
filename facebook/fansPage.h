@@ -14,6 +14,8 @@ public:
     FansPage(const char* name);
     ~FansPage();
 
+    const char* getName() const { return name; }
+
     void addStatus(const Status& newStatus);
     void addFriend(const Member& newFriend);
     void deleteFriend(const char* name);
