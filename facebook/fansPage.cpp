@@ -1,3 +1,5 @@
+#pragma warning (disable:4996)
+
 #include "fansPage.h"
 
 FansPage::FansPage(const char* name)

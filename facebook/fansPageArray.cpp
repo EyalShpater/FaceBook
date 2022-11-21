@@ -10,7 +10,7 @@ FansPageArray::FansPageArray()
 {
 	physSize = DEFAULT_PHYS_SIZE;
 	logSize = DEFAULT_LOG_SIZE;
-	theFansPageArray = new FansPage* [physSize];
+	theFansPageArray = new const FansPage* [physSize];
 }
 
 FansPageArray::~FansPageArray()
@@ -58,10 +58,10 @@ void FansPageArray::reserve()
 
 void FansPageArray::myRealoc(int newSize)
 {
-	const FansPage** temp = new FansPage* [newSize];
+	const FansPage** temp = new const FansPage*[newSize];
 
-	for (int i = 0; i < logSize; i++)
-		temp[i] = theFansPageArray[i];
+	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
+		temp[i] = theFansPageArray[i];  
 
 	delete[]theFansPageArray;
 
