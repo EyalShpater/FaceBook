@@ -10,6 +10,11 @@ MemberArray::MemberArray()
 {
 	physSize = DEFAULT_PHYS_SIZE;
 	logSize = DEFAULT_LOG_SIZE;
-	friends = new Member* [physSize];
+	friends = new Member*[physSize];
+}
+
+MemberArray::~MemberArray()
+{
+
 }
 

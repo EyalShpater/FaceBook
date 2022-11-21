@@ -11,3 +11,8 @@ FansPageArray::FansPageArray()
 	theFansPageArray = new FansPage* [physSize];
 }
 
+FansPageArray::~FansPageArray()
+{
+
+}
+

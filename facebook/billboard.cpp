@@ -12,3 +12,23 @@ Billboard::Billboard()
 	logSize = DEFAULT_LOG_SIZE;
 	theStatus = new Status*[physSize];
 }
+
+Billboard::~Billboard()
+{
+
+}
+
+void Billboard::push(const Status& status)
+{
+
+}
+
+void Billboard::showAllStatus() const
+{
+
+}
+
+void Billboard::showLatest10thStatus() const
+{
+
+}

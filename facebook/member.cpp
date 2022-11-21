@@ -14,3 +14,38 @@ Member::~Member()
 {
 	delete[]name;
 }
+
+void Member::addStatusToBillboard(const Status& newStatus)
+{
+
+}
+
+void Member::addFriend(const Member& newFriend)
+{
+
+}
+
+void Member::cancelFriendship(const char* name)
+{
+
+}
+
+void Member::likePage(const char* name)
+{
+
+}
+
+void Member::showAllStatus() const
+{
+
+}
+
+void Member::showLatest10thStatus() const
+{
+
+}
+
+void Member::showAllFriend() const
+{
+
+}
