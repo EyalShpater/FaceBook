@@ -17,7 +17,7 @@ public:
     Status(const Status& other);
     ~Status();
 
-    void show();
+    void show() const;
 };
 
 

@@ -20,7 +20,7 @@ Status::~Status()
 	delete[]text;
 }
 
-void Status::show()
+void Status::show() const
 {
 	cout << text << endl;
 	cout << "published on: ";

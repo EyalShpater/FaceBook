@@ -4,7 +4,7 @@
 class Status;
 
 class Billboard {
-    Status** theStatus; 
+    const Status** theStatus; 
     int logSize;
     int physSize;
 
@@ -15,13 +15,14 @@ public:
     int getLogSize() const { return logSize; }
     int getPhysSize() const { return physSize; }
 
-    void push(const Status& status);
+    void push(const Status& newStatus);
     void showAllStatus() const; 
     void showLatest10thStatus() const;
    
 private:
     Billboard(const Billboard&);
     void reserve();
+    void myRealoc(int newSize);
 };
 
 
