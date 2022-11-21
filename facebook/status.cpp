@@ -1,3 +1,5 @@
+#pragma warning (disable:4996)
+
 #include "status.h"
 
 #include <iostream>
