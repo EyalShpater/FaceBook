@@ -15,8 +15,10 @@ public:
     ~FansPage();
 
     void addStatus(const Status& newStatus);
-    void showAllStatus() const;
     void addFriend(const Member& newFriend);
+    void deleteFriend(const char* name);
+    void showAllStatus() const;
+    void showAllFriends() const;
     
 private:
     FansPage(const FansPage&);

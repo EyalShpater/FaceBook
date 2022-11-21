@@ -14,14 +14,16 @@ class MemberArray
 
 public:
 	MemberArray();
-	Member** getFriends() const { return friends; }
-	int getNumOfFriends() const { return numOfFriends; }
+	~MemberArray();
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
 
 	void push(const Member& newMember);
+	void pop(const char* name);
+	int findMemberByName(const char* name);
 	void showAllMembers() const;
+	
 	
 private:
 	MemberArray(const MemberArray&);

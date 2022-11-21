@@ -12,11 +12,9 @@ public:
     Billboard();
     ~Billboard();
    
-
     int getLogSize() const { return logSize; }
     int getPhysSize() const { return physSize; }
 
-     
     void push(const Status& status);
     void showAllStatus() const; 
     void showLatest10thStatus() const;

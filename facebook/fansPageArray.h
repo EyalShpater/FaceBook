@@ -19,6 +19,8 @@ public:
 	void push(const Status& status);
 	void showAllStatus() const;
 	void showLatest10thStatus() const;
+	void pop(const char* name);
+	int findPage(const char* name);
 
 private:
 	FansPageArray(const FansPageArray&);
