@@ -1,4 +1,6 @@
 #include "memberArray.h"
+#include "member.h"
+
 
 #include <iostream>
 using namespace std;
@@ -15,6 +17,30 @@ MemberArray::MemberArray()
 
 MemberArray::~MemberArray()
 {
-
+	delete[]friends;
 }
 
+void MemberArray::push(Member& newMember) //cancle const
+{
+	reserve();
+	friends[logSize] = &newMember;
+	logSize++;
+}
+
+void MemberArray::reserve()
+{
+	if (physSize == logSize)
+		physSize *= 2;
+	myRealloc(physSize);
+}
+
+void MemberArray::myRealloc(int newSize)
+{
+	Member** temp = new Member * [newSize];
+	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
+		temp[i] = friends[i];
+
+	delete[]friends;
+
+	friends = temp;
+}

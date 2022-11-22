@@ -19,7 +19,7 @@ public:
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
 
-	void push(const Member& newMember);
+	void push(Member& newMember);
 	void pop(const char* name);
 	int findMemberByName(const char* name);
 	void showAllMembers() const;
@@ -28,6 +28,8 @@ public:
 private:
 	MemberArray(const MemberArray&);
 	void reserve();
+	void myRealloc(int newSize);
+
 };
 
 #endif //__MEMBERARRAY_H
