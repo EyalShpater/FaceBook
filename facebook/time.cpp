@@ -62,5 +62,5 @@ void Time::show() const
         << (minutes < 10 ? "0" : "")
         << minutes << ":"
         << (seconds < 10 ? "0" : "")
-        << seconds << endl;
+        << seconds;
 }
