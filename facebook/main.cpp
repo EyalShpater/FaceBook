@@ -1,17 +1,17 @@
 #pragma warning (disable:4996)
 
-#include <iostream>
-#include <ctime>
-
-#include "time.h"
-#include "date.h"
-
 #include "admin.h"
-
-using namespace std;
 
 int main()
 {
+
+    Admin a;
+    a.menu();
+
+    return 0;
+}
+
+
     /*cout << "hello" << endl;
     Time t(22, 00, 32);
     Date d(19, 11, 2021);
@@ -29,10 +29,8 @@ int main()
     cout << "ver4" << endl;
     */
 
-    //Admin a;
-
-   // a.menu();
-
+    
+    /*
     time_t now = time(0);
     tm* st = localtime(&now);
     //cout << ctime(&now);
@@ -49,6 +47,4 @@ int main()
     Date d2;
     d2.show();
     t2.show();
-
-    return 0;
-}
+    */

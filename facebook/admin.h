@@ -12,8 +12,8 @@ class Admin
 public:
 	Admin();
 
-	const MemberArray& getMemberArray() { return allMembers; }
-	const FansPageArray& getFansPageArrary() { return allPgaes; }
+	const MemberArray& getMemberArray() const { return allMembers; }
+	const FansPageArray& getFansPageArrary() const { return allPgaes; }
 
 	void menu();
 	void addFriend();

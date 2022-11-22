@@ -10,7 +10,7 @@ FansPageArray::FansPageArray()
 {
 	physSize = DEFAULT_PHYS_SIZE;
 	logSize = DEFAULT_LOG_SIZE;
-	theFansPageArray = new const FansPage* [physSize];
+	theFansPageArray = new FansPage* [physSize];
 }
 
 FansPageArray::~FansPageArray()
@@ -18,7 +18,7 @@ FansPageArray::~FansPageArray()
 	delete[]theFansPageArray;
 }
 
-void FansPageArray::push(const FansPage& newFansPage)
+void FansPageArray::push(FansPage& newFansPage)
 {
 	reserve();
 	theFansPageArray[logSize] = &newFansPage;
@@ -30,9 +30,10 @@ void FansPageArray::pop(const char* name)
 	int index = findPage(name);
 	
 	if (index != NOT_FOUND)
+	{
 		theFansPageArray[index] = theFansPageArray[logSize - 1];
-
-	--logSize;
+		--logSize;
+	}
 }
 
 int FansPageArray::findPage(const char* name)
@@ -52,13 +53,13 @@ void FansPageArray::reserve()
 	if (logSize == physSize)
 	{
 		physSize *= 2;
-		myRealoc(physSize);
+		myRealloc(physSize);
 	}
 }
 
-void FansPageArray::myRealoc(int newSize)
+void FansPageArray::myRealloc(int newSize)
 {
-	const FansPage** temp = new const FansPage*[newSize];
+	FansPage** temp = new FansPage*[newSize];
 
 	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
 		temp[i] = theFansPageArray[i];  
