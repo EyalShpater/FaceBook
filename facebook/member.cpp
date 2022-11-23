@@ -20,7 +20,7 @@ void Member::addStatusToBillboard(const Status& newStatus)
 	theBillboard.push(newStatus);
 }
 
-void Member::addFriend(const Member& newFriend)
+void Member::addFriend(Member& newFriend)
 {
 	members.push(newFriend);
 }

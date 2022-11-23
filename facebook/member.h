@@ -24,7 +24,7 @@ public:
 	const Date& getDateOfBirth() const { return dateOfBirth; }
 	
 	void addStatusToBillboard(const Status& newStatus);
-	void addFriend(const Member& newFriend);
+	void addFriend(Member& newFriend);
 	void cancelFriendship(const char* name);
 	void likePage(const char* name);
 	void showAllStatus() const;

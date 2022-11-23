@@ -23,7 +23,7 @@ public:
 	void pop(const char* name);
 	int findMemberByName(const char* name);
 	void showAllMembers() const;
-	
+	int findMember(const char* name);
 	
 private:
 	MemberArray(const MemberArray&);

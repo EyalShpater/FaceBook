@@ -7,6 +7,8 @@ using namespace std;
 
 const int DEFAULT_PHYS_SIZE = 2;
 const int DEFAULT_LOG_SIZE = 0;
+const int NOT_FOUND = -1;
+const int EQUAL = 0;
 
 MemberArray::MemberArray()
 {
@@ -43,4 +45,45 @@ void MemberArray::myRealloc(int newSize)
 	delete[]friends;
 
 	friends = temp;
+}
+
+void MemberArray::pop(const char* name)
+{
+	
+	int index = findMember(name);
+	if (index != NOT_FOUND)
+		friends[index] = friends[logSize - 1];
+	logSize--;
+}
+
+int MemberArray::findMember(const char* name)
+{
+	int index = NOT_FOUND;
+	for (int i = 0; i < logSize; i++)
+	{
+		if (strcmp(friends[i]->getName(), name) == EQUAL)
+			i = index;
+	}
+
+	return index;
+}
+
+int MemberArray::findMemberByName(const char* name)
+{
+	for (int i = 0; i < logSize; i++)
+	{
+		if (strcmp(friends[i]->getName(), name) == EQUAL)
+			return i;
+	}
+}
+
+void MemberArray::showAllMembers()const
+{
+	
+	for (int i = 0; i < logSize; i++)
+	{
+		cout << "Member's name: " << friends[i]->getName() << endl;
+		cout << "Member's birthday: ";
+		friends[i]->getDateOfBirth().show();
+	}
 }
