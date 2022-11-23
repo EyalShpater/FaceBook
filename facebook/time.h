@@ -11,9 +11,9 @@ public:
     int getMinutes() const { return minutes; }
     int getSeconds() const { return seconds; }
 
-    bool setHour(int h);
-    bool setMinutes(int m);
-    bool setSeconds(int s);
+    bool setHour(int hour);
+    bool setMinutes(int minutes);
+    bool setSeconds(int seconds);
 
     void show() const;
 };
