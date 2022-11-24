@@ -10,10 +10,6 @@ Status::Status(const char* text)
 	this->text = strdup(text);
 }
 
-Status::Status(const Status& other)
-{
-	text = other.text;
-}
 
 Status::~Status()
 {

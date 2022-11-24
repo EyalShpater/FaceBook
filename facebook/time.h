@@ -1,7 +1,8 @@
 #ifndef __TIME_H
 #define __TIME_H
 
-class Time {
+class Time 
+{
     int hour, minutes, seconds;
 public:
     Time(int hour, int minutes, int seconds);

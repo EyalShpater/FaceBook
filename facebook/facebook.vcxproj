@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="billboard.cpp" />
+    <ClCompile Include="consoleUI.cpp" />
     <ClCompile Include="date.cpp" />
     <ClCompile Include="fansPage.cpp" />
     <ClCompile Include="fansPageArray.cpp" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="admin.h" />
     <ClInclude Include="billboard.h" />
+    <ClInclude Include="consoleUI.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="fansPage.h" />
     <ClInclude Include="fansPageArray.h" />

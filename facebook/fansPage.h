@@ -5,7 +5,8 @@
 #include "billboard.h"
 
 
-class FansPage {
+class FansPage 
+{
     char* name;
     Billboard theBillboard; 
     MemberArray members;
@@ -16,8 +17,8 @@ public:
 
     const char* getName() const { return name; }
 
-    void addStatus(const Status& newStatus);
-    void addFriend(const Member& newFriend);
+    void addStatus(Status& newStatus);
+    void addFriend(Member& newFriend);
     void deleteFriend(const char* name);
     void showAllStatus() const;
     void showAllFriends() const;

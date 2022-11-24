@@ -5,7 +5,7 @@ class FansPage;
 
 class FansPageArray
 {
-	FansPage** theFansPageArray; //const?
+	FansPage** theFansPageArray; 
 	int logSize;
 	int physSize;
 

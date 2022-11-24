@@ -23,7 +23,7 @@ public:
 	const char* getName() const { return name; }
 	const Date& getDateOfBirth() const { return dateOfBirth; }
 	
-	void addStatusToBillboard(const Status& newStatus);
+	void addStatusToBillboard(Status& newStatus);
 	void addFriend(Member& newFriend);
 	void cancelFriendship(const char* name);
 	void likePage(const char* name);

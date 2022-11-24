@@ -1,15 +1,16 @@
 #ifndef __DATE_H
 #define __DATE_H
 
-class Date {
+class Date 
+{
     int day, month, year;
 public:
     Date();
     Date(int day, int month, int year);
 
-    int getDay() const { return day; }
+    int getDay()   const { return day; }
     int getMonth() const { return month; }
-    int getYear() const { return year; }
+    int getYear()  const { return year; }
 
     bool setDay(int day);
     bool setMonth(int month);

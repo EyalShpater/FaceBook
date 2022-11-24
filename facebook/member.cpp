@@ -15,7 +15,7 @@ Member::~Member()
 	delete[]name;
 }
 
-void Member::addStatusToBillboard(const Status& newStatus)
+void Member::addStatusToBillboard(Status& newStatus)
 {
 	theBillboard.push(newStatus);
 }

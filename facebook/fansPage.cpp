@@ -12,12 +12,12 @@ FansPage::~FansPage()
 	delete[]name;
 }
 
-void FansPage::addStatus(const Status& newStatus)
+void FansPage::addStatus(Status& newStatus)
 {
 	theBillboard.push(newStatus);
 }
 
-void FansPage::addFriend(const Member& newFriend)
+void FansPage::addFriend(Member& newFriend)
 {
 	members.push(newFriend);
 }

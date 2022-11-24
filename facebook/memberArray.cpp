@@ -18,7 +18,11 @@ MemberArray::MemberArray()
 
 MemberArray::~MemberArray()
 {
+	for (int i = 0; i < logSize; i++)
+		delete(friends[i]);
+	
 	delete[]friends;
+
 }
 
 void MemberArray::push(Member& newMember) //cancle const

@@ -3,6 +3,7 @@
 
 #include "memberArray.h"
 #include "fansPageArray.h"
+#include "date.h"
 
 class Admin
 {
@@ -16,7 +17,7 @@ public:
 	const FansPageArray& getFansPageArrary() const { return allPgaes; }
 
 	void menu();
-	void addFriend();
+	void addFriend(const char* name, const Date& date);
 	void addFansPage();
 	void show() const;
 

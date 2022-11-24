@@ -3,7 +3,8 @@
 
 class Status;
 
-class Billboard {
+class Billboard 
+{
     Status** theStatus; 
     int logSize;
     int physSize;
