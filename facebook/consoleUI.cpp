@@ -12,7 +12,13 @@ void ConsoleUI::addFriend()
 	cout << "Please enter the friend's name: " << endl;
 	cin.getline(name, MAX_NAME_LEN);
 	cout << "Please enter the friend's birthday: " << endl;
+}
 
+void addFansPage()
+{
+	char name[MAX_NAME_LEN];
+	cout << "Please enter the fans page's name: " << endl;
+	cin.getline(name, MAX_NAME_LEN);
 	
-
+	faceBook.addFansPage(name);
 }

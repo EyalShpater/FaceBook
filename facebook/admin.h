@@ -18,7 +18,7 @@ public:
 
 	void menu();
 	void addFriend(const char* name, const Date& date);
-	void addFansPage();
+	void addFansPage(const char* name);
 	void show() const;
 
 private:
