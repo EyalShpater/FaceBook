@@ -8,17 +8,17 @@
 class Admin
 {
 	MemberArray allMembers;
-	FansPageArray allPgaes;
+	FansPageArray allPages;
 
 public:
 	Admin();
 
 	const MemberArray& getMemberArray() const { return allMembers; }
-	const FansPageArray& getFansPageArrary() const { return allPgaes; }
+	const FansPageArray& getFansPageArrary() const { return allPages; }
 
 	void menu();
 	void addFriend(const char* name, const Date& date);
-	void addFansPage();
+	void addFansPage(const char* name);
 	void show() const;
 
 private:
