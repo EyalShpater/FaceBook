@@ -2,6 +2,21 @@
 #include "member.h"
 #include "fansPage.h"
 
+Admin::Admin()
+{
+
+}
+
+Admin::~Admin()
+{
+
+}
+
+void Admin::menu()
+{
+
+}
+
 void Admin::addFriend(const char* name, const Date& date)
 {
 	Member* newMember = new Member(name, date);
@@ -11,6 +26,6 @@ void Admin::addFriend(const char* name, const Date& date)
 void Admin::addFansPage(const char* name)
 {
 	FansPage* newFansPage = new FansPage(name);
-	theBillboard.push(newFansPage);
+	allPages.push(*newFansPage);
 }
 
