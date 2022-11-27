@@ -12,6 +12,7 @@ class Admin
 
 public:
 	Admin() = default;
+	~Admin();
 	MemberArray& getMemberArray() { return allMembers; } // do we need it?
 	FansPageArray& getFansPageArrary() { return allPages; } // do we need it?
 

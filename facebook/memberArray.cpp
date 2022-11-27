@@ -17,12 +17,8 @@ MemberArray::MemberArray()
 }
 
 MemberArray::~MemberArray()
-{
-	for (int i = 0; i < logSize; i++)
-		delete(friends[i]);
-	
+{	
 	delete[]friends;
-
 }
 
 void MemberArray::push(Member& newMember) //cancle const
@@ -67,7 +63,7 @@ int MemberArray::findMemberByName(const char* name)
 	for (int i = 0; i < logSize; i++)
 	{
 		if (strcmp(friends[i]->getName(), name) == EQUAL)
-			i = index;
+			index = i;
 	}
 
 	return index;
@@ -81,5 +77,6 @@ void MemberArray::showAllMembers()const
 		cout << "Member's name: " << friends[i]->getName() << endl;
 		cout << "Member's birthday: ";
 		friends[i]->getDateOfBirth().show();
+		cout << endl;
 	}
 }

@@ -15,7 +15,7 @@ public:
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
-	FansPage* getPageByIndex(int index) const { return theFansPageArray[index]; }
+	FansPage& getPageByIndex(int index) const { return *(theFansPageArray[index]); }
 
 	void push(FansPage& newFansPage);
 	void pop(FansPage& other);
