@@ -1,5 +1,7 @@
 #include "consoleUI.h"
 #include "admin.h"
+#include "memberArray.h"
+#include "member.h"
 
 #include <iostream>
 using namespace std;
@@ -31,6 +33,8 @@ void ConsoleUI::addFansPage()
 
 void ConsoleUI::addDefaultMembersToFacebook()
 {
+	//Member& 
+
 	faceBook.addFansPage("MTA College");
 	faceBook.addFansPage("Computer Science");
 	faceBook.addFansPage("We All Love CPP");
@@ -39,4 +43,5 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
 
+	//faceBook.getMemberArray().getIndexMember(0)->addFriend(faceBook.getMemberArray().getIndexMember(1))
 }

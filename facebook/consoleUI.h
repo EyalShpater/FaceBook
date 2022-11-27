@@ -12,7 +12,7 @@ public:
 	//void menu();
 	void addFriend();
 	void addFansPage();
-	void show() const;
+	//void show() const;
 	void addDefaultMembersToFacebook();
 };
 
