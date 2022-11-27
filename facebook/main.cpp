@@ -1,12 +1,11 @@
 #pragma warning (disable:4996)
 
-#include "admin.h"
+#include "consoleUI.h"
 
 int main()
 {
-
-    Admin a;
-    a.menu();
+    ConsoleUI out;
+    out.menu();
 
     return 0;
 }

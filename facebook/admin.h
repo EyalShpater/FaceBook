@@ -12,14 +12,15 @@ class Admin
 
 public:
 	Admin();
+	~Admin();
 
-	const MemberArray& getMemberArray() const { return allMembers; }
-	const FansPageArray& getFansPageArrary() const { return allPages; }
+	MemberArray& getMemberArray() { return allMembers; } // do we need it?
+	FansPageArray& getFansPageArrary() { return allPages; } // do we need it?
 
 	void menu();
 	void addFriend(const char* name, const Date& date);
 	void addFansPage(const char* name);
-	void show() const;
+	void show() const; // do we need it?
 
 private:
 	Admin(const Admin&);

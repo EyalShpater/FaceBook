@@ -7,7 +7,7 @@ FansPage::FansPage(const char* name)
 	this->name = strdup(name);
 }
 
-FansPage::~FansPage()
+FansPage::~FansPage() 
 {
 	delete[]name;
 }
