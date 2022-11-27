@@ -2,6 +2,15 @@
 #include "member.h"
 #include "fansPage.h"
 
+Admin::~Admin()
+{
+	for (int i = 0; i < allMembers.getLogSize(); i++)
+		delete &(allMembers.getIndexMember(i));
+
+	for (int i = 0; i < allPages.getLogSize(); i++)
+		delete &(allPages.getPageByIndex(i));
+}
+
 /*
 void Admin::menu()
 {

@@ -33,8 +33,6 @@ void ConsoleUI::addFansPage()
 
 void ConsoleUI::addDefaultMembersToFacebook()
 {
-	//Member& 
-
 	faceBook.addFansPage("MTA College");
 	faceBook.addFansPage("Computer Science");
 	faceBook.addFansPage("We All Love CPP");
@@ -43,5 +41,30 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
 
-	//faceBook.getMemberArray().getIndexMember(0)->addFriend(faceBook.getMemberArray().getIndexMember(1))
+	Member& nitzan = faceBook.getMemberArray().getIndexMember(0);
+	Member& eyal = faceBook.getMemberArray().getIndexMember(1);
+	Member& noa = faceBook.getMemberArray().getIndexMember(2);
+
+	FansPage& mta = faceBook.getFansPageArrary().getPageByIndex(0);
+	FansPage& cs = faceBook.getFansPageArrary().getPageByIndex(1);
+	FansPage& cpp = faceBook.getFansPageArrary().getPageByIndex(2);
+	
+	eyal.addFriend(nitzan);
+	nitzan.addFriend(noa);
+	eyal.showAllFriend();
+	cout << "\n-----------\n";
+	eyal.likePage(mta);
+	noa.likePage(cpp);
+	eyal.addFriend(noa);
+	eyal.showAllFriend();
+	cout << "\n-----------\n";
+	eyal.cancelFriendship(noa);
+	cout << "\n-----------\n";
+	cout << "Eyal:" << endl;
+	eyal.showAllFriend();
+	cout << "Noa: " << endl;
+	noa.showAllFriend();
+	cout << "Nitzan: " << endl;
+	nitzan.showAllFriend();
+	cout << "\n-----------\n";
 }

@@ -8,7 +8,7 @@ class ConsoleUI
 	Admin faceBook;
 public:
 
-	ConsoleUI() = default;
+	//ConsoleUI() = default;
 	//void menu();
 	void addFriend();
 	void addFansPage();
