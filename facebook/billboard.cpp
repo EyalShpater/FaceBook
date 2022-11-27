@@ -17,6 +17,9 @@ Billboard::Billboard()
 
 Billboard::~Billboard()
 {
+	for (int i = 0; i < logSize; i++)
+		delete theStatus[i];
+
 	delete[]theStatus;
 }
 
