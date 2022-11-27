@@ -9,7 +9,7 @@ class ConsoleUI
 public:
 
 	ConsoleUI() = default;
-	//void menu();
+	void menu();
 	void addFriend();
 	void addFansPage();
 	//void show() const;
