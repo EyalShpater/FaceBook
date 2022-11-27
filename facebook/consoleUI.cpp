@@ -72,8 +72,8 @@ void ConsoleUI::addDefaultMembersToFacebook()
 void ConsoleUI::menu()
 {
 	enum eChoice { ONE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE, TEN, ELEVEN, TWELVE };
-
 	int choice;
+
 	cout << "Please enter your choice from the menu:" << endl
 		<< "1- Add member" << endl
 		<< "2- Add fans page" << endl
