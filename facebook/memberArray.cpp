@@ -50,16 +50,18 @@ void MemberArray::myRealloc(int newSize)
 	friends = temp;
 }
 
-void MemberArray::pop(const char* name)
+void MemberArray::pop(Member& other)
 {
-	
-	int index = findMember(name);
+	int index = findMemberByName(other.getName());
+
 	if (index != NOT_FOUND)
+	{
 		friends[index] = friends[logSize - 1];
-	logSize--;
+		logSize--;
+	}
 }
 
-int MemberArray::findMember(const char* name)
+int MemberArray::findMemberByName(const char* name)
 {
 	int index = NOT_FOUND;
 	for (int i = 0; i < logSize; i++)
@@ -69,15 +71,6 @@ int MemberArray::findMember(const char* name)
 	}
 
 	return index;
-}
-
-int MemberArray::findMemberByName(const char* name)
-{
-	for (int i = 0; i < logSize; i++)
-	{
-		if (strcmp(friends[i]->getName(), name) == EQUAL)
-			return i;
-	}
 }
 
 void MemberArray::showAllMembers()const

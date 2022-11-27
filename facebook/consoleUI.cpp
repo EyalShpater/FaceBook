@@ -8,14 +8,15 @@ const int MAX_NAME_LEN = 50;
 
 void ConsoleUI::addFriend()
 {
+	int day, month, year;
 	char name[MAX_NAME_LEN];
 
 	cout << "Please enter the friend's name: " << endl;
 	cin.getline(name, MAX_NAME_LEN);
 	cout << "Please enter the friend's birthday: " << endl;
-}
-
-	// add to allMembers
+	cin >> day >> month >> year;
+	
+	faceBook.addFriend(name, Date(day, month, year));
 }
 
 void ConsoleUI::addFansPage()
@@ -26,4 +27,16 @@ void ConsoleUI::addFansPage()
 	cin.getline(name, MAX_NAME_LEN);
 	
 	faceBook.addFansPage(name);
+}
+
+void ConsoleUI::addDefaultMembersToFacebook()
+{
+	faceBook.addFansPage("MTA College");
+	faceBook.addFansPage("Computer Science");
+	faceBook.addFansPage("We All Love CPP");
+	
+	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
+	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
+	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
+
 }

@@ -18,12 +18,13 @@ public:
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
+	Member* getIndexMember(int index) const { return friends[index]; }
+
 
 	void push(Member& newMember);
-	void pop(const char* name);
+	void pop(Member& other);
 	int findMemberByName(const char* name);
 	void showAllMembers() const;
-	int findMember(const char* name);
 	
 private:
 	MemberArray(const MemberArray&);

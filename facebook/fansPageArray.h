@@ -15,10 +15,12 @@ public:
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
+	FansPage* getPageByIndex(int index) const { return theFansPageArray[index]; }
 
 	void push(FansPage& newFansPage);
-	void pop(const char* name);
+	void pop(FansPage& other);
 	int findPage(const char* name);
+	void showAllPages() const;
 
 private:
 	FansPageArray(const FansPageArray&);

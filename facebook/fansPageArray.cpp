@@ -28,9 +28,9 @@ void FansPageArray::push(FansPage& newFansPage)
 	logSize++;
 }
 
-void FansPageArray::pop(const char* name)
+void FansPageArray::pop(FansPage& other)
 {
-	int index = findPage(name);
+	int index = findPage(other.getName());
 	
 	if (index != NOT_FOUND)
 	{
@@ -70,4 +70,13 @@ void FansPageArray::myRealloc(int newSize)
 	delete[]theFansPageArray;
 
 	theFansPageArray = temp;
+}
+
+void FansPageArray::showAllPages() const
+{
+	for (int i = 0; i < logSize; i++)
+	{
+		theFansPageArray[i]->show();
+		cout << endl;
+	}
 }

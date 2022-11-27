@@ -1,6 +1,7 @@
 #pragma warning (disable:4996)
 
 #include "fansPage.h"
+#include "member.h"
 
 FansPage::FansPage(const char* name)
 {
@@ -19,12 +20,13 @@ void FansPage::addStatus(Status& newStatus)
 
 void FansPage::addFriend(Member& newFriend)
 {
+	//if(newFriend.)
 	members.push(newFriend);
 }
 
 void FansPage::deleteFriend(const char* name)
 {
-	members.pop(name);
+	//members.pop(name);
 }
 
 void FansPage::showAllStatus() const
@@ -35,4 +37,9 @@ void FansPage::showAllStatus() const
 void FansPage::showAllFriends() const
 {
 	members.showAllMembers();
+}
+
+void FansPage::show() const
+{
+	cout << "The fans page name: " << name;
 }

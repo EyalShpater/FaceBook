@@ -25,8 +25,8 @@ public:
 	
 	void addStatusToBillboard(Status& newStatus);
 	void addFriend(Member& newFriend);
-	void cancelFriendship(const char* name);
-	void likePage(const char* name);
+	void cancelFriendship(Member& other);
+	void likePage(FansPage& newPage);
 	void showAllStatus() const;
 	void showLatest10thStatus() const;
 	void showAllFriend() const;

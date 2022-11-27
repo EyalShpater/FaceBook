@@ -1,9 +1,14 @@
 #pragma warning (disable:4996)
 
 #include "member.h"
+#include "fansPage.h"
+
+
 
 #include <iostream>
 using namespace std;
+
+const int NOT_FOUND = -1;
 
 Member::Member(const char* name, const Date& birthDate) : dateOfBirth(birthDate)
 {
@@ -22,17 +27,30 @@ void Member::addStatusToBillboard(Status& newStatus)
 
 void Member::addFriend(Member& newFriend)
 {
-	members.push(newFriend);
+	if (members.findMemberByName(newFriend.getName()) == NOT_FOUND)
+			members.push(newFriend);
+
+	if (newFriend.members.findMemberByName(name) == NOT_FOUND)
+			newFriend.members.push(*this);
+	
 }
 
-void Member::cancelFriendship(const char* name)
+void Member::cancelFriendship(Member& other)
 {
-	members.pop(name);
+	if (members.findMemberByName(other.getName()) != NOT_FOUND)
+		members.pop(other);
+
+	if (other.members.findMemberByName(name) != NOT_FOUND)
+		other.members.pop(*this);
 }
 
-void Member::likePage(const char* name)
+void Member::likePage(FansPage& newPage)
 {
-	fansPages.pop(name);
+	if (fansPages.findPage(newPage.getName()) == NOT_FOUND)
+	{
+		fansPages.push(newPage);
+		newPage.addFriend(*this);
+	}
 }
 
 void Member::showAllStatus() const

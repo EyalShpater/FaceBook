@@ -22,7 +22,7 @@ public:
     void deleteFriend(const char* name);
     void showAllStatus() const;
     void showAllFriends() const;
-    
+    void show() const;
 private:
     FansPage(const FansPage&);
 };
