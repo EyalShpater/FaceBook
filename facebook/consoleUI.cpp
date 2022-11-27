@@ -71,10 +71,12 @@ void ConsoleUI::menu()
 	{
 	case ONE:
 	{
+		addFriend();
 		break;
 	}
 	case TWO:
 	{
+		addFansPage();
 		break;
 	}
 	case THREE:
