@@ -5,7 +5,7 @@ class Status;
 
 class Billboard 
 {
-    Status** theStatus; 
+    const Status** theStatus; 
     int logSize;
     int physSize;
 
@@ -16,9 +16,9 @@ public:
     int getLogSize() const { return logSize; }
     int getPhysSize() const { return physSize; }
 
-    void push(Status& newStatus);
+    void push(const char* text);
     void showAllStatus() const; 
-    void showLatest10thStatus() const;
+    void showLatest10thStatus() const; // should'nt be here
    
 private:
     Billboard(const Billboard&);

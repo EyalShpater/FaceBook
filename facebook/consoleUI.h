@@ -14,6 +14,11 @@ public:
 	void addFansPage();
 	//void show() const;
 	void addDefaultMembersToFacebook();
+	bool addStatusToUser();
+	void addStatusToMember();
+	void addStatusToFansPage();
+
+	enum eUserType { MEMBER, FANS_PAGE };
 
 private:
 	ConsoleUI(const ConsoleUI&);

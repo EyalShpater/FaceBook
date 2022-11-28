@@ -4,6 +4,7 @@
 #include "memberArray.h"
 #include "fansPageArray.h"
 #include "date.h"
+#include "status.h"
 
 class Admin
 {
@@ -21,7 +22,8 @@ public:
 	void addFansPage(const char* name);
 	void showAllMembers() const; 
 	void showAllFansPages() const; 
-
+	void addNewStatus(Member& theMember, const char* newStatus);
+	void addNewStatus(FansPage& theFansPage, const char* newStatus);
 
 private:
 	Admin(const Admin&);
