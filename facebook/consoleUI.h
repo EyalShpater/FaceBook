@@ -9,11 +9,16 @@ class ConsoleUI
 public:
 
 	//ConsoleUI() = default;
-	//void menu();
+	void menu();
 	void addFriend();
 	void addFansPage();
+	int askForMemberDetails();
+	int askForFansPageDetails();
 	//void show() const;
 	void addDefaultMembersToFacebook();
+
+private:
+	int printMenu();
 };
 
 #endif// __CONSOLE_UI_H

@@ -18,7 +18,7 @@ public:
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
-	Member& getIndexMember(int index) const { return *(friends[index]); }
+	Member& getMemberByIndex(int index) const { return *(friends[index]); } //שיניתי לפונקציה את השם
 
 
 	void push(Member& newMember);
