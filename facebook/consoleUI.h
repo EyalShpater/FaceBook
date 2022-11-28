@@ -8,7 +8,7 @@ class ConsoleUI
 	Admin faceBook;
 public:
 
-	//ConsoleUI() = default;
+	ConsoleUI() = default;
 	void menu();
 	void addFriend();
 	void addFansPage();
@@ -16,9 +16,14 @@ public:
 	int askForFansPageDetails();
 	//void show() const;
 	void addDefaultMembersToFacebook();
+	bool addStatusToUser();
+	void addStatusToMember();
+	void addStatusToFansPage();
+
+	enum eUserType { MEMBER, FANS_PAGE };
 
 private:
-	int printMenu();
+	ConsoleUI(const ConsoleUI&);
 };
 
 #endif// __CONSOLE_UI_H

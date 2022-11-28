@@ -7,6 +7,7 @@ int main()
     ConsoleUI out;
 
     out.addDefaultMembersToFacebook();
+    out.addStatusToUser();
     
    
    // out.menu();

@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-const int DEFAULT_PHYS_SIZE = 2;
+const int DEFAULT_PHYS_SIZE = 2; // make all of this static in the h file
 const int DEFAULT_LOG_SIZE = 0;
 const int NOT_FOUND = -1;
 const int EQUAL = 0;
@@ -46,7 +46,7 @@ void MemberArray::myRealloc(int newSize)
 	friends = temp;
 }
 
-void MemberArray::pop(Member& other)
+void MemberArray::pop(Member& other) // bool?
 {
 	int index = findMemberByName(other.getName());
 
@@ -60,7 +60,7 @@ void MemberArray::pop(Member& other)
 int MemberArray::findMemberByName(const char* name)
 {
 	int index = NOT_FOUND;
-	for (int i = 0; i < logSize; i++)
+	for (int i = 0; i < logSize && index == NOT_FOUND; i++)
 	{
 		if (strcmp(friends[i]->getName(), name) == EQUAL)
 			index = i;

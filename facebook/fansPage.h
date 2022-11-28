@@ -17,9 +17,9 @@ public:
 
     const char* getName() const { return name; }
 
-    void addStatus(Status& newStatus);
+    void addStatus(const char* newStatus);
     void addFriend(Member& newFriend);
-    void deleteFriend(const char* name);
+    void deleteFriend(Member& other);
     void showAllStatus() const;
     void showAllFriends() const;
     void show() const;

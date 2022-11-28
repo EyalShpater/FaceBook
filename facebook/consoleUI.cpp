@@ -9,6 +9,7 @@
 using namespace std;
 
 const int MAX_NAME_LEN = 50;
+const int MAX_STATUS_LEN = 300;
 
 void ConsoleUI::addFriend()
 {
@@ -224,4 +225,64 @@ int ConsoleUI::askForFansPageDetails()
 	cin.getline() >> fansPageName >> endl;
 
 	return (faceBook.getFansPageArrary().findPage(fansPageName));
+}
+
+bool ConsoleUI::addStatusToUser()
+{
+	int type;
+
+	cout << "Press:\n" << (int)eUserType::MEMBER << " - to add status to member" << endl
+		<< (int)eUserType::FANS_PAGE << " - to add status to fans page" << endl;
+
+	cin >> type;
+
+	switch (type)
+	{
+	case (int)eUserType::MEMBER :
+		addStatusToMember();
+		return true;
+	case (int)eUserType::FANS_PAGE :
+		addStatusToFansPage();
+		return true;
+	default:
+		return false;
+	}
+}
+
+void ConsoleUI::addStatusToMember() // add input check
+{
+	int ind;
+	char text[MAX_STATUS_LEN];
+	char name[MAX_NAME_LEN];
+
+	getchar(); // clear buffer
+
+	cout << "Enter the member's name" << endl;
+	cin.getline(name, MAX_NAME_LEN);
+
+	cout << "Enter your status" << endl;
+	cin.getline(text, MAX_STATUS_LEN);
+
+	ind = faceBook.getMemberArray().findMemberByName(name);
+	Member& theMember = faceBook.getMemberArray().getIndexMember(ind);
+
+	faceBook.addNewStatus(theMember, text);
+}
+
+void ConsoleUI::addStatusToFansPage()
+{
+	int ind;
+	char text[MAX_STATUS_LEN];
+	char name[MAX_NAME_LEN];
+
+	cout << "Enter the fans page's name" << endl;
+	cin >> name;
+
+	cout << "Enter your status" << endl;
+	cin.getline(text, MAX_STATUS_LEN);
+
+	ind = faceBook.getFansPageArrary().findPage(name);
+	FansPage& thePage = faceBook.getFansPageArrary().getPageByIndex(ind);
+
+	faceBook.addNewStatus(thePage, text);
 }

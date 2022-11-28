@@ -2,8 +2,7 @@
 
 #include "member.h"
 #include "fansPage.h"
-
-
+#include "status.h"
 
 #include <iostream>
 using namespace std;
@@ -20,9 +19,9 @@ Member::~Member()
 	delete[]name;
 }
 
-void Member::addStatusToBillboard(Status& newStatus)
+void Member::addStatusToBillboard(const char* text)
 {
-	theBillboard.push(newStatus);
+	theBillboard.push(text);
 }
 
 void Member::addFriend(Member& newFriend)

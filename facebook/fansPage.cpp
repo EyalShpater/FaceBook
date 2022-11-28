@@ -3,6 +3,8 @@
 #include "fansPage.h"
 #include "member.h"
 
+const int NOT_FOUND = -1;
+
 FansPage::FansPage(const char* name)
 {
 	this->name = strdup(name);
@@ -13,20 +15,20 @@ FansPage::~FansPage()
 	delete[]name;
 }
 
-void FansPage::addStatus(Status& newStatus)
+void FansPage::addStatus(const char* newStatus)
 {
 	theBillboard.push(newStatus);
 }
 
 void FansPage::addFriend(Member& newFriend)
 {
-	//if(newFriend.)
-	members.push(newFriend);
+	if (members.findMemberByName(newFriend.getName()) == NOT_FOUND)
+		members.push(newFriend); // Assmption: FansPage can't add member to like it.
 }
 
-void FansPage::deleteFriend(const char* name)
+void FansPage::deleteFriend(Member& other)
 {
-	//members.pop(name);
+	members.pop(other); // Assmption: FansPage can't remove member from like it.
 }
 
 void FansPage::showAllStatus() const

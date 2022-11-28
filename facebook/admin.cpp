@@ -1,6 +1,8 @@
 #include "admin.h"
 #include "member.h"
 #include "fansPage.h"
+#include "date.h"
+#include "status.h"
 
 Admin::~Admin()
 {
@@ -39,3 +41,12 @@ void Admin::showAllFansPages() const
 	allPages.showAllPages();
 }
 
+void Admin::addNewStatus(Member& theMember, const char* newStatus)
+{
+	theMember.addStatusToBillboard(newStatus);
+}
+
+void Admin::addNewStatus(FansPage& theFansPage, const char* newStatus)
+{
+	theFansPage.addStatus(newStatus);
+}

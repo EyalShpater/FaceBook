@@ -12,7 +12,7 @@ Billboard::Billboard()
 {
 	physSize = DEFAULT_PHYS_SIZE;
 	logSize = DEFAULT_LOG_SIZE;
-	theStatus = new Status*[physSize];
+	theStatus = new const Status*[physSize];
 }
 
 Billboard::~Billboard()
@@ -23,10 +23,10 @@ Billboard::~Billboard()
 	delete[]theStatus;
 }
 
-void Billboard::push(Status& newStatus)
+void Billboard::push(const char* text)
 {
 	reserve();
-	theStatus[logSize] = &newStatus;
+	theStatus[logSize] = new Status(text);
 	logSize++;
 }
 
@@ -53,7 +53,7 @@ void Billboard::reserve()
 
 void Billboard::myRealloc(int newSize)
 {
-	Status** temp = new Status*[newSize];
+	const Status** temp = new const Status*[newSize];
 
 	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
 		temp[i] = theStatus[i];
