@@ -176,11 +176,13 @@ void ConsoleUI::addStatusToMember() // add input check
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	cout << "Enter the member's name" << endl;
-	cin >> name;
+	cin.getline(name, MAX_NAME_LEN);
 
 	cout << "Enter your status" << endl;
-	cin >> text;
+	cin.getline(text, MAX_STATUS_LEN);
 
 	ind = faceBook.getMemberArray().findMemberByName(name);
 	Member& theMember = faceBook.getMemberArray().getIndexMember(ind);
@@ -198,7 +200,7 @@ void ConsoleUI::addStatusToFansPage()
 	cin >> name;
 
 	cout << "Enter your status" << endl;
-	cin >> text;
+	cin.getline(text, MAX_STATUS_LEN);
 
 	ind = faceBook.getFansPageArrary().findPage(name);
 	FansPage& thePage = faceBook.getFansPageArrary().getPageByIndex(ind);
