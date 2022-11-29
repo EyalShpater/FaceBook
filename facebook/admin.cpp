@@ -15,25 +15,6 @@ Admin::~Admin()
 		delete &(allPages.getPageByIndex(i));
 }
 
-/*
-void Admin::menu()
-{
-
-}
-Member* Admin::getMemberByName(const char* name) 
-{
-	int index = allMembers.findMemberByName(name);
-	return &(allMembers.getMemberByIndex(index));
-}
-
-FansPage* Admin::getPageByName(const char* name)
-{
-	int index = allPages.findPage(name);
-	return &(allPages.getPageByIndex(index));
-}
-*/
-
-
 void Admin::addFriend(const char* name, const Date& date)
 {
 	Member* newMember = new Member(name, date);
