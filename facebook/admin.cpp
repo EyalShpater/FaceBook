@@ -154,36 +154,36 @@ bool Admin::showUpdatedFriendsStatuses(const char* name) const
 	return isValid;
 }
 
-bool Admin::makeFriendship(const char* nameFirst, cinst char* nameSecond)
+bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
 {
 	bool isValid;
 
-	int index1 = allMembers.findMemberByName(name1);
-	int index2 = allMembers.findMemberByName(name2);
+	int index1 = allMembers.findMemberByName(nameFirst);
+	int index2 = allMembers.findMemberByName(nameSecond);
 
 	isValid = (index1 != NOT_FOUND && index2 != NOT_FOUND);
 	if (isValid)
 	{
-		Member firstMember = allMembers.getMemberByIndex(index1);
-		Member secondMember = allMembers.getMemberByIndex(index2);
+	    Member& firstMember = allMembers.getMemberByIndex(index1);
+		Member& secondMember = allMembers.getMemberByIndex(index2);
 		firstMember.addFriend(secondMember);
 	}
 
 	return isValid;
 }
 
-bool Admin::cancelFriendshipBetweenTwoMembers()
+bool Admin::cancelFriendship(const char* nameFirst, const char* nameSecond)
 {
 	bool isValid;
 
-	int index1 = allMembers.findMemberByName(name1);
-	int index2 = allMembers.findMemberByName(name2);
+	int index1 = allMembers.findMemberByName(nameFirst);
+	int index2 = allMembers.findMemberByName(nameSecond);
 
 	isValid = (index1 != NOT_FOUND && index2 != NOT_FOUND);
 	if (isValid)
 	{
-		Member firstMember = allMembers.getMemberByIndex(index1);
-		Member secondMember = allMembers.getMemberByIndex(index2);
+		Member& firstMember = allMembers.getMemberByIndex(index1);
+		Member& secondMember = allMembers.getMemberByIndex(index2);
 		firstMember.cancelFriendship(secondMember);
 	}
 

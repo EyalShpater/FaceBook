@@ -310,16 +310,16 @@ int ConsoleUI::askForUserType()
 	return type;
 }
 
-bool ConsoleUI::friendshipBetweenTwoMembers()
+bool ConsoleUI::friendshipBetweenTwoMembers() 
 {
-	char* firstMemberName = askForMemberDetails();
-	char* secondMemberName = askForMemberDetails();
+	const char* firstMemberName = askForMemberDetails();
+	const char* secondMemberName = askForMemberDetails();
 	return faceBook.makeFriendship(firstMemberName, secondMemberName);
 }
 
-bool ConsoleUI::cancelFriendshipBetweenTwoMembers()
+bool ConsoleUI::cancelFriendshipBetweenTwoMembers() 
 {
-	char* firstMemberName = askForMemberDetails();
-	char* secondMemberName = askForMemberDetails();
+	const char* firstMemberName = askForMemberDetails();
+	const char* secondMemberName = askForMemberDetails();
 	return faceBook.cancelFriendship(firstMemberName, secondMemberName);
 }
