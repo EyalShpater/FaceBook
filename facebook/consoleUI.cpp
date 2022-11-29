@@ -43,15 +43,15 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
-
+/*
 	Member& nitzan = faceBook.getMemberArray().getMemberByIndex(0);
 	Member& eyal = faceBook.getMemberArray().getMemberByIndex(1);
 	Member& noa = faceBook.getMemberArray().getMemberByIndex(2);
 
 	FansPage& mta = faceBook.getFansPageArrary().getPageByIndex(0);
 	FansPage& cs = faceBook.getFansPageArrary().getPageByIndex(1);
-	FansPage& cpp = faceBook.getFansPageArrary().getPageByIndex(2);
-	
+	FansPage& cpp = faceBook.getFansPageArrary().getPageByIndex(2);*/
+	/*
 	eyal.addFriend(nitzan);
 	nitzan.addFriend(noa);
 	eyal.showAllFriend();
@@ -69,19 +69,12 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	noa.showAllFriend();
 	cout << "Nitzan: " << endl;
 	nitzan.showAllFriend();
-	cout << "\n-----------\n";
+	cout << "\n-----------\n"; */
 }
 
 void ConsoleUI::menu()
-{
-	enum eChoice {
-		ADD_MEMBER = 1, ADD_PAGE, ADD_STATUS_TO_MEMBER, ADD_STATUS_TO_PAGE,
-		PRINT_STATUSES_MEMBER, PRINT_STATUSES_PAGE, PRINT_TEN_STATUSES,
-		FRIENDSHIP, CANCAL_FRIENDSHIP, ADD_FAN_TO_PAGE, REMOVE_FAN_FROM_PAGE,
-		PRINT_FACEBOOK_MEMBERS, PRINT_FRIENDS_OF_MEMBER, PRINT_FRIENDS_OF_PAGE, EXIT
-	};
-	
-	int choice=printMenu();
+{	
+	int choice = printMenu();
 
 	switch (choice)
 	{
@@ -95,34 +88,21 @@ void ConsoleUI::menu()
 		addFansPage();
 		break;
 	}
-	case ADD_STATUS_TO_MEMBER:
+	case ADD_STATUS:
 	{
-		int indexMember = askForMemberDetails;
-		faceBook.getMemberArray().getMemberByIndex(indexMember).addStatusToBillboard(/*createStatus*/);
+		addStatusToUser();
 		break;
 	}
-	case ADD_STATUS_TO_PAGE:
+	
+	case PRINT_STATUSES:
 	{
-		int indexFansPage = askForFansPageDetails();
-		faceBook.getFansPageArrary().getPageByIndex(indexFansPage).addStatus(/*createStatus*/);
-	}
-	case PRINT_STATUSES_MEMBER:
-	{
-		int indexMember = askForMemberDetails;
-		faceBook.getMemberArray().getMemberByIndex(indexMember).showAllStatus();
-
+		showAllUserStatuses();
 		break;
 	}
-	case PRINT_STATUSES_PAGE:
-	{
-		int indexFansPage = askForFansPageDetails();
-		faceBook.getFansPageArrary().getPageByIndex(indexFansPage).showAllStatus;
-
-		break;
-	}
+	
 	case PRINT_TEN_STATUSES:
 	{
-		int indexMember = askForMemberDetails;
+		int indexMember = askForMemberDetails();
 		faceBook.getMemberArray().getMemberByIndex(indexMember).showLatest10thStatus();
 
 		break;
@@ -204,27 +184,28 @@ int ConsoleUI::printMenu()
 		<< "15-Exit" << endl;
 
 	cin >> choice;
+
 	return choice;
 }
 
-int ConsoleUI::askForMemberDetails()
+Member* ConsoleUI::askForMemberDetails() 
 {
-	char* memberName;
+	char memberName[MAX_NAME_LEN];
 
-	cout << "Enter the member's name: ";
-	cin.getline() >> memberName >> endl;
+	cout << "Enter the member's name: " << endl;
+	cin.getline(memberName, MAX_NAME_LEN);
 
-	return (faceBook.getMemberArray().findMemberByName(memberName));
+	return faceBook.getMemberByName(memberName);
 }
 
-int ConsoleUI::askForFansPageDetails()
+FansPage* ConsoleUI::askForFansPageDetails() 
 {
-	char* fansPageName;
+	char fansPageName[MAX_NAME_LEN];
 
-	cout << "Enter the fansPage's name: ";
-	cin.getline() >> fansPageName >> endl;
+	cout << "Enter the fansPage's name: " << endl;
+	cin.getline(fansPageName, MAX_NAME_LEN);
 
-	return (faceBook.getFansPageArrary().findPage(fansPageName));
+	return faceBook.getPageByName(fansPageName);
 }
 
 bool ConsoleUI::addStatusToUser()
@@ -251,38 +232,76 @@ bool ConsoleUI::addStatusToUser()
 
 void ConsoleUI::addStatusToMember() // add input check
 {
-	int ind;
+	Member* theMember;
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
 	getchar(); // clear buffer
 
-	cout << "Enter the member's name" << endl;
-	cin.getline(name, MAX_NAME_LEN);
+	theMember = askForMemberDetails();
 
 	cout << "Enter your status" << endl;
 	cin.getline(text, MAX_STATUS_LEN);
 
-	ind = faceBook.getMemberArray().findMemberByName(name);
-	Member& theMember = faceBook.getMemberArray().getIndexMember(ind);
-
-	faceBook.addNewStatus(theMember, text);
+	faceBook.addNewStatus(*theMember, text);
 }
 
 void ConsoleUI::addStatusToFansPage()
 {
-	int ind;
+	FansPage* thePage;
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
-	cout << "Enter the fans page's name" << endl;
-	cin >> name;
+	thePage = askForFansPageDetails();
 
 	cout << "Enter your status" << endl;
 	cin.getline(text, MAX_STATUS_LEN);
 
-	ind = faceBook.getFansPageArrary().findPage(name);
-	FansPage& thePage = faceBook.getFansPageArrary().getPageByIndex(ind);
+	faceBook.addNewStatus(*thePage, text);
+}
 
-	faceBook.addNewStatus(thePage, text);
+bool ConsoleUI::showAllUserStatuses() 
+{
+	int type;
+
+	cout << "Press:\n" << (int)eUserType::MEMBER << " - to show statuses of a member" << endl
+		<< (int)eUserType::FANS_PAGE << " - to show statuses of fans page" << endl;
+
+	cin >> type;
+
+	switch (type)
+	{
+	case (int)eUserType::MEMBER:
+		return showAllMemberStatuses();
+	case (int)eUserType::FANS_PAGE:
+		return showAllFansPageStatuses();
+	default:
+		return false;
+	}
+}
+
+bool ConsoleUI::showAllMemberStatuses() 
+{
+	bool found;
+	Member* theMember = askForMemberDetails();
+
+	found = (theMember != nullptr);
+
+	if (found)
+		theMember->showAllStatus();
+
+	return found;
+}
+
+bool ConsoleUI::showAllFansPageStatuses() 
+{
+	bool found;
+	const FansPage* thePage = askForFansPageDetails();
+
+	found = (thePage != nullptr);
+
+	if (found)
+		thePage->showAllStatus();
+
+	return found;
 }
