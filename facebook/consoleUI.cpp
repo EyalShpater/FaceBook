@@ -124,19 +124,16 @@ int ConsoleUI::printMenu()
 	cout << "Please enter your choice from the menu:" << endl
 		<< "1- Add member" << endl
 		<< "2- Add fans page" << endl
-		<< "3- Add status to member" << endl
-		<< "4- Add status to fans page" << endl
-		<< "5- Displaying all the statuses of a member" << endl
-		<< "6- Displaying all the statuses of a fan page" << endl
-		<< "7- Displaying the 10 most recent statuses of a certain member's friends" << endl
-		<< "8- Friendship link between two friends" << endl
-		<< "9- Cancellation of membership between two members" << endl
-		<< "10- Adding a fan to the page" << endl
-		<< "11- Removing a fan from page" << endl
-		<< "12- Displaying all members registered to faceBook" << endl
-		<< "13- Showing all the friends of a certain member" << endl
-		<< "14- Showing all the the fans of a certain page" << endl
-		<< "15-Exit" << endl;
+		<< "3- Add status to member/fans page" << endl
+		<< "4- Displaying all the statuses of a member/fans page" << endl
+		<< "5- Displaying the 10 most recent statuses of a certain member's friends" << endl
+		<< "6- Friendship link between two friends" << endl
+		<< "7- Cancellation of membership between two members" << endl
+		<< "8- Adding a fan to the page" << endl
+		<< "9- Removing a fan from page" << endl
+		<< "10- Displaying all members registered to faceBook" << endl
+		<< "11- Showing all the friends of a certain member/page" << endl
+		<< "12-Exit" << endl;
 
 	cin >> choice;
 
