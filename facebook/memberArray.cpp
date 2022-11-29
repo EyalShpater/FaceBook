@@ -31,8 +31,10 @@ void MemberArray::push(Member& newMember) //cancle const
 void MemberArray::reserve()
 {
 	if (physSize == logSize)
+	{
 		physSize *= 2;
-	myRealloc(physSize);
+		myRealloc(physSize);
+	}
 }
 
 void MemberArray::myRealloc(int newSize)
