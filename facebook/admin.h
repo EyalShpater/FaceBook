@@ -15,26 +15,21 @@ public:
 	Admin() = default;
 	~Admin();
 
-	//MemberArray& getMemberArray() { return allMembers; } // do we need it?
-	//FansPageArray& getFansPageArrary() { return allPages; } // do we need it?
-
-	Member* getMemberByName(const char* name);
-	FansPage* getPageByName(const char* name);
-
-
-//	void menu();
-
 	void addFriend(const char* name, const Date& date);
 	void addFansPage(const char* name);
 	void showAllUsers() const;
 	void showAllMembers() const; 
 	void showAllFansPages() const; 
-	void addNewStatus(Member& theMember, const char* newStatus);
-	void addNewStatus(FansPage& theFansPage, const char* newStatus);
-	bool addFanToPage(Member* member, FansPage* page);
-	bool removeFanFromPage(Member* member, FansPage* page);
-	void showAllMemberFriends(Member* theMember) const;
-	void showAllFansPageFans(FansPage* theFansPage) const;
+	void addNewStatusToMember(const char* name, const char* newStatus);
+	void addNewStatusToFansPage(const char* name, const char* newStatus);
+	bool addFanToPage(const char* member, const char* page);
+	bool removeFanFromPage(const char* member,const char* page);
+	bool showAllMemberFriends(const char* name) const;
+	bool showAllFansPageFans(const char* name) const;
+	bool showAllMemberStatuses(const char* name) const;
+	bool showAllFansPageStatuses(const char* name) const;
+	bool showUpdatedFriendsStatuses(const char* name) const;
+
 
 private:
 	Admin(const Admin&);

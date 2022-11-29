@@ -18,12 +18,12 @@ public:
 
 	int getLogSize() const { return logSize; }
 	int getPhysSize() const { return physSize; }
-	Member& getMemberByIndex(int index) const { return *(friends[index]); } //שיניתי לפונקציה את השם
+	Member& getMemberByIndex(int index) const { return *(friends[index]); }
 
 
 	void push(Member& newMember);
 	void pop(Member& other);
-	int findMemberByName(const char* name);
+	int findMemberByName(const char* name) const;
 	void showAllMembers() const;
 	
 private:

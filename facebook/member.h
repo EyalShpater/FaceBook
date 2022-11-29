@@ -27,8 +27,10 @@ public:
 	void addFriend(Member& newFriend);
 	void cancelFriendship(Member& other);
 	void likePage(FansPage& newPage);
+	void dislikePage(FansPage& other);
 	void showAllStatus() const;
 	void showLatest10thStatus() const;
+	void showUpdatedFriendsStatuses() const;
 	void showAllFriends() const;
 	
 private:

@@ -57,7 +57,7 @@ void MemberArray::pop(Member& other) // bool?
 	}
 }
 
-int MemberArray::findMemberByName(const char* name)
+int MemberArray::findMemberByName(const char* name) const
 {
 	int index = NOT_FOUND;
 	for (int i = 0; i < logSize && index == NOT_FOUND; i++)

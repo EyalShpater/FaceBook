@@ -13,8 +13,8 @@ public:
 	void menu();
 	void addFriend();
 	void addFansPage();
-	Member* askForMemberDetails();
-	FansPage* askForFansPageDetails();
+	const char* askForMemberDetails();
+	const char* askForFansPageDetails();
 	void addDefaultMembersToFacebook();
 	bool addStatusToUser();
 	void addStatusToMember();
@@ -39,11 +39,12 @@ private:
 	bool showAllUserStatuses();
 	bool showAllMemberStatuses();
 	bool showAllFansPageStatuses();
-	bool showUpdatedStatuses();
+	bool showUpdatedFriendsStatuses();
 	void showAllUsers();
-	void showUserFriends();
-	void showMemberFriends();
-	void showFansPageFriends();
+	bool showUserFriends();
+	bool showMemberFriends();
+	bool showFansPageFans();
+	int askForUserType();
 };
 
 #endif// __CONSOLE_UI_H

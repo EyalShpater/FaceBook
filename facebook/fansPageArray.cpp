@@ -36,7 +36,7 @@ void FansPageArray::pop(FansPage& other)
 	}
 }
 
-int FansPageArray::findPage(const char* name)
+int FansPageArray::findPage(const char* name) const
 {
 	int index = NOT_FOUND;
 

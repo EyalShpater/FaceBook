@@ -53,6 +53,15 @@ void Member::likePage(FansPage& newPage)
 	}
 }
 
+void Member::dislikePage(FansPage& other)
+{
+	if (fansPages.findPage(other.getName()) != NOT_FOUND)
+	{
+		fansPages.push(other);
+		other.deleteFriend(*this);
+	}
+}
+
 void Member::showAllStatus() const
 {
 	theBillboard.showAllStatus();
@@ -63,7 +72,14 @@ void Member::showLatest10thStatus() const
 	theBillboard.showLatestNumOfStatus(DEFAULT_NUM_OF_STATUS_TO_SHOW);
 }
 
+void Member::showUpdatedFriendsStatuses() const
+{
+	for (int i = 0; i < members.getLogSize(); i++)
+		members.getMemberByIndex(i).showLatest10thStatus();
+}
+
 void Member::showAllFriends() const
 {
+	cout << "**********" << name << " Friends: **********" << endl;
 	members.showAllMembers();
 }

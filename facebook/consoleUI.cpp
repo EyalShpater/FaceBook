@@ -1,3 +1,5 @@
+#pragma warning (disable:4996)
+
 #include "consoleUI.h"
 #include "admin.h"
 #include "memberArray.h"
@@ -94,11 +96,13 @@ void ConsoleUI::menu()
 			showAllUserStatuses();
 			break;
 		case PRINT_TEN_STATUSES:
-			showUpdatedStatuses();
+			showUpdatedFriendsStatuses();
 			break;
 		case FRIENDSHIP:
+			//
 			break;
 		case CANCAL_FRIENDSHIP:
+			//
 			break;
 		case ADD_FAN_TO_PAGE:
 			addFanToPage();
@@ -146,34 +150,29 @@ int ConsoleUI::printMenu()
 	return choice;
 }
 
-Member* ConsoleUI::askForMemberDetails() 
+const char* ConsoleUI::askForMemberDetails() 
 {
 	char memberName[MAX_NAME_LEN];
 
 	cout << "Enter the member's name: " << endl;
 	cin.getline(memberName, MAX_NAME_LEN);
 
-	return faceBook.getMemberByName(memberName);
+	return memberName;
 }
 
-FansPage* ConsoleUI::askForFansPageDetails() 
+const char* ConsoleUI::askForFansPageDetails() 
 {
 	char fansPageName[MAX_NAME_LEN];
 
 	cout << "Enter the fansPage's name: " << endl;
 	cin.getline(fansPageName, MAX_NAME_LEN);
 
-	return faceBook.getPageByName(fansPageName);
+	return fansPageName;
 }
 
 bool ConsoleUI::addStatusToUser()
 {
-	int type;
-
-	cout << "Press:\n" << (int)eUserType::MEMBER << " - to add status to member" << endl
-		<< (int)eUserType::FANS_PAGE << " - to add status to fans page" << endl;
-
-	cin >> type;
+	int type = askForUserType();
 
 	switch (type)
 	{
@@ -190,42 +189,35 @@ bool ConsoleUI::addStatusToUser()
 
 void ConsoleUI::addStatusToMember() // add input check
 {
-	Member* theMember;
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
 	getchar(); // clear buffer
 
-	theMember = askForMemberDetails();
+	strcpy(name, askForMemberDetails());
 
 	cout << "Enter your status" << endl;
 	cin.getline(text, MAX_STATUS_LEN);
 
-	faceBook.addNewStatus(*theMember, text);
+	faceBook.addNewStatusToMember(name, text);
 }
 
 void ConsoleUI::addStatusToFansPage()
 {
-	FansPage* thePage;
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
-	thePage = askForFansPageDetails();
+	strcpy (name, askForFansPageDetails());
 
 	cout << "Enter your status" << endl;
 	cin.getline(text, MAX_STATUS_LEN);
 
-	faceBook.addNewStatus(*thePage, text);
+	faceBook.addNewStatusToFansPage(name, text);
 }
 
 bool ConsoleUI::showAllUserStatuses() 
 {
-	int type;
-
-	cout << "Press:\n" << (int)eUserType::MEMBER << " - to show statuses of a member" << endl
-		<< (int)eUserType::FANS_PAGE << " - to show statuses of fans page" << endl;
-
-	cin >> type;
+	int type = askForUserType();
 
 	switch (type)
 	{
@@ -240,41 +232,29 @@ bool ConsoleUI::showAllUserStatuses()
 
 bool ConsoleUI::showAllMemberStatuses() 
 {
-	bool found;
-	Member* theMember = askForMemberDetails();
+	char name[MAX_NAME_LEN];
 
-	found = (theMember != nullptr);
+	strcpy(name, askForMemberDetails());
 
-	if (found)
-		theMember->showAllStatus();
-
-	return found;
+	return faceBook.showAllMemberStatuses(name);
 }
 
 bool ConsoleUI::showAllFansPageStatuses() 
 {
-	bool found;
-	const FansPage* thePage = askForFansPageDetails();
+	char name[MAX_NAME_LEN];
 
-	found = (thePage != nullptr);
+	strcpy(name, askForFansPageDetails());
 
-	if (found)
-		thePage->showAllStatus();
-
-	return found;
+	return faceBook.showAllFansPageStatuses(name);
 }
 
-bool ConsoleUI::showUpdatedStatuses()
+bool ConsoleUI::showUpdatedFriendsStatuses()
 {
-	bool isValid;
-	Member* theMember = askForMemberDetails();
+	char name[MAX_NAME_LEN];
+	
+	strcpy(name, askForMemberDetails());
 
-	isValid = (theMember != nullptr);
-
-	if (isValid)
-		theMember->showLatest10thStatus();
-
-	return isValid;
+	return faceBook.showUpdatedFriendsStatuses(name);
 }
 
 void ConsoleUI::showAllUsers()
@@ -285,53 +265,57 @@ void ConsoleUI::showAllUsers()
 
 bool ConsoleUI::addFanToPage()
 {
-	Member* theMember = askForMemberDetails();
-	FansPage* thePage = askForFansPageDetails();
+	char memberName[MAX_NAME_LEN];
+	char fansPageName[MAX_NAME_LEN];
 
-	return faceBook.addFanToPage(theMember, thePage);
+	strcpy(memberName, askForMemberDetails());
+	strcpy(fansPageName, askForFansPageDetails());
+
+	return faceBook.addFanToPage(memberName, fansPageName);
 }
 
 bool ConsoleUI::removeFanFromPage()
 {
-	Member* theMember = askForMemberDetails();
-	FansPage* thePage = askForFansPageDetails();
+	char memberName[MAX_NAME_LEN];
+	char fansPageName[MAX_NAME_LEN];
 
-	return faceBook.removeFanFromPage(theMember, thePage);
+	strcpy(memberName, askForMemberDetails());
+	strcpy(fansPageName, askForFansPageDetails());
+
+	return faceBook.removeFanFromPage(memberName, fansPageName);
 }
 
-void ConsoleUI::showUserFriends()
+bool ConsoleUI::showUserFriends()
 {
-	int type;
-
-	cout << "Press:\n" << (int)eUserType::MEMBER << " - to show statuses of a member" << endl
-		<< (int)eUserType::FANS_PAGE << " - to show statuses of fans page" << endl;
-
-	cin >> type;
+	int type = askForUserType();
 
 	switch (type)
 	{
 	case (int)eUserType::MEMBER:
-		showMemberFriends();
-		break;
+		return showMemberFriends();
 	case (int)eUserType::FANS_PAGE:
-		showFansPageFriends();
-		break;
+		return showFansPageFans();
 	default:
-		break;
+		return false;
 	}
 }
 
-void ConsoleUI::showMemberFriends()
-{
-	Member* theMember = askForMemberDetails();
-
-	cout << "*****" << theMember->getName() << " Friend: *****" << endl;
-	theMember->showAllFriends();
+bool ConsoleUI::showMemberFriends()
+{	
+	return faceBook.showAllMemberFriends(askForMemberDetails());
 }
-void ConsoleUI::showFansPageFriends()
+bool ConsoleUI::showFansPageFans()
 {
-	Member* theMember = askForMemberDetails();
+	return faceBook.showAllFansPageFans(askForFansPageDetails());
+}
 
-	cout << "*****" << theMember->getName() << " Friend: *****" << endl;
-	theMember->showAllFriends();
+int ConsoleUI::askForUserType()
+{
+	int type;
+
+	cout << "Press:\n" << (int)eUserType::MEMBER << " - to add status to member" << endl
+		<< (int)eUserType::FANS_PAGE << " - to add status to fans page" << endl;
+	cin >> type;
+
+	return type;
 }
