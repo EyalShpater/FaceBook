@@ -45,14 +45,7 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
-/*
-	Member& nitzan = faceBook.getMemberArray().getMemberByIndex(0);
-	Member& eyal = faceBook.getMemberArray().getMemberByIndex(1);
-	Member& noa = faceBook.getMemberArray().getMemberByIndex(2);
-
-	FansPage& mta = faceBook.getFansPageArrary().getPageByIndex(0);
-	FansPage& cs = faceBook.getFansPageArrary().getPageByIndex(1);
-	FansPage& cpp = faceBook.getFansPageArrary().getPageByIndex(2);*/
+	
 	/*
 	eyal.addFriend(nitzan);
 	nitzan.addFriend(noa);
@@ -71,7 +64,7 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	noa.showAllFriend();
 	cout << "Nitzan: " << endl;
 	nitzan.showAllFriend();
-	cout << "\n-----------\n"; */
+	cout << "\n-----------\n";  */
 }
 
 void ConsoleUI::menu()
@@ -129,20 +122,20 @@ int ConsoleUI::printMenu()
 	int choice;
 
 	cout << "Please enter your choice from the menu:" << endl
-	//	<< "1- Add member" << endl
-	//	<< "2- Add fans page" << endl
-	//להוסיף	<< "3- Add status to member" << endl
-	//להוסיף	<< "4- Add status to fans page" << endl
-	//	<< "5- Displaying all the statuses of a member" << endl
-	//	<< "6- Displaying all the statuses of a fan page" << endl
-	//	<< "7- Displaying the 10 most recent statuses of a certain member's friends" << endl
+		<< "1- Add member" << endl
+		<< "2- Add fans page" << endl
+		<< "3- Add status to member" << endl
+		<< "4- Add status to fans page" << endl
+		<< "5- Displaying all the statuses of a member" << endl
+		<< "6- Displaying all the statuses of a fan page" << endl
+		<< "7- Displaying the 10 most recent statuses of a certain member's friends" << endl
 		<< "8- Friendship link between two friends" << endl
 		<< "9- Cancellation of membership between two members" << endl
-	//	<< "10- Adding a fan to the page" << endl
-	//	<< "11- Removing a fan from page" << endl
-	//	<< "12- Displaying all members registered to faceBook" << endl
-	//	<< "13- Showing all the friends of a certain member" << endl
-	//	<< "14- Showing all the the fans of a certain page" << endl
+		<< "10- Adding a fan to the page" << endl
+		<< "11- Removing a fan from page" << endl
+		<< "12- Displaying all members registered to faceBook" << endl
+		<< "13- Showing all the friends of a certain member" << endl
+		<< "14- Showing all the the fans of a certain page" << endl
 		<< "15-Exit" << endl;
 
 	cin >> choice;

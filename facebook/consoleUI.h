@@ -11,20 +11,9 @@ public:
 	ConsoleUI() = default;
 
 	void menu();
-	void addFriend();
-	void addFansPage();
-	const char* askForMemberDetails();
-	const char* askForFansPageDetails();
 	void addDefaultMembersToFacebook();
-	bool addStatusToUser();
-	void addStatusToMember();
-	void addStatusToFansPage();
-	bool addFanToPage();
-	bool removeFanFromPage();
-
 
 	enum eUserType { MEMBER, FANS_PAGE };
-
 	enum eChoice 
 	{
 		ADD_MEMBER = 1, ADD_PAGE, ADD_STATUS, PRINT_STATUSES, PRINT_TEN_STATUSES, 
@@ -35,6 +24,15 @@ public:
 private:
 	ConsoleUI(const ConsoleUI&);
 
+	void addFriend();
+	void addFansPage();
+	const char* askForMemberDetails();
+	const char* askForFansPageDetails();
+	bool addStatusToUser();
+	void addStatusToMember();
+	void addStatusToFansPage();
+	bool addFanToPage();
+	bool removeFanFromPage();
 	int printMenu();
 	bool showAllUserStatuses();
 	bool showAllMemberStatuses();
