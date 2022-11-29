@@ -8,6 +8,7 @@
 using namespace std;
 
 const int NOT_FOUND = -1;
+const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
 
 Member::Member(const char* name, const Date& birthDate) : dateOfBirth(birthDate)
 {
@@ -59,10 +60,10 @@ void Member::showAllStatus() const
 
 void Member::showLatest10thStatus() const
 {
-	theBillboard.showLatest10thStatus();
+	theBillboard.showLatestNumOfStatus(DEFAULT_NUM_OF_STATUS_TO_SHOW);
 }
 
-void Member::showAllFriend() const
+void Member::showAllFriends() const
 {
 	members.showAllMembers();
 }

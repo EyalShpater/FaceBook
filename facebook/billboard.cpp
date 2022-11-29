@@ -6,7 +6,6 @@ using namespace std;
 
 const int DEFAULT_PHYS_SIZE = 2;
 const int DEFAULT_LOG_SIZE = 0;
-const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
 
 Billboard::Billboard()
 {
@@ -36,10 +35,10 @@ void Billboard::showAllStatus() const
 		theStatus[i]->show();
 }
 
-void Billboard::showLatest10thStatus() const
+void Billboard::showLatestNumOfStatus(int num) const
 {
-	for (int i = 1; i <= DEFAULT_NUM_OF_STATUS_TO_SHOW && i < logSize; i++)
-		theStatus[DEFAULT_NUM_OF_STATUS_TO_SHOW - i]->show();
+	for (int i = 1; i <= logSize && i <= num; i++)
+		theStatus[logSize - i]->show();
 }
 
 void Billboard::reserve()

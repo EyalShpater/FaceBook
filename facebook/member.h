@@ -29,7 +29,7 @@ public:
 	void likePage(FansPage& newPage);
 	void showAllStatus() const;
 	void showLatest10thStatus() const;
-	void showAllFriend() const;
+	void showAllFriends() const;
 	
 private:
 	Member(const Member&); 

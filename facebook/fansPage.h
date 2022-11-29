@@ -21,7 +21,7 @@ public:
     void addFriend(Member& newFriend);
     void deleteFriend(Member& other);
     void showAllStatus() const;
-    void showAllFriends() const;
+    void showAllFans() const;
     void show() const;
 private:
     FansPage(const FansPage&);

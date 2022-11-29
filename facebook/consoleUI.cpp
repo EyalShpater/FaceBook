@@ -74,91 +74,49 @@ void ConsoleUI::addDefaultMembersToFacebook()
 
 void ConsoleUI::menu()
 {	
-	int choice = printMenu();
+	int choice;
+	do
+	{
+		choice = printMenu();
 
-	switch (choice)
-	{
-	case ADD_MEMBER:
-	{
-		addFriend();
-		break;
-	}
-	case ADD_PAGE:
-	{
-		addFansPage();
-		break;
-	}
-	case ADD_STATUS:
-	{
-		addStatusToUser();
-		break;
-	}
-	
-	case PRINT_STATUSES:
-	{
-		showAllUserStatuses();
-		break;
-	}
-	
-	case PRINT_TEN_STATUSES:
-	{
-		int indexMember = askForMemberDetails();
-		faceBook.getMemberArray().getMemberByIndex(indexMember).showLatest10thStatus();
+		switch (choice)
+		{
+		case ADD_MEMBER:
+			addFriend();
+			break;
+		case ADD_PAGE:
+			addFansPage();
+			break;
+		case ADD_STATUS:
+			addStatusToUser();
+			break;
+		case PRINT_STATUSES:
+			showAllUserStatuses();
+			break;
+		case PRINT_TEN_STATUSES:
+			showUpdatedStatuses();
+			break;
+		case FRIENDSHIP:
+			break;
+		case CANCAL_FRIENDSHIP:
+			break;
+		case ADD_FAN_TO_PAGE:
+			addFanToPage();
+			break;
+		case REMOVE_FAN_FROM_PAGE:
+			removeFanFromPage();
+			break;
+		case PRINT_FACEBOOK_USERS:
+			showAllUsers();
+			break;
+		case PRINT_FRIENDS_OF_USER:
+			showUserFriends();
+			break;
+		case EXIT:
+			break;
+		}
 
-		break;
-	}
-	case FRIENDSHIP:
-	{
-
-	}
-	case CANCAL_FRIENDSHIP:
-	{
-
-	}
-	case ADD_FAN_TO_PAGE:
-	{
-		int indexMember = askForMemberDetails();
-		int indexFansPage = askForFansPageDetails();
-
-		faceBook.getFansPageArrary().getPageByIndex(indexFansPage).addFriend(faceBook.getMemberArray().getMemberByIndex(indexMember)); //מכניס את השם הנבחר לפונקציה הוסף חבר בדף אוהדים
-
-		break;
-	}
-	case REMOVE_FAN_FROM_PAGE:
-	{
-		int indexMember = askForMemberDetails();
-		int indexFansPage = askForFansPageDetails();
-
-		faceBook.getFansPageArrary().getPageByIndex(indexFansPage).deleteFriend(memberName);
-
-		//לבדוק למה בפונקציה מחיקה בדף אוהדים מקבלים שם ובפונקציית הוספת חבר מקבלים ממבר
-		break;
-	}
-	case PRINT_FACEBOOK_MEMBERS:
-	{
-		faceBook.getMemberArray().showAllMembers();
-		break;
-	}
-
-	case PRINT_FRIENDS_OF_MEMBER:
-	{
-		int indexMember = askForMemberDetails();
-		faceBook.getMemberArray().getMemberByIndex(indexMember).showAllFriend();
-
-		break;
-	}
-	case PRINT_FRIENDS_OF_PAGE:
-	{
-		int indexFansPage = askForFansPageDetails();
-		faceBook.getFansPageArrary().getPageByIndex(indexFansPage).showAllFriends();
-
-		break;
-	}
-	case EXIT:
-	{
-
-	}
-	}
+	} while (choice != eChoice::EXIT);
 
 }
 
@@ -304,4 +262,76 @@ bool ConsoleUI::showAllFansPageStatuses()
 		thePage->showAllStatus();
 
 	return found;
+}
+
+bool ConsoleUI::showUpdatedStatuses()
+{
+	bool isValid;
+	Member* theMember = askForMemberDetails();
+
+	isValid = (theMember != nullptr);
+
+	if (isValid)
+		theMember->showLatest10thStatus();
+
+	return isValid;
+}
+
+void ConsoleUI::showAllUsers()
+{
+	faceBook.showAllUsers();
+}
+
+
+bool ConsoleUI::addFanToPage()
+{
+	Member* theMember = askForMemberDetails();
+	FansPage* thePage = askForFansPageDetails();
+
+	return faceBook.addFanToPage(theMember, thePage);
+}
+
+bool ConsoleUI::removeFanFromPage()
+{
+	Member* theMember = askForMemberDetails();
+	FansPage* thePage = askForFansPageDetails();
+
+	return faceBook.removeFanFromPage(theMember, thePage);
+}
+
+void ConsoleUI::showUserFriends()
+{
+	int type;
+
+	cout << "Press:\n" << (int)eUserType::MEMBER << " - to show statuses of a member" << endl
+		<< (int)eUserType::FANS_PAGE << " - to show statuses of fans page" << endl;
+
+	cin >> type;
+
+	switch (type)
+	{
+	case (int)eUserType::MEMBER:
+		showMemberFriends();
+		break;
+	case (int)eUserType::FANS_PAGE:
+		showFansPageFriends();
+		break;
+	default:
+		break;
+	}
+}
+
+void ConsoleUI::showMemberFriends()
+{
+	Member* theMember = askForMemberDetails();
+
+	cout << "*****" << theMember->getName() << " Friend: *****" << endl;
+	theMember->showAllFriends();
+}
+void ConsoleUI::showFansPageFriends()
+{
+	Member* theMember = askForMemberDetails();
+
+	cout << "*****" << theMember->getName() << " Friend: *****" << endl;
+	theMember->showAllFriends();
 }

@@ -18,7 +18,7 @@ public:
 
     void push(const char* text);
     void showAllStatus() const; 
-    void showLatest10thStatus() const; // should'nt be here
+    void showLatestNumOfStatus(int num) const; 
    
 private:
     Billboard(const Billboard&);

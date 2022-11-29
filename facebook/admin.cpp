@@ -7,7 +7,7 @@
 Admin::~Admin()
 {
 	for (int i = 0; i < allMembers.getLogSize(); i++)
-		delete &(allMembers.getIndexMember(i));
+		delete &(allMembers.getMemberByIndex(i));
 
 	for (int i = 0; i < allPages.getLogSize(); i++)
 		delete &(allPages.getPageByIndex(i));
@@ -44,6 +44,12 @@ void Admin::addFansPage(const char* name)
 	allPages.push(*newFansPage);
 }
 
+void Admin::showAllUsers() const
+{
+	allMembers.showAllMembers();
+	allPages.showAllPages();
+}
+
 void Admin::showAllMembers() const
 {
 	allMembers.showAllMembers();
@@ -62,4 +68,33 @@ void Admin::addNewStatus(Member& theMember, const char* newStatus)
 void Admin::addNewStatus(FansPage& theFansPage, const char* newStatus)
 {
 	theFansPage.addStatus(newStatus);
+}
+
+bool Admin::addFanToPage(Member* member,FansPage* page)
+{
+	bool isValid = (member != nullptr && page != nullptr);
+
+	if (isValid)
+		page->addFriend(*member);
+
+	return isValid;
+}
+bool Admin::removeFanFromPage(Member* member, FansPage* page)
+{
+	bool isValid = (member != nullptr && page != nullptr);
+
+	if (isValid)
+		page->deleteFriend(*member);
+
+	return isValid;
+}
+
+void Admin::showAllMemberFriends(Member* theMember) const
+{
+	theMember->showAllFriends();
+}
+
+void Admin::showAllFansPageFans(FansPage* theFansPage) const
+{
+	theFansPage->showAllFans();
 }

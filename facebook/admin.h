@@ -26,10 +26,15 @@ public:
 
 	void addFriend(const char* name, const Date& date);
 	void addFansPage(const char* name);
+	void showAllUsers() const;
 	void showAllMembers() const; 
 	void showAllFansPages() const; 
 	void addNewStatus(Member& theMember, const char* newStatus);
 	void addNewStatus(FansPage& theFansPage, const char* newStatus);
+	bool addFanToPage(Member* member, FansPage* page);
+	bool removeFanFromPage(Member* member, FansPage* page);
+	void showAllMemberFriends(Member* theMember) const;
+	void showAllFansPageFans(FansPage* theFansPage) const;
 
 private:
 	Admin(const Admin&);

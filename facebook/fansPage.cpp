@@ -36,7 +36,7 @@ void FansPage::showAllStatus() const
 	theBillboard.showAllStatus();
 }
 
-void FansPage::showAllFriends() const
+void FansPage::showAllFans() const
 {
 	members.showAllMembers();
 }
