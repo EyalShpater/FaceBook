@@ -29,7 +29,8 @@ public:
 	bool showAllMemberStatuses(const char* name) const;
 	bool showAllFansPageStatuses(const char* name) const;
 	bool showUpdatedFriendsStatuses(const char* name) const;
-
+	bool makeFriendship(const char* nameFirst, cinst char* nameSecond);
+	bool cancelFriendshipBetweenTwoMembers();
 
 private:
 	Admin(const Admin&);

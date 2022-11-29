@@ -92,10 +92,10 @@ void ConsoleUI::menu()
 			showUpdatedFriendsStatuses();
 			break;
 		case FRIENDSHIP:
-			//
+			friendshipBetweenTwoMembers();
 			break;
 		case CANCAL_FRIENDSHIP:
-			//
+			cancelFriendshipBetweenTwoMembers();
 			break;
 		case ADD_FAN_TO_PAGE:
 			addFanToPage();
@@ -311,4 +311,18 @@ int ConsoleUI::askForUserType()
 	cin >> type;
 
 	return type;
+}
+
+bool ConsoleUI::friendshipBetweenTwoMembers()
+{
+	char* firstMemberName = askForMemberDetails();
+	char* secondMemberName = askForMemberDetails();
+	return faceBook.makeFriendship(firstMemberName, secondMemberName);
+}
+
+bool ConsoleUI::cancelFriendshipBetweenTwoMembers()
+{
+	char* firstMemberName = askForMemberDetails();
+	char* secondMemberName = askForMemberDetails();
+	return faceBook.cancelFriendship(firstMemberName, secondMemberName);
 }

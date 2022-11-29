@@ -43,6 +43,8 @@ private:
 	bool showMemberFriends();
 	bool showFansPageFans();
 	int askForUserType();
+	bool friendshipBetweenTwoMembers();
+	bool cancelFriendshipBetweenTwoMembers();
 };
 
 #endif// __CONSOLE_UI_H
