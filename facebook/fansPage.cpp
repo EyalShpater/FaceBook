@@ -23,12 +23,19 @@ void FansPage::addStatus(const char* newStatus)
 void FansPage::addFriend(Member& newFriend)
 {
 	if (members.findMemberByName(newFriend.getName()) == NOT_FOUND)
-		members.push(newFriend); // Assmption: FansPage can't add member to like it.
+	{
+		members.push(newFriend);
+		newFriend.likePage(*this);
+	}
 }
 
 void FansPage::deleteFriend(Member& other)
 {
-	members.pop(other); // Assmption: FansPage can't remove member from like it.
+	if (members.findMemberByName(other.getName()) != NOT_FOUND)
+	{
+		members.pop(other);
+		other.dislikePage(*this);
+	}
 }
 
 void FansPage::showAllStatus() const

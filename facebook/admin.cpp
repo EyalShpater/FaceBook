@@ -15,14 +15,24 @@ Admin::~Admin()
 		delete &(allPages.getPageByIndex(i));
 }
 
-void Admin::addFriend(const char* name, const Date& date)
+bool Admin::addFriend(const char* name, const Date& date)
 {
-	Member* newMember = new Member(name, date);
-	allMembers.push(*newMember);
+	bool isValid = allMembers.findMemberByName(name) == NOT_FOUND;
+
+	if (isValid)
+	{
+		Member* newMember = new Member(name, date);
+		allMembers.push(*newMember);
+	}
+
+	return isValid;
 }
 
-void Admin::addFansPage(const char* name)
+bool Admin::addFansPage(const char* name)
 {
+	bool isValid = (allPages.findPage(name) == NOT_FOUND);
+
+	if (isValid)
 	FansPage* newFansPage = new FansPage(name);
 	allPages.push(*newFansPage);
 }

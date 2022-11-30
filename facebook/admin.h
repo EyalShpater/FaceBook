@@ -15,8 +15,8 @@ public:
 	Admin() = default;
 	~Admin();
 
-	void addFriend(const char* name, const Date& date);
-	void addFansPage(const char* name);
+	bool addFriend(const char* name, const Date& date);
+	bool addFansPage(const char* name);
 	void showAllUsers() const;
 	void showAllMembers() const; 
 	void showAllFansPages() const; 
