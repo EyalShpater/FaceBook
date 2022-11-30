@@ -17,8 +17,8 @@ public:
 
 	bool addFriend(const char* name, const Date& date);
 	bool addFansPage(const char* name);
-	void addNewStatusToMember(const char* name, const char* newStatus);
-	void addNewStatusToFansPage(const char* name, const char* newStatus);
+	bool addNewStatusToMember(const char* name, const char* newStatus);
+	bool addNewStatusToFansPage(const char* name, const char* newStatus);
 	bool makeFriendship(const char* nameFirst, const char* nameSecond);
 	bool addFanToPage(const char* member, const char* page);
 

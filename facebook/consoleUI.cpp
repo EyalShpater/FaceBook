@@ -159,8 +159,6 @@ const char* ConsoleUI::askForMemberDetails() const
 {
 	char memberName[MAX_NAME_LEN];
 
-	getchar(); // clear buffer
-
 	cout << "Enter the member's name: " << endl;
 	cin.getline(memberName, MAX_NAME_LEN);
 
@@ -214,6 +212,8 @@ void ConsoleUI::addStatusToFansPage()
 	char text[MAX_STATUS_LEN];
 	char name[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	strcpy (name, askForFansPageDetails());
 
 	cout << "Enter your status" << endl;
@@ -225,6 +225,8 @@ void ConsoleUI::addStatusToFansPage()
 bool ConsoleUI::showAllUserStatuses() const
 {
 	int type = askForUserType();
+
+	getchar(); // clear buffer
 
 	switch (type)
 	{
@@ -260,6 +262,8 @@ bool ConsoleUI::showUpdatedFriendsStatuses() const
 	char name[MAX_NAME_LEN];
 	
 	strcpy(name, askForMemberDetails());
+
+	getchar(); // clear buffer
 
 	return faceBook.showUpdatedFriendsStatuses(name);
 }
@@ -343,6 +347,8 @@ bool ConsoleUI::cancelFriendshipBetweenTwoMembers()
 {
 	char firstMemberName[MAX_NAME_LEN];
 	strcpy(firstMemberName, askForMemberDetails());
+
+	//getchar(); // clear buffer
 
 	char secondMemberName[MAX_NAME_LEN];
 	strcpy(secondMemberName, askForMemberDetails());

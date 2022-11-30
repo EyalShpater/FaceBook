@@ -79,6 +79,6 @@ void MemberArray::showAllMembers()const
 		cout << "Member's name: " << friends[i]->getName() << endl;
 		cout << "Member's birthday: ";
 		friends[i]->getDateOfBirth().show();
-		cout << endl;
+		cout << endl << endl;
 	}
 }

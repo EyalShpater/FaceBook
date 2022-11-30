@@ -17,7 +17,7 @@ Admin::~Admin()
 
 bool Admin::addFriend(const char* name, const Date& date)
 {
-	bool isValid = allMembers.findMemberByName(name) == NOT_FOUND;
+	bool isValid = allMembers.findMemberByName(name) == /*MemberArray::*/ NOT_FOUND;
 
 	if (isValid)
 	{
@@ -30,7 +30,7 @@ bool Admin::addFriend(const char* name, const Date& date)
 
 bool Admin::addFansPage(const char* name)
 {
-	bool isValid = (allPages.findPageByName(name) == NOT_FOUND);
+	bool isValid = (allPages.findPageByName(name) == FansPageArray::NOT_FOUND);
 
 	if (isValid)
 	{
@@ -57,20 +57,32 @@ void Admin::showAllFansPages() const
 	allPages.showAllPages();
 }
 
-void Admin::addNewStatusToMember(const char* name, const char* newStatus)
+bool Admin::addNewStatusToMember(const char* name, const char* newStatus)
 {
 	int index;
+	bool isValid;
 
 	index = allMembers.findMemberByName(name);
-	allMembers.getMemberByIndex(index).addStatusToBillboard(newStatus);
+	isValid = (index != /*MemberArray::*/NOT_FOUND);
+
+	if (isValid)
+		allMembers.getMemberByIndex(index).addStatusToBillboard(newStatus);
+
+	return isValid;
 }
 
-void Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
+bool Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
 {
 	int index;
+	bool isValid;
 
 	index = allPages.findPageByName(name);
-	allPages.getPageByIndex(index).addStatus(newStatus);
+	isValid = (index != FansPageArray::NOT_FOUND);
+
+	if (isValid)
+		allPages.getPageByIndex(index).addStatus(newStatus);
+
+	return isValid;
 }
 
 bool Admin::addFanToPage(const char* member,const char* page)
@@ -80,7 +92,7 @@ bool Admin::addFanToPage(const char* member,const char* page)
 
 	mIndex = allMembers.findMemberByName(member);
 	pIndex = allPages.findPageByName(page);
-	isValid = (mIndex != NOT_FOUND && pIndex != NOT_FOUND);
+	isValid = (mIndex != /*MemberArray::*/NOT_FOUND && pIndex != FansPageArray::NOT_FOUND);
 
 	if (isValid)
 		allMembers.getMemberByIndex(mIndex).likePage(allPages.getPageByIndex(pIndex));
@@ -94,7 +106,7 @@ bool Admin::removeFanFromPage(const char* member, const char* page)
 
 	mIndex = allMembers.findMemberByName(member);
 	pIndex = allPages.findPageByName(page);
-	isValid = (mIndex != NOT_FOUND && pIndex != NOT_FOUND);
+	isValid = (mIndex != /*MemberArray::*/NOT_FOUND && pIndex != FansPageArray::NOT_FOUND);
 
 	if (isValid)
 		allMembers.getMemberByIndex(mIndex).dislikePage(allPages.getPageByIndex(pIndex));
@@ -108,7 +120,7 @@ bool Admin::showAllMemberFriends(const char* name) const
 	bool isValid;
 
 	index = allMembers.findMemberByName(name);
-	isValid = (index != NOT_FOUND);
+	isValid = (index != /*MemberArray::*/NOT_FOUND);
 
 	if (isValid)
 		allMembers.getMemberByIndex(index).showAllFriends();
@@ -122,7 +134,7 @@ bool Admin::showAllFansPageFans(const char* name) const
 	bool isValid;
 
 	index = allPages.findPageByName(name);
-	isValid = (index != NOT_FOUND);
+	isValid = (index != FansPageArray::NOT_FOUND);
 	
 	if(isValid)
 		allPages.getPageByIndex(index).showAllFans();
@@ -136,7 +148,8 @@ bool Admin::showAllMemberStatuses(const char* name) const
 	int index;
 	
 	index = allMembers.findMemberByName(name);
-	isValid = (index != NOT_FOUND);
+	isValid = (index != /*MemberArray::*/NOT_FOUND);
+
 	if (isValid)
 		allMembers.getMemberByIndex(index).showAllStatus();
 
@@ -149,7 +162,7 @@ bool Admin::showAllFansPageStatuses(const char* name) const
 	int index;
 	
 	index = allPages.findPageByName(name);
-	isValid = (index != NOT_FOUND);
+	isValid = (index != FansPageArray::NOT_FOUND);
 	if (isValid)
 		allPages.getPageByIndex(index).showAllStatus();
 
@@ -161,7 +174,7 @@ bool Admin::showUpdatedFriendsStatuses(const char* name) const
 	bool isValid;
 	int index = allMembers.findMemberByName(name);
 
-	isValid = (index != NOT_FOUND);
+	isValid = (index != /*MemberArray::*/NOT_FOUND);
 	if(isValid)
 		allMembers.getMemberByIndex(index).showUpdatedFriendsStatuses();
 
@@ -175,7 +188,7 @@ bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
 	int index1 = allMembers.findMemberByName(nameFirst);
 	int index2 = allMembers.findMemberByName(nameSecond);
 
-	isValid = (index1 != NOT_FOUND && index2 != NOT_FOUND);
+	isValid = (index1 != /*MemberArray::*/NOT_FOUND && index2 /*MemberArray::*/ != NOT_FOUND);
 	if (isValid)
 	{
 	    Member& firstMember = allMembers.getMemberByIndex(index1);
@@ -193,7 +206,7 @@ bool Admin::cancelFriendship(const char* nameFirst, const char* nameSecond)
 	int index1 = allMembers.findMemberByName(nameFirst);
 	int index2 = allMembers.findMemberByName(nameSecond);
 
-	isValid = (index1 != NOT_FOUND && index2 != NOT_FOUND);
+	isValid = (index1 != /*MemberArray::*/NOT_FOUND && /*MemberArray::*/index2 != NOT_FOUND);
 	if (isValid)
 	{
 		Member& firstMember = allMembers.getMemberByIndex(index1);
