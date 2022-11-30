@@ -18,6 +18,8 @@ void ConsoleUI::addFriend()
 	int day, month, year;
 	char name[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	cout << "Please enter the friend's name: " << endl;
 	cin.getline(name, MAX_NAME_LEN);
 	cout << "Please enter the friend's birthday: " << endl;
@@ -30,6 +32,8 @@ void ConsoleUI::addFansPage()
 {
 	char name[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	cout << "Please enter the fans page's name: " << endl;
 	cin.getline(name, MAX_NAME_LEN);
 	
@@ -41,30 +45,41 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFansPage("MTA College");
 	faceBook.addFansPage("Computer Science");
 	faceBook.addFansPage("We All Love CPP");
+	faceBook.addFansPage("Comeing From Love");
 	
 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
+	faceBook.addFriend("Yehudit Ravitz", Date(29, 12, 1956));
 	
-	/*
-	eyal.addFriend(nitzan);
-	nitzan.addFriend(noa);
-	eyal.showAllFriend();
-	cout << "\n-----------\n";
-	eyal.likePage(mta);
-	noa.likePage(cpp);
-	eyal.addFriend(noa);
-	eyal.showAllFriend();
-	cout << "\n-----------\n";
-	eyal.cancelFriendship(noa);
-	cout << "\n-----------\n";
-	cout << "Eyal:" << endl;
-	eyal.showAllFriend();
-	cout << "Noa: " << endl;
-	noa.showAllFriend();
-	cout << "Nitzan: " << endl;
-	nitzan.showAllFriend();
-	cout << "\n-----------\n";  */
+	
+	faceBook.makeFriendship("Eyal Shpater", "Nitzan Sde Or");
+	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
+	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
+	faceBook.makeFriendship("Yehudit Ravitz", "Eyal Shpater");
+
+	faceBook.addFanToPage("Eyal Shpater", "MTA College");
+	faceBook.addFanToPage("Nitzan Sde Or", "MTA College");
+	faceBook.addFanToPage("Noa Kirel", "We All Love CPP");
+	faceBook.addFanToPage("Nitzan Sde Or", "Computer Science");
+	faceBook.addFanToPage("Yehudit Ravitz", "Comeing From Love");
+
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir");
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!");
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3");
+
+	faceBook.addNewStatusToMember("Eyal Shpater", "Hello it's me.");
+	faceBook.addNewStatusToMember("Eyal Shpater", "I was wondering...");
+	faceBook.addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?");
+
+	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la");
+	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala");
+	
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.");
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?");
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl");
+	
+
 }
 
 void ConsoleUI::menu()
@@ -143,6 +158,8 @@ int ConsoleUI::printMenu()
 const char* ConsoleUI::askForMemberDetails() 
 {
 	char memberName[MAX_NAME_LEN];
+
+	getchar(); // clear buffer
 
 	cout << "Enter the member's name: " << endl;
 	cin.getline(memberName, MAX_NAME_LEN);
@@ -303,8 +320,8 @@ int ConsoleUI::askForUserType()
 {
 	int type;
 
-	cout << "Press:\n" << (int)eUserType::MEMBER << " - to add status to member" << endl
-		<< (int)eUserType::FANS_PAGE << " - to add status to fans page" << endl;
+	cout << "Press:\n" << (int)eUserType::MEMBER << " - to member" << endl
+		<< (int)eUserType::FANS_PAGE << " - to fans page" << endl;
 	cin >> type;
 
 	return type;
