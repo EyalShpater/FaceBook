@@ -25,13 +25,16 @@ void Member::addStatusToBillboard(const char* text)
 	theBillboard.push(text);
 }
 
-void Member::addFriend(Member& newFriend)
+void Member::addFriend(Member& newFriend) // bool?
 {
-	if (members.findMemberByName(newFriend.getName()) == NOT_FOUND)
+	if (&newFriend != this)
+	{
+		if (members.findMemberByName(newFriend.getName()) == NOT_FOUND)
 			members.push(newFriend);
 
-	if (newFriend.members.findMemberByName(name) == NOT_FOUND)
+		if (newFriend.members.findMemberByName(name) == NOT_FOUND)
 			newFriend.members.push(*this);
+	}
 	
 }
 
@@ -46,7 +49,7 @@ void Member::cancelFriendship(Member& other)
 
 void Member::likePage(FansPage& newPage)
 {
-	if (fansPages.findPage(newPage.getName()) == NOT_FOUND)
+	if (fansPages.findPageByName(newPage.getName()) == NOT_FOUND)
 	{
 		fansPages.push(newPage);
 		newPage.addFriend(*this);
@@ -55,7 +58,7 @@ void Member::likePage(FansPage& newPage)
 
 void Member::dislikePage(FansPage& other)
 {
-	if (fansPages.findPage(other.getName()) != NOT_FOUND)
+	if (fansPages.findPageByName(other.getName()) != NOT_FOUND)
 	{
 		fansPages.push(other);
 		other.deleteFriend(*this);

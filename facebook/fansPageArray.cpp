@@ -1,9 +1,13 @@
 #include "fansPageArray.h"
 #include "fansPage.h"
 
+#include <iostream>
+using namespace std;
+
+const int FansPageArray::NOT_FOUND = -1;
+
 const int DEFAULT_PHYS_SIZE = 2;
 const int DEFAULT_LOG_SIZE = 0;
-const int NOT_FOUND = -1;
 const int EQUAL = 0;
 
 FansPageArray::FansPageArray()
@@ -27,7 +31,7 @@ void FansPageArray::push(FansPage& newFansPage)
 
 void FansPageArray::pop(FansPage& other)
 {
-	int index = findPage(other.getName());
+	int index = findPageByName(other.getName());
 	
 	if (index != NOT_FOUND)
 	{
@@ -36,7 +40,7 @@ void FansPageArray::pop(FansPage& other)
 	}
 }
 
-int FansPageArray::findPage(const char* name) const
+int FansPageArray::findPageByName(const char* name) const
 {
 	int index = NOT_FOUND;
 

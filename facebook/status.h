@@ -18,6 +18,7 @@ public:
     ~Status();
 
     void show() const;
+
 private:
     Status(const Status& other);
 };

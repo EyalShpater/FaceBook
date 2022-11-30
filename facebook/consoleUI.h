@@ -5,46 +5,51 @@
 
 class ConsoleUI
 {
-	Admin faceBook;
 public:
-
-	ConsoleUI() = default;
-
-	void menu();
-	void addDefaultMembersToFacebook();
-
 	enum eUserType { MEMBER, FANS_PAGE };
-	enum eChoice 
+	enum eChoice
 	{
-		ADD_MEMBER = 1, ADD_PAGE, ADD_STATUS, PRINT_STATUSES, PRINT_TEN_STATUSES, 
+		ADD_MEMBER = 1, ADD_PAGE, ADD_STATUS, PRINT_STATUSES, PRINT_TEN_STATUSES,
 		FRIENDSHIP, CANCAL_FRIENDSHIP, ADD_FAN_TO_PAGE, REMOVE_FAN_FROM_PAGE,
 		PRINT_FACEBOOK_USERS, PRINT_FRIENDS_OF_USER, EXIT
 	};
 
 private:
+	Admin faceBook;
+
+public:
+	ConsoleUI() = default;
+
+	void menu();
+	void addDefaultMembersToFacebook();
+
+private:
 	ConsoleUI(const ConsoleUI&);
+
+	int printMenu() const;
+	const char* askForMemberDetails() const;
+	const char* askForFansPageDetails() const;
+	int askForUserType() const;
 
 	void addFriend();
 	void addFansPage();
-	const char* askForMemberDetails();
-	const char* askForFansPageDetails();
 	bool addStatusToUser();
 	void addStatusToMember();
 	void addStatusToFansPage();
 	bool addFanToPage();
-	bool removeFanFromPage();
-	int printMenu();
-	bool showAllUserStatuses();
-	bool showAllMemberStatuses();
-	bool showAllFansPageStatuses();
-	bool showUpdatedFriendsStatuses();
-	void showAllUsers();
-	bool showUserFriends();
-	bool showMemberFriends();
-	bool showFansPageFans();
-	int askForUserType();
 	bool friendshipBetweenTwoMembers();
+
 	bool cancelFriendshipBetweenTwoMembers();
+	bool removeFanFromPage();
+
+	bool showAllUserStatuses() const;
+	bool showAllMemberStatuses() const;
+	bool showAllFansPageStatuses() const;
+	bool showUpdatedFriendsStatuses() const;
+	void showAllUsers() const;
+	bool showUserFriends() const;
+	bool showMemberFriends() const;
+	bool showFansPageFans() const;
 };
 
 #endif// __CONSOLE_UI_H

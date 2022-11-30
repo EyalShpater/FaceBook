@@ -4,6 +4,7 @@
 class Time 
 {
     int hour, minutes, seconds;
+
 public:
     Time(int hour, int minutes, int seconds);
     Time();

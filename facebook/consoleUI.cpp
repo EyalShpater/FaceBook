@@ -132,7 +132,7 @@ void ConsoleUI::menu()
 
 }
 
-int ConsoleUI::printMenu()
+int ConsoleUI::printMenu() const
 {
 	int choice;
 
@@ -155,7 +155,7 @@ int ConsoleUI::printMenu()
 	return choice;
 }
 
-const char* ConsoleUI::askForMemberDetails() 
+const char* ConsoleUI::askForMemberDetails() const
 {
 	char memberName[MAX_NAME_LEN];
 
@@ -167,7 +167,7 @@ const char* ConsoleUI::askForMemberDetails()
 	return memberName;
 }
 
-const char* ConsoleUI::askForFansPageDetails() 
+const char* ConsoleUI::askForFansPageDetails() const
 {
 	char fansPageName[MAX_NAME_LEN];
 
@@ -222,7 +222,7 @@ void ConsoleUI::addStatusToFansPage()
 	faceBook.addNewStatusToFansPage(name, text);
 }
 
-bool ConsoleUI::showAllUserStatuses() 
+bool ConsoleUI::showAllUserStatuses() const
 {
 	int type = askForUserType();
 
@@ -237,7 +237,7 @@ bool ConsoleUI::showAllUserStatuses()
 	}
 }
 
-bool ConsoleUI::showAllMemberStatuses() 
+bool ConsoleUI::showAllMemberStatuses() const
 {
 	char name[MAX_NAME_LEN];
 
@@ -246,7 +246,7 @@ bool ConsoleUI::showAllMemberStatuses()
 	return faceBook.showAllMemberStatuses(name);
 }
 
-bool ConsoleUI::showAllFansPageStatuses() 
+bool ConsoleUI::showAllFansPageStatuses() const
 {
 	char name[MAX_NAME_LEN];
 
@@ -255,7 +255,7 @@ bool ConsoleUI::showAllFansPageStatuses()
 	return faceBook.showAllFansPageStatuses(name);
 }
 
-bool ConsoleUI::showUpdatedFriendsStatuses()
+bool ConsoleUI::showUpdatedFriendsStatuses() const
 {
 	char name[MAX_NAME_LEN];
 	
@@ -264,13 +264,13 @@ bool ConsoleUI::showUpdatedFriendsStatuses()
 	return faceBook.showUpdatedFriendsStatuses(name);
 }
 
-void ConsoleUI::showAllUsers()
+void ConsoleUI::showAllUsers() const
 {
 	faceBook.showAllUsers();
 }
 
 
-bool ConsoleUI::addFanToPage()
+bool ConsoleUI::addFanToPage() 
 {
 	char memberName[MAX_NAME_LEN];
 	char fansPageName[MAX_NAME_LEN];
@@ -292,7 +292,7 @@ bool ConsoleUI::removeFanFromPage()
 	return faceBook.removeFanFromPage(memberName, fansPageName);
 }
 
-bool ConsoleUI::showUserFriends()
+bool ConsoleUI::showUserFriends() const
 {
 	int type = askForUserType();
 
@@ -307,16 +307,17 @@ bool ConsoleUI::showUserFriends()
 	}
 }
 
-bool ConsoleUI::showMemberFriends()
+bool ConsoleUI::showMemberFriends() const
 {	
 	return faceBook.showAllMemberFriends(askForMemberDetails());
 }
-bool ConsoleUI::showFansPageFans()
+
+bool ConsoleUI::showFansPageFans() const
 {
 	return faceBook.showAllFansPageFans(askForFansPageDetails());
 }
 
-int ConsoleUI::askForUserType()
+int ConsoleUI::askForUserType() const
 {
 	int type;
 

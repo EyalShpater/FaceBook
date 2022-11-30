@@ -10,7 +10,7 @@ class FansPage
     char* name;
     Billboard theBillboard; 
     MemberArray members;
-   
+
 public:
     FansPage(const char* name);
     ~FansPage();
@@ -20,9 +20,11 @@ public:
     void addStatus(const char* newStatus);
     void addFriend(Member& newFriend);
     void deleteFriend(Member& other);
+
     void showAllStatus() const;
     void showAllFans() const;
     void show() const;
+
 private:
     FansPage(const FansPage&);
 };

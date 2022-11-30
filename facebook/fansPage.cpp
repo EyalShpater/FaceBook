@@ -3,6 +3,9 @@
 #include "fansPage.h"
 #include "member.h"
 
+#include <iostream>
+using namespace std;
+
 const int NOT_FOUND = -1;
 
 FansPage::FansPage(const char* name)

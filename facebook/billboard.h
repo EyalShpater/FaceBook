@@ -22,6 +22,7 @@ public:
    
 private:
     Billboard(const Billboard&);
+
     void reserve();
     void myRealloc(int newSize);
 };

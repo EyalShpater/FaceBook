@@ -30,11 +30,15 @@ bool Admin::addFriend(const char* name, const Date& date)
 
 bool Admin::addFansPage(const char* name)
 {
-	bool isValid = (allPages.findPage(name) == NOT_FOUND);
+	bool isValid = (allPages.findPageByName(name) == NOT_FOUND);
 
 	if (isValid)
-	FansPage* newFansPage = new FansPage(name);
-	allPages.push(*newFansPage);
+	{
+		FansPage* newFansPage = new FansPage(name);
+		allPages.push(*newFansPage);
+	}
+
+	return isValid;
 }
 
 void Admin::showAllUsers() const
@@ -65,7 +69,7 @@ void Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
 {
 	int index;
 
-	index = allPages.findPage(name);
+	index = allPages.findPageByName(name);
 	allPages.getPageByIndex(index).addStatus(newStatus);
 }
 
@@ -75,7 +79,7 @@ bool Admin::addFanToPage(const char* member,const char* page)
 	bool isValid;
 
 	mIndex = allMembers.findMemberByName(member);
-	pIndex = allPages.findPage(page);
+	pIndex = allPages.findPageByName(page);
 	isValid = (mIndex != NOT_FOUND && pIndex != NOT_FOUND);
 
 	if (isValid)
@@ -89,7 +93,7 @@ bool Admin::removeFanFromPage(const char* member, const char* page)
 	bool isValid;
 
 	mIndex = allMembers.findMemberByName(member);
-	pIndex = allPages.findPage(page);
+	pIndex = allPages.findPageByName(page);
 	isValid = (mIndex != NOT_FOUND && pIndex != NOT_FOUND);
 
 	if (isValid)
@@ -117,7 +121,7 @@ bool Admin::showAllFansPageFans(const char* name) const
 	int index;
 	bool isValid;
 
-	index = allPages.findPage(name);
+	index = allPages.findPageByName(name);
 	isValid = (index != NOT_FOUND);
 	
 	if(isValid)
@@ -144,7 +148,7 @@ bool Admin::showAllFansPageStatuses(const char* name) const
 	bool isValid;
 	int index;
 	
-	index = allPages.findPage(name);
+	index = allPages.findPageByName(name);
 	isValid = (index != NOT_FOUND);
 	if (isValid)
 		allPages.getPageByIndex(index).showAllStatus();
