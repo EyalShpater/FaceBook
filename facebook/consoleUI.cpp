@@ -329,14 +329,22 @@ int ConsoleUI::askForUserType()
 
 bool ConsoleUI::friendshipBetweenTwoMembers() 
 {
-	const char* firstMemberName = askForMemberDetails();
-	const char* secondMemberName = askForMemberDetails();
+    char firstMemberName[MAX_NAME_LEN];
+	strcpy(firstMemberName, askForMemberDetails());
+
+    char secondMemberName[MAX_NAME_LEN];
+	strcpy(secondMemberName, askForMemberDetails());
+
 	return faceBook.makeFriendship(firstMemberName, secondMemberName);
 }
 
 bool ConsoleUI::cancelFriendshipBetweenTwoMembers() 
 {
-	const char* firstMemberName = askForMemberDetails();
-	const char* secondMemberName = askForMemberDetails();
+	char firstMemberName[MAX_NAME_LEN];
+	strcpy(firstMemberName, askForMemberDetails());
+
+	char secondMemberName[MAX_NAME_LEN];
+	strcpy(secondMemberName, askForMemberDetails());
+
 	return faceBook.cancelFriendship(firstMemberName, secondMemberName);
 }
