@@ -24,7 +24,7 @@ public:
 	const Date& getDateOfBirth() const { return dateOfBirth; }
 	
 	void addStatusToBillboard(const char* text);
-	void addFriend(Member& newFriend); //bool?
+	bool addFriend(Member& newFriend); 
 	void cancelFriendship(Member& other); //bool?
 	void likePage(FansPage& newPage); //bool?
 	void dislikePage(FansPage& other); // bool?

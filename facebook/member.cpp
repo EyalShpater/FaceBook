@@ -24,8 +24,10 @@ void Member::addStatusToBillboard(const char* text)
 	theBillboard.push(text);
 }
 
-void Member::addFriend(Member& newFriend) // bool?
+bool Member::addFriend(Member& newFriend) 
 {
+	bool isValid = false;
+
 	if (&newFriend != this)
 	{
 		if (members.findMemberByName(newFriend.getName()) == MemberArray::NOT_FOUND)
@@ -33,8 +35,11 @@ void Member::addFriend(Member& newFriend) // bool?
 
 		if (newFriend.members.findMemberByName(name) == MemberArray::NOT_FOUND)
 			newFriend.members.push(*this);
+
+		isValid = true;
 	}
 	
+	return isValid;
 }
 
 void Member::cancelFriendship(Member& other)

@@ -33,23 +33,23 @@ private:
 
 	void addFriend();
 	void addFansPage();
-	bool addStatusToUser();
+	void addStatusToUser();
 	void addStatusToMember();
 	void addStatusToFansPage();
-	bool addFanToPage();
-	bool friendshipBetweenTwoMembers();
+	void addFanToPage();
+	void friendshipBetweenTwoMembers();
 
-	bool cancelFriendshipBetweenTwoMembers();
-	bool removeFanFromPage();
+	void cancelFriendshipBetweenTwoMembers();
+	void removeFanFromPage();
 
-	bool showAllUserStatuses() const;
-	bool showAllMemberStatuses() const;
-	bool showAllFansPageStatuses() const;
-	bool showUpdatedFriendsStatuses() const;
+	void showAllUserStatuses() const;
+	void showAllMemberStatuses() const;
+	void showAllFansPageStatuses() const;
+	void showUpdatedFriendsStatuses() const;
 	void showAllUsers() const;
-	bool showUserFriends() const;
-	bool showMemberFriends() const;
-	bool showFansPageFans() const;
+	void showUserFriends() const;
+	void showMemberFriends() const;
+	void showFansPageFans() const;
 };
 
 #endif// __CONSOLE_UI_H

@@ -191,7 +191,7 @@ bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
 	{
 	    Member& firstMember = allMembers.getMemberByIndex(index1);
 		Member& secondMember = allMembers.getMemberByIndex(index2);
-		firstMember.addFriend(secondMember);
+		isValid = firstMember.addFriend(secondMember);
 	}
 
 	return isValid;
