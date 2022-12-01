@@ -82,12 +82,17 @@ void Member::showLatest10thStatus() const
 void Member::showUpdatedFriendsStatuses() const
 {
 	for (int i = 0; i < members.getLogSize(); i++)
+	{
+		cout << "..................................." << endl;
+		cout << members.getMemberByIndex(i).getName() << "'s statuses:" << endl;
+		cout << "..................................." << endl << endl;
 		members.getMemberByIndex(i).showLatest10thStatus();
+	}
 }
 
 void Member::showAllFriends() const
 {
-	cout << "**********" << name << " Friends: **********" << endl;
+	cout << "**********" << name << "'s Friends **********" << endl << endl;
 	members.showAllMembers();
 	cout << "********************" << endl;
 }

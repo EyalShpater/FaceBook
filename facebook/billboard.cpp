@@ -31,14 +31,20 @@ void Billboard::push(const char* text)
 
 void Billboard::showAllStatus() const
 {
-	for (int i = 0; i < logSize; i++)
+	for (int i = logSize - 1; i >= 0; i--)
+	{
 		theStatus[i]->show();
+		cout << endl;
+	}
 }
 
 void Billboard::showLatestNumOfStatus(int num) const
 {
 	for (int i = 1; i <= logSize && i <= num; i++)
+	{
 		theStatus[logSize - i]->show();
+		cout << endl;
+	}
 }
 
 void Billboard::reserve()
