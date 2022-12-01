@@ -27,8 +27,8 @@ private:
 	ConsoleUI(const ConsoleUI&);
 
 	int printMenu() const;
-	const char* askForMemberDetails() const;
-	const char* askForFansPageDetails() const;
+	void askForMemberDetails(char name[]) const;
+	void askForFansPageDetails(char name[]) const;
 	int askForUserType() const;
 
 	void addFriend();

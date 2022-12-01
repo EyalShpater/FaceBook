@@ -19,7 +19,6 @@ Time::Time(int hour, int minutes, int seconds)
     setMinutes(minutes);
     setSeconds(seconds);
 }
-
 Time::Time() 
 {
     time_t now = time(0);
