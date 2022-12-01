@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+/********* Constructors *********/
+
 FansPage::FansPage(const char* name)
 {
 	this->name = strdup(name);
@@ -15,6 +17,8 @@ FansPage::~FansPage()
 {
 	delete[]name;
 }
+
+/********* Fans-Page's functions *********/
 
 void FansPage::addStatus(const char* newStatus)
 {
@@ -38,6 +42,8 @@ void FansPage::deleteFriend(Member& other)
 		other.dislikePage(*this);
 	}
 }
+
+/********* Show functions *********/
 
 void FansPage::showAllStatus() const
 {

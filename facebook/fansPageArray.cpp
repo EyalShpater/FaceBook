@@ -4,10 +4,14 @@
 #include <iostream>
 using namespace std;
 
+/********* Static variables declaration *********/
+
 const int FansPageArray::NOT_FOUND = -1;
 const int FansPageArray::DEFAULT_PHYS_SIZE = 2;
 const int FansPageArray::DEFAULT_LOG_SIZE = 0;
 const int FansPageArray::EQUAL = 0;
+
+/********* Constructors *********/
 
 FansPageArray::FansPageArray()
 {
@@ -20,6 +24,8 @@ FansPageArray::~FansPageArray()
 {
 	delete[]theFansPageArray;
 }
+
+/********* Array functions *********/
 
 void FansPageArray::push(FansPage& newFansPage)
 {
@@ -50,7 +56,6 @@ int FansPageArray::findPageByName(const char* name) const
 	return index;
 }
 
-
 void FansPageArray::reserve()
 {
 	if (logSize == physSize)
@@ -72,11 +77,13 @@ void FansPageArray::myRealloc(int newSize)
 	theFansPageArray = temp;
 }
 
+/********* Show *********/
+
 void FansPageArray::showAllPages() const
 {
 	for (int i = 0; i < logSize; i++)
 	{
 		theFansPageArray[i]->show();
-		cout << endl;
+		cout << endl << endl;
 	}
 }

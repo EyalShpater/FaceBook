@@ -27,8 +27,8 @@ public:
 
 	void push(FansPage& newFansPage);
 	void pop(FansPage& other);
-
 	int findPageByName(const char* name) const;
+
 	void showAllPages() const;
 
 private:

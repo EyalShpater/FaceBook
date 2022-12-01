@@ -4,6 +4,8 @@
 #include "date.h"
 #include "status.h"
 
+/********* Destructor *********/
+
 Admin::~Admin()
 {
 	for (int i = 0; i < allMembers.getLogSize(); i++)
@@ -12,6 +14,8 @@ Admin::~Admin()
 	for (int i = 0; i < allPages.getLogSize(); i++)
 		delete &(allPages.getPageByIndex(i));
 }
+
+/********* Add and Connect functions *********/
 
 bool Admin::addFriend(const char* name, const Date& date)
 {
@@ -37,22 +41,6 @@ bool Admin::addFansPage(const char* name)
 	}
 
 	return isValid;
-}
-
-void Admin::showAllUsers() const
-{
-	allMembers.showAllMembers();
-	allPages.showAllPages();
-}
-
-void Admin::showAllMembers() const
-{
-	allMembers.showAllMembers();
-}
-
-void Admin::showAllFansPages() const
-{
-	allPages.showAllPages();
 }
 
 bool Admin::addNewStatusToMember(const char* name, const char* newStatus)
@@ -83,7 +71,25 @@ bool Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
 	return isValid;
 }
 
-bool Admin::addFanToPage(const char* member,const char* page)
+bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
+{
+	bool isValid;
+
+	int index1 = allMembers.findMemberByName(nameFirst);
+	int index2 = allMembers.findMemberByName(nameSecond);
+
+	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
+	if (isValid)
+	{
+		Member& firstMember = allMembers.getMemberByIndex(index1);
+		Member& secondMember = allMembers.getMemberByIndex(index2);
+		isValid = firstMember.addFriend(secondMember);
+	}
+
+	return isValid;
+}
+
+bool Admin::addFanToPage(const char* member, const char* page)
 {
 	int mIndex, pIndex;
 	bool isValid;
@@ -97,6 +103,9 @@ bool Admin::addFanToPage(const char* member,const char* page)
 
 	return isValid;
 }
+
+/********* Disconncet functions *********/
+
 bool Admin::removeFanFromPage(const char* member, const char* page)
 {
 	int mIndex, pIndex;
@@ -110,6 +119,42 @@ bool Admin::removeFanFromPage(const char* member, const char* page)
 		allMembers.getMemberByIndex(mIndex).dislikePage(allPages.getPageByIndex(pIndex));
 
 	return isValid;
+}
+
+bool Admin::cancelFriendship(const char* nameFirst, const char* nameSecond)
+{
+	bool isValid;
+
+	int index1 = allMembers.findMemberByName(nameFirst);
+	int index2 = allMembers.findMemberByName(nameSecond);
+
+	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
+	if (isValid)
+	{
+		Member& firstMember = allMembers.getMemberByIndex(index1);
+		Member& secondMember = allMembers.getMemberByIndex(index2);
+		firstMember.cancelFriendship(secondMember);
+	}
+
+	return isValid;
+}
+
+/********* Show functions *********/
+
+void Admin::showAllUsers() const
+{
+	allMembers.showAllMembers();
+	allPages.showAllPages();
+}
+
+void Admin::showAllMembers() const
+{
+	allMembers.showAllMembers();
+}
+
+void Admin::showAllFansPages() const
+{
+	allPages.showAllPages();
 }
 
 bool Admin::showAllMemberFriends(const char* name) const
@@ -175,42 +220,6 @@ bool Admin::showUpdatedFriendsStatuses(const char* name) const
 	isValid = (index != MemberArray::NOT_FOUND);
 	if(isValid)
 		allMembers.getMemberByIndex(index).showUpdatedFriendsStatuses();
-
-	return isValid;
-}
-
-bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
-{
-	bool isValid;
-
-	int index1 = allMembers.findMemberByName(nameFirst);
-	int index2 = allMembers.findMemberByName(nameSecond);
-
-	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
-	if (isValid)
-	{
-	    Member& firstMember = allMembers.getMemberByIndex(index1);
-		Member& secondMember = allMembers.getMemberByIndex(index2);
-		isValid = firstMember.addFriend(secondMember);
-	}
-
-	return isValid;
-}
-
-bool Admin::cancelFriendship(const char* nameFirst, const char* nameSecond)
-{
-	bool isValid;
-
-	int index1 = allMembers.findMemberByName(nameFirst);
-	int index2 = allMembers.findMemberByName(nameSecond);
-
-	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
-	if (isValid)
-	{
-		Member& firstMember = allMembers.getMemberByIndex(index1);
-		Member& secondMember = allMembers.getMemberByIndex(index2);
-		firstMember.cancelFriendship(secondMember);
-	}
 
 	return isValid;
 }

@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+/********* Const variables declaration *********/
+
 const int MIN_HOUR = 0;
 const int MAX_HOUR = 23;
 const int MIN_MIN = 0;
@@ -13,12 +15,15 @@ const int MAX_MIN = 59;
 const int MIN_SEC = 0;
 const int MAX_SEC = 59;
 
+/********* Constructors *********/
+
 Time::Time(int hour, int minutes, int seconds)
 {
     setHour(hour);
     setMinutes(minutes);
     setSeconds(seconds);
 }
+
 Time::Time() 
 {
     time_t now = time(0);
@@ -29,6 +34,8 @@ Time::Time()
     seconds = temp->tm_sec;
 }
 
+/********* Setters *********/
+
 bool Time::setHour(int hour)
 {
     if (hour < MIN_HOUR || hour > MAX_HOUR)
@@ -37,6 +44,7 @@ bool Time::setHour(int hour)
     this->hour = hour;
     return true;
 }
+
 bool Time::setMinutes(int minutes)
 {
     if (minutes < MIN_MIN || minutes > MAX_MIN)
@@ -45,6 +53,7 @@ bool Time::setMinutes(int minutes)
     this->minutes = minutes;
     return true;
 }
+
 bool Time::setSeconds(int seconds)
 {
     if (seconds < MIN_SEC || seconds > MAX_SEC)
@@ -53,6 +62,8 @@ bool Time::setSeconds(int seconds)
     this->seconds = seconds;
     return true;
 }
+
+/********* Show *********/
 
 void Time::show() const
 {

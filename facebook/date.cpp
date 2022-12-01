@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+/********* Const variables declaration *********/
+
 const int MIN_DAY = 1;
 const int MAX_DAY = 31;
 const int MIN_MONTH = 1;
@@ -14,6 +16,8 @@ const int MIN_YEAR = 1000;
 const int MAX_YEAR = 3000;
 const int CTIME_START_YEAR_COUNT = 1900;
 const int CTIME_START_MONTH_COUNT = 1;
+
+/********* Constructors *********/
 
 Date::Date()
 {
@@ -31,6 +35,8 @@ Date::Date(int day, int month, int year)
     setMonth(month);
     setYear(year);
 }
+
+/********* Setters *********/
 
 bool Date::setDay(int day)
 {
@@ -58,6 +64,9 @@ bool Date::setYear(int year)
     this->year = year;
     return true;
 }
+
+
+/********* Show *********/
 
 void Date::show() const
 {

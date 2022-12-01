@@ -10,49 +10,12 @@
 #include <iostream>
 using namespace std;
 
+/********* Const variables declaration *********/
+
 const int MAX_NAME_LEN = 50;
 const int MAX_STATUS_LEN = 300;
 
-void ConsoleUI::addFriend()
-{
-	int day, month, year;
-	char name[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-
-	system("cls");
-	cout << "******************** Add A Friend To The System ********************" << endl;
-
-	cout << "Please enter the friend's name: " << endl;
-	cin.getline(name, MAX_NAME_LEN);
-	cout << "Please enter the friend's birthday: " << endl;
-	cin >> day >> month >> year;
-	
-	isValid = faceBook.addFriend(name, Date(day, month, year));
-
-	if (!isValid)
-		cout << "\nName already exist!" << endl << endl;
-}
-
-void ConsoleUI::addFansPage()
-{
-	char name[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-
-	system("cls");
-	cout << "******************** Add A Fans-Page To The System ********************" << endl;
-
-	cout << "Please enter the fans page's name: " << endl;
-	cin.getline(name, MAX_NAME_LEN);
-	
-	isValid = faceBook.addFansPage(name);
-
-	if (!isValid)
-		cout << "\nName already exist!" << endl << endl;
-}
+/********* Main functions *********/
 
 void ConsoleUI::addDefaultMembersToFacebook()
 {
@@ -60,13 +23,13 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFansPage("Computer Science");
 	faceBook.addFansPage("We All Love CPP");
 	faceBook.addFansPage("Comeing From Love");
-	
+
 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
 	faceBook.addFriend("Yehudit Ravitz", Date(29, 12, 1956));
-	
-	
+
+
 	faceBook.makeFriendship("Eyal Shpater", "Nitzan Sde Or");
 	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
 	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
@@ -88,16 +51,16 @@ void ConsoleUI::addDefaultMembersToFacebook()
 
 	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la");
 	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala");
-	
+
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.");
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?");
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl");
-	
+
 
 }
 
 void ConsoleUI::menu()
-{	
+{
 	int choice;
 	do
 	{
@@ -147,13 +110,15 @@ void ConsoleUI::menu()
 
 }
 
+/********* Utilities functions *********/
+
 int ConsoleUI::printMenu() const
 {
 	int choice;
 
 	cout << "~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~" << endl;
 	cout << "Please enter your choice from the menu:" << endl
-		<<ADD_MEMBER<< "- Add member" << endl
+		<< ADD_MEMBER << "- Add member" << endl
 		<< "2- Add fans page" << endl
 		<< "3- Add status to member/fans page" << endl
 		<< "4- Displaying all the statuses of a member/fans page" << endl
@@ -186,6 +151,69 @@ void ConsoleUI::askForFansPageDetails(char name[]) const
 	cin.getline(name, MAX_NAME_LEN);
 }
 
+int ConsoleUI::askForUserType() const
+{
+	int type;
+	bool flag = false;
+
+	do
+	{
+		if (flag)
+			cout << "Invalid input! try again" << endl;
+
+		cout << "Press:\n" << (int)eUserType::MEMBER << " - to member" << endl
+			<< (int)eUserType::FANS_PAGE << " - to fans page" << endl;
+		cin >> type;
+
+		flag = true;
+	} while (type != eUserType::MEMBER && type != eUserType::FANS_PAGE);
+
+	return type;
+}
+
+/********* Add and Connect functions *********/
+
+void ConsoleUI::addFriend()
+{
+	int day, month, year;
+	char name[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+
+	system("cls");
+	cout << "******************** Add A Friend To The System ********************" << endl;
+
+	cout << "Please enter the friend's name: " << endl;
+	cin.getline(name, MAX_NAME_LEN);
+	cout << "Please enter the friend's birthday: " << endl;
+	cin >> day >> month >> year;
+	
+	isValid = faceBook.addFriend(name, Date(day, month, year));
+
+	if (!isValid)
+		cout << "\nName already exist!" << endl << endl;
+}
+
+void ConsoleUI::addFansPage()
+{
+	char name[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+
+	system("cls");
+	cout << "******************** Add A Fans-Page To The System ********************" << endl;
+
+	cout << "Please enter the fans page's name: " << endl;
+	cin.getline(name, MAX_NAME_LEN);
+	
+	isValid = faceBook.addFansPage(name);
+
+	if (!isValid)
+		cout << "\nName already exist!" << endl << endl;
+}
+
 void ConsoleUI::addStatusToUser()
 {
 	int type;
@@ -197,11 +225,11 @@ void ConsoleUI::addStatusToUser()
 
 	switch (type)
 	{
-	case (int)eUserType::MEMBER :
+	case (int)eUserType::MEMBER:
 		addStatusToMember();
 		cout << endl;
 		break;
-	case (int)eUserType::FANS_PAGE :
+	case (int)eUserType::FANS_PAGE:
 		addStatusToFansPage();
 		cout << endl;
 		break;
@@ -248,6 +276,92 @@ void ConsoleUI::addStatusToFansPage()
 		cout << endl << name << " not found!" << endl;
 }
 
+void ConsoleUI::addFanToPage()
+{
+	char memberName[MAX_NAME_LEN];
+	char fansPageName[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+	system("cls");
+	cout << "******************** Add Fan To Like A Page ********************" << endl;
+
+	askForMemberDetails(memberName);
+	askForFansPageDetails(fansPageName);
+
+	isValid = faceBook.addFanToPage(memberName, fansPageName);
+
+	if (!isValid)
+		cout << endl << "Unable to add " << memberName << " to " << fansPageName << endl << endl;
+}
+
+void ConsoleUI::friendshipBetweenTwoMembers()
+{
+	char firstMemberName[MAX_NAME_LEN];
+	char secondMemberName[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+
+	system("cls");
+	cout << "******************** Friendship Link ********************" << endl;
+
+	askForMemberDetails(firstMemberName);
+	askForMemberDetails(secondMemberName);
+
+	isValid = faceBook.makeFriendship(firstMemberName, secondMemberName);
+
+	if (!isValid)
+		cout << "\nUnable to make " << firstMemberName << " and "
+		<< secondMemberName << " friends :(" << endl << endl;
+}
+
+/********* Disconncet functions *********/
+
+void ConsoleUI::cancelFriendshipBetweenTwoMembers()
+{
+	char firstMemberName[MAX_NAME_LEN];
+	char secondMemberName[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+
+	system("cls");
+	cout << "******************** Cancel Friendship ********************" << endl;
+
+	askForMemberDetails(firstMemberName);
+	askForMemberDetails(secondMemberName);
+
+	isValid = faceBook.cancelFriendship(firstMemberName, secondMemberName);
+
+	if (!isValid)
+		cout << "\nUnable to cancel friendship between " << firstMemberName << " and "
+		<< secondMemberName << endl << endl;
+
+}
+
+void ConsoleUI::removeFanFromPage()
+{
+	char memberName[MAX_NAME_LEN];
+	char fansPageName[MAX_NAME_LEN];
+	bool isValid;
+
+	getchar(); // clear buffer
+
+	system("cls");
+	cout << "******************** Remove A Friend From A Page ********************" << endl;
+
+	askForMemberDetails(memberName);
+	askForFansPageDetails(fansPageName);
+
+	isValid = faceBook.removeFanFromPage(memberName, fansPageName);
+
+	if (!isValid)
+		cout << endl << "Unable to remove " << memberName << " from " << fansPageName << endl << endl;
+}
+
+/********* Show functions *********/
+
 void ConsoleUI::showAllUserStatuses() const
 {
 	int type;
@@ -292,8 +406,6 @@ void ConsoleUI::showAllFansPageStatuses() const
 	char name[MAX_NAME_LEN];
 	bool isValid;
 
-	system("cls");
-
 	askForFansPageDetails(name);
 
 	cout << endl;
@@ -330,46 +442,6 @@ void ConsoleUI::showAllUsers() const
 	cout << endl;
 
 	faceBook.showAllUsers();
-}
-
-
-void ConsoleUI::addFanToPage() 
-{
-	char memberName[MAX_NAME_LEN];
-	char fansPageName[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-	system("cls");
-	cout << "******************** Add Fan To Like A Page ********************" << endl;
-
-	askForMemberDetails(memberName);
-	askForFansPageDetails(fansPageName);
-
-	isValid = faceBook.addFanToPage(memberName, fansPageName);
-
-	if (!isValid)
-		cout << endl << "Unable to add " << memberName << " to " << fansPageName << endl << endl;
-}
-
-void ConsoleUI::removeFanFromPage()
-{
-	char memberName[MAX_NAME_LEN];
-	char fansPageName[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-
-	system("cls");
-	cout << "******************** Remove A Friend From A Page ********************" << endl;
-
-	askForMemberDetails(memberName);
-	askForFansPageDetails(fansPageName);
-
-	isValid = faceBook.removeFanFromPage(memberName, fansPageName);
-
-	if (!isValid)
-		cout << endl << "Unable to remove " << memberName << " from " << fansPageName << endl << endl;
 }
 
 void ConsoleUI::showUserFriends() const
@@ -418,70 +490,11 @@ void ConsoleUI::showFansPageFans() const
 	bool isValid;
 
 	askForFansPageDetails(name);
+
+	cout << endl;
+
 	isValid = faceBook.showAllFansPageFans(name);
 
 	if (!isValid)
 		cout << endl << name << " not found!" << endl << endl;
-}
-
-int ConsoleUI::askForUserType() const
-{
-	int type;
-	bool flag = false;
-
-	do 
-	{
-		if (flag)
-			cout << "Invalid input! try again" << endl;
-
-		cout << "Press:\n" << (int)eUserType::MEMBER << " - to member" << endl
-			<< (int)eUserType::FANS_PAGE << " - to fans page" << endl;
-		cin >> type;
-		flag = true;
-	} while (type != eUserType::MEMBER && type != eUserType::FANS_PAGE);
-
-	return type;
-}
-
-void ConsoleUI::friendshipBetweenTwoMembers() 
-{
-	char firstMemberName[MAX_NAME_LEN];
-	char secondMemberName[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-
-	system("cls");
-	cout << "******************** Friendship Link ********************" << endl;
-
-	askForMemberDetails(firstMemberName);
-	askForMemberDetails(secondMemberName);
-
-	isValid = faceBook.makeFriendship(firstMemberName, secondMemberName);
-
-	if (!isValid)
-		cout << "\nUnable to make " << firstMemberName << " and " 
-		<< secondMemberName << " friends :(" << endl << endl;
-}
-
-void ConsoleUI::cancelFriendshipBetweenTwoMembers() 
-{
-	char firstMemberName[MAX_NAME_LEN];
-	char secondMemberName[MAX_NAME_LEN];
-	bool isValid;
-
-	getchar(); // clear buffer
-
-	system("cls");
-	cout << "******************** Cancel Friendship ********************" << endl;
-
-	askForMemberDetails(firstMemberName);
-	askForMemberDetails(secondMemberName);
-
-	isValid = faceBook.cancelFriendship(firstMemberName, secondMemberName);
-
-	if (!isValid)
-		cout << "\nUnable to cancel friendship between " << firstMemberName << " and "
-		<< secondMemberName << endl << endl;
-
 }

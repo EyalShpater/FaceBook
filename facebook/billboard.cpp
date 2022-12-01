@@ -4,8 +4,12 @@
 #include <iostream>
 using namespace std;
 
+/********* Static variables declaration *********/
+
 const int Billboard::DEFAULT_PHYS_SIZE = 2;
 const int Billboard::DEFAULT_LOG_SIZE = 0;
+
+/********* Constructors *********/
 
 Billboard::Billboard()
 {
@@ -22,12 +26,37 @@ Billboard::~Billboard()
 	delete[]theStatus;
 }
 
+/********* Array functions *********/
+
 void Billboard::push(const char* text)
 {
 	reserve();
 	theStatus[logSize] = new Status(text);
 	logSize++;
 }
+
+void Billboard::reserve()
+{
+	if (logSize == physSize)
+	{
+		physSize *= 2;
+		myRealloc(physSize);
+	}
+}
+
+void Billboard::myRealloc(int newSize)
+{
+	const Status** temp = new const Status * [newSize];
+
+	for (int i = 0; i < logSize; i++) // Assumption: logSize < newSize
+		temp[i] = theStatus[i];
+
+	delete[]theStatus;
+
+	theStatus = temp;
+}
+
+/********* Show *********/
 
 void Billboard::showAllStatus() const
 {
@@ -45,25 +74,4 @@ void Billboard::showLatestNumOfStatus(int num) const
 		theStatus[logSize - i]->show();
 		cout << endl;
 	}
-}
-
-void Billboard::reserve()
-{
-	if (logSize == physSize)
-	{
-		physSize *= 2;
-		myRealloc(physSize);
-	}
-}
-
-void Billboard::myRealloc(int newSize)
-{
-	const Status** temp = new const Status*[newSize];
-
-	for (int i = 0; i < logSize; i++) // Assumption: logSize < newSize
-		temp[i] = theStatus[i];
-
-	delete[]theStatus;
-
-	theStatus = temp;
 }

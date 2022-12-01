@@ -7,7 +7,11 @@
 #include <iostream>
 using namespace std;
 
+/********* Const variables declaration *********/
+
 const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
+
+/********* Constructors *********/
 
 Member::Member(const char* name, const Date& birthDate) : dateOfBirth(birthDate)
 {
@@ -18,6 +22,8 @@ Member::~Member()
 {
 	delete[]name;
 }
+
+/********* Member's functions *********/
 
 void Member::addStatusToBillboard(const char* text)
 {
@@ -68,6 +74,8 @@ void Member::dislikePage(FansPage& other)
 		other.deleteFriend(*this);
 	}
 }
+
+/********* Show functions *********/
 
 void Member::showAllStatus() const
 {
