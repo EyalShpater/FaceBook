@@ -21,8 +21,7 @@ void ConsoleUI::addDefaultMembersToFacebook()
 {
 	faceBook.addFansPage("MTA College");
 	faceBook.addFansPage("Computer Science");
-	faceBook.addFansPage("We All Love CPP");
-	faceBook.addFansPage("Comeing From Love");
+	faceBook.addFansPage("Coming From Love");
 
 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
@@ -37,9 +36,9 @@ void ConsoleUI::addDefaultMembersToFacebook()
 
 	faceBook.addFanToPage("Eyal Shpater", "MTA College");
 	faceBook.addFanToPage("Nitzan Sde Or", "MTA College");
-	faceBook.addFanToPage("Noa Kirel", "We All Love CPP");
+	faceBook.addFanToPage("Noa Kirel", "Coming From Love");
 	faceBook.addFanToPage("Nitzan Sde Or", "Computer Science");
-	faceBook.addFanToPage("Yehudit Ravitz", "Comeing From Love");
+	faceBook.addFanToPage("Yehudit Ravitz", "Coming From Love");
 
 	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir");
 	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!");
@@ -56,6 +55,14 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?");
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl");
 
+	faceBook.addNewStatusToFansPage("MTA College", "Welcome all new students!");
+	faceBook.addNewStatusToFansPage("MTA College", "If you want to pass you have to get at least 60 points.");
+
+	faceBook.addNewStatusToFansPage("Coming From Love", "Peace and Love");
+	faceBook.addNewStatusToFansPage("Coming From Love", "Maybe one day she would taste the taste of love...");
+
+	faceBook.addNewStatusToFansPage("Computer Science", "C Plus Plus");
+	faceBook.addNewStatusToFansPage("Computer Science", "Java Script");
 
 }
 
