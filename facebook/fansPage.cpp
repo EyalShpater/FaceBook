@@ -52,7 +52,9 @@ void FansPage::showAllStatus() const
 
 void FansPage::showAllFans() const
 {
+	cout << "**********" << name << "'s Fans **********" << endl << endl;
 	members.showAllMembers();
+	cout << "********************" << endl;
 }
 
 void FansPage::show() const
