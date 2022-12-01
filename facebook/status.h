@@ -23,5 +23,4 @@ private:
     Status(const Status& other);
 };
 
-
 #endif //__STATUS_H

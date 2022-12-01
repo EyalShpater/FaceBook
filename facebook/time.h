@@ -20,5 +20,4 @@ public:
     void show() const;
 };
 
-
 #endif // __TIME_H

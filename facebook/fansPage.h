@@ -29,5 +29,4 @@ private:
     FansPage(const FansPage&);
 };
 
-
 #endif // __FANSPAGE_H

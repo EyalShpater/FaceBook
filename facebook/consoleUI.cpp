@@ -63,7 +63,6 @@ void ConsoleUI::addDefaultMembersToFacebook()
 
 	faceBook.addNewStatusToFansPage("Computer Science", "C Plus Plus");
 	faceBook.addNewStatusToFansPage("Computer Science", "Java Script");
-
 }
 
 void ConsoleUI::menu()
@@ -128,14 +127,14 @@ int ConsoleUI::printMenu() const
 		<< ADD_MEMBER << "- Add member" << endl
 		<< ADD_PAGE << "- Add fans page" << endl
 		<< ADD_STATUS << "- Add status to member/fans page" << endl
-		<< PRINT_STATUSES << "- Displaying all the statuses of a member/fans page" << endl
-		<< PRINT_TEN_STATUSES << "- Displaying the 10 most recent statuses of a certain member's friends" << endl
+		<< PRINT_STATUSES << "- Display all the statuses of a member/fans page" << endl
+		<< PRINT_TEN_STATUSES << "- Display the 10 most recent statuses of a certain member's friends" << endl
 		<< FRIENDSHIP << "- Friendship link between two friends" << endl
-		<< CANCAL_FRIENDSHIP << "- Cancellation of membership between two members" << endl
-		<< ADD_FAN_TO_PAGE << "- Adding a fan to the page" << endl
-		<< REMOVE_FAN_FROM_PAGE << "- Removing a fan from page" << endl
-		<< PRINT_FACEBOOK_USERS << "- Displaying all members registered to faceBook" << endl
-		<< PRINT_FRIENDS_OF_USER << "- Showing all the friends of a certain member/page" << endl
+		<< CANCEL_FRIENDSHIP << "- Cancellation of membership between two members" << endl
+		<< ADD_FAN_TO_PAGE << "- Add a fan to a fans-page" << endl
+		<< REMOVE_FAN_FROM_PAGE << "- Remove a fan from a page" << endl
+		<< PRINT_FACEBOOK_USERS << "- Display all members registered to faceBook" << endl
+		<< PRINT_FRIENDS_OF_USER << "- Show all the friends of a certain member/page" << endl
 		<< EXIT << "- Exit" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 

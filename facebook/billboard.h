@@ -32,5 +32,4 @@ private:
     void myRealloc(int newSize);
 };
 
-
 #endif // __BILLBOARD_H

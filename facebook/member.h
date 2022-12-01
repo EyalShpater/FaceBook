@@ -39,5 +39,4 @@ private:
 	Member(const Member&); 
 };
 
-
 #endif // __MEMBER_H
