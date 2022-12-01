@@ -92,7 +92,7 @@ void ConsoleUI::menu()
 		case FRIENDSHIP:
 			friendshipBetweenTwoMembers();
 			break;
-		case CANCAL_FRIENDSHIP:
+		case CANCEL_FRIENDSHIP:
 			cancelFriendshipBetweenTwoMembers();
 			break;
 		case ADD_FAN_TO_PAGE:
