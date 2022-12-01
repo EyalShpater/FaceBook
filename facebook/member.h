@@ -33,6 +33,7 @@ public:
 	void showLatest10thStatus() const;
 	void showUpdatedFriendsStatuses() const;
 	void showAllFriends() const;
+	void showAllFansPage() const;
 	
 private:
 	Member(const Member&); 

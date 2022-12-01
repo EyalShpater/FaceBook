@@ -104,3 +104,10 @@ void Member::showAllFriends() const
 	members.showAllMembers();
 	cout << "********************" << endl;
 }
+
+void Member::showAllFansPage() const
+{
+	cout << "**********" << name << "'s Fans-Pages **********" << endl << endl;
+	fansPages.showAllPages();
+	cout << "********************" << endl;
+}
