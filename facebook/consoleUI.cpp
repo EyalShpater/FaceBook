@@ -261,9 +261,9 @@ bool ConsoleUI::showUpdatedFriendsStatuses() const
 {
 	char name[MAX_NAME_LEN];
 	
-	strcpy(name, askForMemberDetails());
-
 	getchar(); // clear buffer
+
+	strcpy(name, askForMemberDetails());
 
 	return faceBook.showUpdatedFriendsStatuses(name);
 }
@@ -279,6 +279,8 @@ bool ConsoleUI::addFanToPage()
 	char memberName[MAX_NAME_LEN];
 	char fansPageName[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	strcpy(memberName, askForMemberDetails());
 	strcpy(fansPageName, askForFansPageDetails());
 
@@ -290,6 +292,8 @@ bool ConsoleUI::removeFanFromPage()
 	char memberName[MAX_NAME_LEN];
 	char fansPageName[MAX_NAME_LEN];
 
+	getchar(); // clear buffer
+
 	strcpy(memberName, askForMemberDetails());
 	strcpy(fansPageName, askForFansPageDetails());
 
@@ -299,6 +303,8 @@ bool ConsoleUI::removeFanFromPage()
 bool ConsoleUI::showUserFriends() const
 {
 	int type = askForUserType();
+
+	getchar(); // clear buffer
 
 	switch (type)
 	{
@@ -334,6 +340,8 @@ int ConsoleUI::askForUserType() const
 
 bool ConsoleUI::friendshipBetweenTwoMembers() 
 {
+	getchar(); // clear buffer
+
     char firstMemberName[MAX_NAME_LEN];
 	strcpy(firstMemberName, askForMemberDetails());
 
@@ -345,10 +353,10 @@ bool ConsoleUI::friendshipBetweenTwoMembers()
 
 bool ConsoleUI::cancelFriendshipBetweenTwoMembers() 
 {
+	getchar(); // clear buffer
+
 	char firstMemberName[MAX_NAME_LEN];
 	strcpy(firstMemberName, askForMemberDetails());
-
-	//getchar(); // clear buffer
 
 	char secondMemberName[MAX_NAME_LEN];
 	strcpy(secondMemberName, askForMemberDetails());
