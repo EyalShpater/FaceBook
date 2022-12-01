@@ -6,10 +6,10 @@ class Member;
 class MemberArray
 {
 public:
-	const int DEFAULT_PHYS_SIZE = 2; // make all of this static in the h file
-	const int DEFAULT_LOG_SIZE = 0;
-	const int NOT_FOUND = -1;
-	const int EQUAL = 0;
+	static const int DEFAULT_PHYS_SIZE = 2; // make all of this static in the h file
+	static const int DEFAULT_LOG_SIZE = 0;
+	static const int NOT_FOUND = -1;
+	static const int EQUAL = 0;
 
 private:
 	Member** friends;
