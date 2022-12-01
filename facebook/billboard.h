@@ -5,6 +5,11 @@ class Status;
 
 class Billboard 
 {
+public:
+    static const int DEFAULT_PHYS_SIZE;
+    static const int DEFAULT_LOG_SIZE;
+
+private:
     const Status** theStatus; 
     int logSize;
     int physSize;

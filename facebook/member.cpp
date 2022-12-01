@@ -7,7 +7,6 @@
 #include <iostream>
 using namespace std;
 
-const int NOT_FOUND = -1;
 const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
 
 Member::Member(const char* name, const Date& birthDate) : dateOfBirth(birthDate)
@@ -29,10 +28,10 @@ void Member::addFriend(Member& newFriend) // bool?
 {
 	if (&newFriend != this)
 	{
-		if (members.findMemberByName(newFriend.getName()) == /*MemberArray::*/NOT_FOUND)
+		if (members.findMemberByName(newFriend.getName()) == MemberArray::NOT_FOUND)
 			members.push(newFriend);
 
-		if (newFriend.members.findMemberByName(name) == NOT_FOUND)
+		if (newFriend.members.findMemberByName(name) == MemberArray::NOT_FOUND)
 			newFriend.members.push(*this);
 	}
 	
@@ -40,10 +39,10 @@ void Member::addFriend(Member& newFriend) // bool?
 
 void Member::cancelFriendship(Member& other)
 {
-	if (members.findMemberByName(other.getName()) != /*MemberArray::*/NOT_FOUND)
+	if (members.findMemberByName(other.getName()) != MemberArray::NOT_FOUND)
 		members.pop(other);
 
-	if (other.members.findMemberByName(name) != NOT_FOUND)
+	if (other.members.findMemberByName(name) != MemberArray::NOT_FOUND)
 		other.members.pop(*this);
 }
 

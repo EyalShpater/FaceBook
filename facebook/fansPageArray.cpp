@@ -5,10 +5,9 @@
 using namespace std;
 
 const int FansPageArray::NOT_FOUND = -1;
-
-const int DEFAULT_PHYS_SIZE = 2;
-const int DEFAULT_LOG_SIZE = 0;
-const int EQUAL = 0;
+const int FansPageArray::DEFAULT_PHYS_SIZE = 2;
+const int FansPageArray::DEFAULT_LOG_SIZE = 0;
+const int FansPageArray::EQUAL = 0;
 
 FansPageArray::FansPageArray()
 {

@@ -4,6 +4,11 @@
 #include <iostream>
 using namespace std;
 
+const int MemberArray::DEFAULT_PHYS_SIZE = 2;
+const int MemberArray::DEFAULT_LOG_SIZE = 0;
+const int MemberArray::NOT_FOUND = -1;
+const int MemberArray::EQUAL = 0;
+
 MemberArray::MemberArray()
 {
 	physSize = DEFAULT_PHYS_SIZE;
@@ -16,7 +21,7 @@ MemberArray::~MemberArray()
 	delete[]friends;
 }
 
-void MemberArray::push(Member& newMember) //cancle const
+void MemberArray::push(Member& newMember)
 {
 	reserve();
 	friends[logSize] = &newMember;
@@ -35,7 +40,7 @@ void MemberArray::reserve()
 void MemberArray::myRealloc(int newSize)
 {
 	Member** temp = new Member * [newSize];
-	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
+	for (int i = 0; i < logSize; i++) // Assumption: logSize < newSize
 		temp[i] = friends[i];
 
 	delete[]friends;

@@ -4,8 +4,8 @@
 #include <iostream>
 using namespace std;
 
-const int DEFAULT_PHYS_SIZE = 2;
-const int DEFAULT_LOG_SIZE = 0;
+const int Billboard::DEFAULT_PHYS_SIZE = 2;
+const int Billboard::DEFAULT_LOG_SIZE = 0;
 
 Billboard::Billboard()
 {
@@ -54,7 +54,7 @@ void Billboard::myRealloc(int newSize)
 {
 	const Status** temp = new const Status*[newSize];
 
-	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
+	for (int i = 0; i < logSize; i++) // Assumption: logSize < newSize
 		temp[i] = theStatus[i];
 
 	delete[]theStatus;
