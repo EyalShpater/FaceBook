@@ -11,7 +11,7 @@ class Status
 {
     const Date theDate;
     const Time theTime;
-    char* text;
+    const char* text;
 
 public:
     Status(const char* text);
