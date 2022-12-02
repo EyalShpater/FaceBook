@@ -25,9 +25,9 @@ public:
 	
 	void addStatusToBillboard(const char* text);
 	bool addFriend(Member& newFriend); 
-	void cancelFriendship(Member& other); //bool?
-	void likePage(FansPage& newPage); //bool?
-	void dislikePage(FansPage& other); // bool?
+	void cancelFriendship(Member& other); 
+	void likePage(FansPage& newPage); 
+	void dislikePage(FansPage& other);
 
 	void showAllStatus() const; 
 	void showLatest10thStatus() const;

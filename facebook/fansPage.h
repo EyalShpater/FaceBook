@@ -7,7 +7,7 @@
 
 class FansPage 
 {
-    char* name;
+    const char* name;
     Billboard theBillboard; 
     MemberArray members;
 
