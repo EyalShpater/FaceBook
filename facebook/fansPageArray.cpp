@@ -69,7 +69,7 @@ void FansPageArray::myRealloc(int newSize)
 {
 	FansPage** temp = new FansPage*[newSize];
 
-	for (int i = 0; i < logSize; i++) // assumption: logSize < newSize
+	for (int i = 0; i < logSize; i++) // Assumption: logSize < newSize
 		temp[i] = theFansPageArray[i];  
 
 	delete[]theFansPageArray;
