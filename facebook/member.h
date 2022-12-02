@@ -10,7 +10,7 @@ class Status;
 
 class Member
 {
-	char* name;
+	const char* name;
 	const Date dateOfBirth;
 	Billboard theBillboard;
 	MemberArray members;
