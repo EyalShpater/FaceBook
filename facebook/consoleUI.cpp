@@ -444,7 +444,7 @@ void ConsoleUI::showUpdatedFriendsStatuses() const
 void ConsoleUI::showAllUsers() const
 {
 	system("cls");
-	cout << "******************** All Users Registed To The System ********************" << endl;
+	cout << "******************** All Users Registered To The System ********************" << endl;
 	cout << endl;
 
 	faceBook.showAllUsers();
