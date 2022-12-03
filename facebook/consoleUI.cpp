@@ -1,11 +1,8 @@
 #pragma warning (disable:4996)
 
 #include "consoleUI.h"
-#include "admin.h"
-#include "memberArray.h"
 #include "member.h"
 #include "fansPage.h"
-#include "fansPageArray.h"
 
 #include <iostream>
 using namespace std;
@@ -109,6 +106,9 @@ void ConsoleUI::menu()
 			break;
 		case EXIT:
 			cout << "\nbye!\n";
+			break;
+		default:
+			cout << "Choice is not valid!" << endl;
 			break;
 		}
 
@@ -322,7 +322,7 @@ void ConsoleUI::friendshipBetweenTwoMembers()
 		<< secondMemberName << " friends :(" << endl << endl;
 }
 
-/********* Disconncet functions *********/
+/********* Disconnect functions *********/
 
 void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 {

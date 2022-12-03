@@ -104,7 +104,7 @@ bool Admin::addFanToPage(const char* member, const char* page)
 	return isValid;
 }
 
-/********* Disconncet functions *********/
+/********* Disconnect functions *********/
 
 bool Admin::removeFanFromPage(const char* member, const char* page)
 {

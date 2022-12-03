@@ -26,7 +26,7 @@ Time::Time(int hour, int minutes, int seconds)
 
 Time::Time() 
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm* temp = localtime(&now);
 
     hour = temp->tm_hour;

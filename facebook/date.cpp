@@ -21,7 +21,7 @@ const int CTIME_START_MONTH_COUNT = 1;
 
 Date::Date()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm* temp = localtime(&now);
 
     year = temp->tm_year + CTIME_START_YEAR_COUNT;
