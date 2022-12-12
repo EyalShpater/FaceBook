@@ -25,13 +25,15 @@ void FansPage::addStatus(const char* newStatus)
 	theBillboard.push(newStatus);
 }
 
-void FansPage::addFriend(Member& newFriend)
+const FansPage& FansPage::operator+=(Member& newFriend)
 {
 	if (members.findMemberByName(newFriend.getName()) == MemberArray::NOT_FOUND)
 	{
 		members.push(newFriend);
 		newFriend.likePage(*this);
 	}
+
+	return *this;
 }
 
 void FansPage::deleteFriend(Member& other)
