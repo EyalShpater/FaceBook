@@ -23,13 +23,7 @@ Member::~Member()
 	delete[]name;
 }
 
-/********* Member's functions *********/
-
-void Member::addStatusToBillboard(const char* text)
-{
-	theBillboard.push(text);
-}
-
+/**********************/
 const Member& Member::operator+=(Member& newFriend)
 {
 	if (&newFriend != this)
@@ -40,8 +34,20 @@ const Member& Member::operator+=(Member& newFriend)
 		if (newFriend.members.findMemberByName(name) == MemberArray::NOT_FOUND)
 			newFriend.members.push(*this);
 	}
-	
+
 	return *this;
+}
+
+bool Member::operator>(const Member& other)const
+{
+	return (members.getLogSize() > other.members.getLogSize());
+}
+
+/********* Member's functions *********/
+
+void Member::addStatusToBillboard(const char* text)
+{
+	theBillboard.push(text);
 }
 
 void Member::cancelFriendship(Member& other)
