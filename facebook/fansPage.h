@@ -17,8 +17,10 @@ public:
 
     const char* getName() const { return name; }
 
-    void addStatus(const char* newStatus);
+    bool operator>(const FansPage& other)const;
     const FansPage& operator+=(Member& newFriend);
+
+    void addStatus(const char* newStatus);
     void deleteFriend(Member& other);
 
     void showAllStatus() const;

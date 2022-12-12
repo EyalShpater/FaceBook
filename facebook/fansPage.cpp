@@ -18,11 +18,11 @@ FansPage::~FansPage()
 	delete[]name;
 }
 
-/********* Fans-Page's functions *********/
+/**********************************************/
 
-void FansPage::addStatus(const char* newStatus)
+bool FansPage::operator>(const FansPage& other)const
 {
-	theBillboard.push(newStatus);
+	return (members.getLogSize() > other.members.getLogSize());
 }
 
 const FansPage& FansPage::operator+=(Member& newFriend)
@@ -34,6 +34,13 @@ const FansPage& FansPage::operator+=(Member& newFriend)
 	}
 
 	return *this;
+}
+
+/********* Fans-Page's functions *********/
+
+void FansPage::addStatus(const char* newStatus)
+{
+	theBillboard.push(newStatus);
 }
 
 void FansPage::deleteFriend(Member& other)
