@@ -19,8 +19,8 @@ public:
 
     void show() const;
 
-    bool operator==(const Status other)const;
-    bool operator!=(const Status other)const;
+    bool operator==(const Status& other)const;
+    bool operator!=(const Status& other)const;
 
 
 private:

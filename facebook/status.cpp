@@ -35,13 +35,13 @@ void Status::show() const
 
 /***************/
 
-bool Status::operator==(const Status other)const
+bool Status::operator==(const Status& other)const
 {
 	return (strcmp(text, other.text) == 0);
 
 }
 
-bool Status::operator!=(const Status other)const
+bool Status::operator!=(const Status& other)const
 {
 	return (strcmp(text, other.text) != 0);
 }
