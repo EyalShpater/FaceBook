@@ -31,28 +31,28 @@ bool Admin::addFansPage(const string& name)
 
 bool Admin::addNewStatusToMember(const string& name, const string& newStatus)
 {
-	int index;
+	Member* curr;
 	bool isValid;
 
-	index = allMembers.findMemberByName(name);
-	isValid = (index != MemberArray::NOT_FOUND);
+	curr = findMemberByName(name, allMembers);
+	isValid = (curr != nullptr);
 
 	if (isValid)
-		allMembers.getMemberByIndex(index).addStatusToBillboard(newStatus);
+		curr->addStatusToBillboard(newStatus);
 
 	return isValid;
 }
 
 bool Admin::addNewStatusToFansPage(const string& name, const string& newStatus)
 {
-	int index;
+	FansPage* curr;
 	bool isValid;
 
-	index = allPages.findPageByName(name);
-	isValid = (index != FansPageArray::NOT_FOUND);
+	curr = findFansPageByName(name, allPages);
+	isValid = (curr != nullptr);
 
 	if (isValid)
-		allPages.getPageByIndex(index).addStatus(newStatus);
+		curr->addStatus(newStatus);
 
 	return isValid;
 }
@@ -61,16 +61,12 @@ bool Admin::makeFriendship(const string& nameFirst, const string& nameSecond)
 {
 	bool isValid;
 
-	int index1 = allMembers.findMemberByName(nameFirst);
-	int index2 = allMembers.findMemberByName(nameSecond);
+	Member* member1 = findMemberByName(nameFirst, allMembers);
+	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
+	isValid = (member1 != nullptr && member2 != nullptr);
 	if (isValid)
-	{
-		Member& firstMember = allMembers.getMemberByIndex(index1);
-		Member& secondMember = allMembers.getMemberByIndex(index2);
-		/*isValid = */firstMember += secondMember;
-	}
+		*member1 += *member2;
 
 	return isValid;
 }
