@@ -22,6 +22,7 @@ public:
     bool operator>(const FansPage& other)const;
     bool operator>(const Member& other) const;
     const FansPage& operator+=(Member& newFriend);
+    friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
 
     void addStatus(const std::string& newStatus);
     void deleteFriend(Member& other);
@@ -32,9 +33,11 @@ public:
     // This function returns iterator to the FansPage adress in allMembers if found, 
     // else returns the last place in the vector.
     friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage);
+    friend std::list<FansPage>::iterator findFansPageIteratorByName(const std::string& name, std::list<FansPage>& allFansPage);
+  
     friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
-    friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
-
+    friend FansPage* findFansPageByName(const std::string& name, std::list<FansPage>& allFansPage);
+    
 private:
     FansPage(const FansPage&);
 };

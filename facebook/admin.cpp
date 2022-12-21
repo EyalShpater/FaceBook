@@ -4,35 +4,32 @@
 #include "date.h"
 #include "status.h"
 
+#include <iostream>
+using namespace std;
+
 /********* Add and Connect functions *********/
 
-bool Admin::addFriend(const char* name, const Date& date)
+bool Admin::addFriend(const string& name, const Date& date)
 {
-	bool isValid = allMembers.findMemberByName(name) == MemberArray::NOT_FOUND;
+	bool isValid = findMemberByName(name, allMembers) == nullptr;
 
 	if (isValid)
-	{
-		Member* newMember = new Member(name, date);
-		allMembers.push(*newMember);
-	}
+		allMembers.push_back(Member(name, date));
 
 	return isValid;
 }
 
-bool Admin::addFansPage(const char* name)
+bool Admin::addFansPage(const string& name)
 {
-	bool isValid = (allPages.findPageByName(name) == FansPageArray::NOT_FOUND);
+	bool isValid = findFansPageByName(name, allPages) == nullptr;
 
 	if (isValid)
-	{
-		FansPage* newFansPage = new FansPage(name);
-		allPages.push(*newFansPage);
-	}
+		allPages.push_back(FansPage(name));
 
 	return isValid;
 }
 
-bool Admin::addNewStatusToMember(const char* name, const char* newStatus)
+bool Admin::addNewStatusToMember(const string& name, const string& newStatus)
 {
 	int index;
 	bool isValid;
@@ -46,7 +43,7 @@ bool Admin::addNewStatusToMember(const char* name, const char* newStatus)
 	return isValid;
 }
 
-bool Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
+bool Admin::addNewStatusToFansPage(const string& name, const string& newStatus)
 {
 	int index;
 	bool isValid;
@@ -60,7 +57,7 @@ bool Admin::addNewStatusToFansPage(const char* name, const char* newStatus)
 	return isValid;
 }
 
-bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
+bool Admin::makeFriendship(const string& nameFirst, const string& nameSecond)
 {
 	bool isValid;
 
@@ -78,7 +75,7 @@ bool Admin::makeFriendship(const char* nameFirst, const char* nameSecond)
 	return isValid;
 }
 
-bool Admin::addFanToPage(const char* member, const char* page)
+bool Admin::addFanToPage(const string& member, const string& page)
 {
 	int mIndex, pIndex;
 	bool isValid;
@@ -95,7 +92,7 @@ bool Admin::addFanToPage(const char* member, const char* page)
 
 /********* Disconnect functions *********/
 
-bool Admin::removeFanFromPage(const char* member, const char* page)
+bool Admin::removeFanFromPage(const string& member, const string& page)
 {
 	int mIndex, pIndex;
 	bool isValid;
@@ -110,7 +107,7 @@ bool Admin::removeFanFromPage(const char* member, const char* page)
 	return isValid;
 }
 
-bool Admin::cancelFriendship(const char* nameFirst, const char* nameSecond)
+bool Admin::cancelFriendship(const string& nameFirst, const string& nameSecond)
 {
 	bool isValid;
 
@@ -146,7 +143,7 @@ void Admin::showAllFansPages() const
 	allPages.showAllPages();
 }
 
-bool Admin::showAllMemberFriends(const char* name) const
+bool Admin::showAllMemberFriends(const string& name) const
 {
 	int index;
 	bool isValid;
@@ -160,7 +157,7 @@ bool Admin::showAllMemberFriends(const char* name) const
 	return isValid;
 }
 
-bool Admin::showAllFansPageFans(const char* name) const
+bool Admin::showAllFansPageFans(const string& name) const
 {
 	int index;
 	bool isValid;
@@ -174,7 +171,7 @@ bool Admin::showAllFansPageFans(const char* name) const
 	return isValid;
 }
 
-bool Admin::showAllMemberStatuses(const char* name) const
+bool Admin::showAllMemberStatuses(const string& name) const
 {
 	bool isValid;
 	int index;
@@ -188,7 +185,7 @@ bool Admin::showAllMemberStatuses(const char* name) const
 	return isValid;
 }
 
-bool Admin::showAllFansPageStatuses(const char* name) const
+bool Admin::showAllFansPageStatuses(const string& name) const
 {
 	bool isValid;
 	int index;
@@ -201,7 +198,7 @@ bool Admin::showAllFansPageStatuses(const char* name) const
 	return isValid;
 }
 
-bool Admin::showUpdatedFriendsStatuses(const char* name) const
+bool Admin::showUpdatedFriendsStatuses(const string& name) const
 {
 	bool isValid;
 	int index = allMembers.findMemberByName(name);

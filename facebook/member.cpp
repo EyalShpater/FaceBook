@@ -69,6 +69,23 @@ vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Me
 	return itr;
 }
 
+list<Member>::iterator findMemberIteratorByName(const std::string& name, std::list<Member>& allMembers)
+{
+	bool isFound = false;
+	list<Member>::iterator itr = allMembers.begin();
+	list<Member>::iterator itrEnd = allMembers.end();
+
+	while (itr != itrEnd && !isFound)
+	{
+		if ((*itr).getName() == name)
+			isFound = true;
+		else
+			++itr;
+	}
+
+	return itr;
+}
+
 Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 {
 	vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
@@ -79,6 +96,16 @@ Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 	return *res;
 }
 
+
+Member* findMemberByName(const std::string& name, std::list<Member>& allMembers)
+{
+	list<Member>::iterator res = findMemberIteratorByName(name, allMembers);
+
+	if (res == allMembers.end() && (*res).getName() != name) //not found
+		return nullptr;
+
+	return &(*res);
+}
 
 /********* Member's functions *********/
 

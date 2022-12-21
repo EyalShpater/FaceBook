@@ -2,6 +2,8 @@
 #define __ADMIN_H
 
 #include <list>
+#include <string>
+
 #include "member.h"
 #include "fansPage.h"
 
@@ -15,24 +17,24 @@ class Admin
 public:
 	Admin() = default;
 
-	bool addFriend(const char* name, const Date& date);
-	bool addFansPage(const char* name);
-	bool addNewStatusToMember(const char* name, const char* newStatus);
-	bool addNewStatusToFansPage(const char* name, const char* newStatus);
-	bool makeFriendship(const char* nameFirst, const char* nameSecond);
-	bool addFanToPage(const char* member, const char* page);
+	bool addFriend(const std::string& name, const Date& date);
+	bool addFansPage(const std::string& name);
+	bool addNewStatusToMember(const std::string& name, const std::string& newStatus);
+	bool addNewStatusToFansPage(const std::string& name, const std::string& newStatus);
+	bool makeFriendship(const std::string& nameFirst, const std::string& nameSecond);
+	bool addFanToPage(const std::string& member, const std::string& page);
 
-	bool removeFanFromPage(const char* member,const char* page);
-	bool cancelFriendship(const char* nameFirst, const char* nameSecond);
+	bool removeFanFromPage(const std::string& member, const std::string& page);
+	bool cancelFriendship(const std::string& nameFirst, const std::string& nameSecond);
 
 	void showAllUsers() const;
 	void showAllMembers() const;
 	void showAllFansPages() const;
-	bool showAllMemberFriends(const char* name) const;
-	bool showAllFansPageFans(const char* name) const;
-	bool showAllMemberStatuses(const char* name) const;
-	bool showAllFansPageStatuses(const char* name) const;
-	bool showUpdatedFriendsStatuses(const char* name) const;
+	bool showAllMemberFriends(const std::string& name) const;
+	bool showAllFansPageFans(const std::string& name) const;
+	bool showAllMemberStatuses(const std::string& name) const;
+	bool showAllFansPageStatuses(const std::string& name) const;
+	bool showUpdatedFriendsStatuses(const std::string& name) const;
 
 private:
 	Admin(const Admin&);

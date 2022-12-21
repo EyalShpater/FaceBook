@@ -105,3 +105,31 @@ FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
 
 	return *res;
 }
+
+FansPage* findFansPageByName(const std::string& name, std::list<FansPage>& allFansPage)
+{
+	std::list<FansPage>::iterator res = findFansPageIteratorByName(name, allFansPage);
+
+	if (res == allFansPage.end() && (*res).getName() != name) //not found
+		return nullptr;
+
+	return &(*res);
+}
+
+
+std::list<FansPage>::iterator findFansPageIteratorByName(const std::string& name, std::list<FansPage>& allFansPage)
+{
+	bool isFound = false;
+	std::list<FansPage>::iterator itr = allFansPage.begin();
+	std::list<FansPage>::iterator itrEnd = allFansPage.end();
+
+	while (itr != itrEnd && !isFound)
+	{
+		if ((*itr).getName() == name)
+			isFound = true;
+		else
+			++itr;
+	}
+
+	return itr;
+}

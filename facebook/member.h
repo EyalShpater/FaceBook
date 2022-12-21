@@ -5,6 +5,7 @@
 #include "date.h"
 
 #include <vector>
+#include <list>
 #include <string>
 
 class FansPage;
@@ -32,8 +33,10 @@ public:
 	// This function returns iterator to the Member adress in allMembers if found, 
 	// else returns the last place in the vector.
 	friend std::vector<Member*>::iterator findMemberIteratorByName(const std::string& name, std::vector<Member*>& allMembers);
+	friend std::list<Member>::iterator findMemberIteratorByName(const std::string& name, std::list<Member>& allMembers);
 
 	friend Member* findMemberByName(const std::string& name, std::vector<Member*> &allMembers);
+	friend Member* findMemberByName(const std::string& name, std::list<Member>& allMembers);
 
 	void addStatusToBillboard(const std::string& text);
 	void cancelFriendship(Member& other); 
