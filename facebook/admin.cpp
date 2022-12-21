@@ -4,17 +4,6 @@
 #include "date.h"
 #include "status.h"
 
-/********* Destructor *********/
-
-Admin::~Admin()
-{
-	for (int i = 0; i < allMembers.getLogSize(); i++)
-		delete &(allMembers.getMemberByIndex(i));
-
-	for (int i = 0; i < allPages.getLogSize(); i++)
-		delete &(allPages.getPageByIndex(i));
-}
-
 /********* Add and Connect functions *********/
 
 bool Admin::addFriend(const char* name, const Date& date)

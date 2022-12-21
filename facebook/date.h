@@ -1,6 +1,8 @@
 #ifndef __DATE_H
 #define __DATE_H
 
+#include <iostream>
+
 class Date 
 {
     int day, month, year;
@@ -17,7 +19,7 @@ public:
     bool setMonth(int month);
     bool setYear(int year);
 
-    void show() const;
+    friend std::ostream& operator<<(std::ostream& os, const Date& d);
 };
 
 #endif // __DATE_H

@@ -1,34 +1,41 @@
 #ifndef __MEMBER_H
 #define __MEMBER_H
 
+#include "status.h"
 #include "date.h"
-#include "billboard.h"
-#include "memberArray.h"
-#include "fansPageArray.h"
 
-class Status;
+#include <vector>
+#include <string>
+
+class FansPage;
 
 class Member
 {
-	const char* name;
+	std::string name;
 	const Date dateOfBirth;
-	Billboard theBillboard;
-	MemberArray members;
-	FansPageArray fansPages;
+	std::vector<Status> theBillboard;
+	std::vector<Member*> members;
+	std::vector<FansPage*> fansPages;
 
 public:
-	Member(const char* name, const Date& birthDate);
-	~Member();
-
-	const char* getName() const { return name; }
+	Member(const std::string& name, const Date& birthDate);
+	
+	const std::string& getName() const { return name; }
 	const Date& getDateOfBirth() const { return dateOfBirth; }
-	int getNumOfFriends() const { return members.getLogSize(); }
+	int getNumOfFriends() const { return members.size(); }
 
 	const Member& operator+= (Member& newFriend);
 	bool operator>(const Member& other) const;
 	bool operator>(const FansPage& other) const;
+	friend std::ostream& operator<<(std::ostream& os, const Member& s);
 	
-	void addStatusToBillboard(const char* text);
+	// This function returns iterator to the Member adress in allMembers if found, 
+	// else returns the last place in the vector.
+	friend std::vector<Member*>::iterator findMemberIteratorByName(const std::string& name, std::vector<Member*>& allMembers);
+
+	friend Member* findMemberByName(const std::string& name, std::vector<Member*> &allMembers);
+
+	void addStatusToBillboard(const std::string& text);
 	void cancelFriendship(Member& other); 
 	void likePage(FansPage& newPage); 
 	void dislikePage(FansPage& other);

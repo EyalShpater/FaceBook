@@ -1,6 +1,8 @@
 #ifndef __TIME_H
 #define __TIME_H
 
+#include <iostream>
+
 class Time 
 {
     int hour, minutes, seconds;
@@ -17,7 +19,7 @@ public:
     bool setMinutes(int minutes);
     bool setSeconds(int seconds);
 
-    void show() const;
+    friend std::ostream& operator<<(std::ostream& os, const Time& t);
 };
 
 #endif // __TIME_H

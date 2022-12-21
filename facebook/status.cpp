@@ -3,45 +3,28 @@
 #include "status.h"
 
 #include <iostream>
+#include <string>
 using namespace std;
-
-/********* Constructors *********/
-
-Status::Status(const char* text)
-{
-	this->text = strdup(text);
-}
-
-Status::~Status()
-{
-	delete[]text;
-}
 
 /********* Show *********/
 
-void Status::show() const
+std::ostream& operator<<(std::ostream& os, const Status& s)
 {
-	cout << text << endl;
-	cout << "published on: ";
+	os << s.text << endl;
+	os << "published on: " << s.theDate << ", " << s.theTime;
 
-	theDate.show();
-	
-	cout << ", ";
-
-	theTime.show();
-
-	cout << endl;
+	return os;
 }
 
 /***************/
 
 bool Status::operator==(const Status& other)const
 {
-	return (strcmp(text, other.text) == 0);
+	return text == other.text;
 
 }
 
 bool Status::operator!=(const Status& other)const
 {
-	return (strcmp(text, other.text) != 0);
+	return !(*this == other);
 }

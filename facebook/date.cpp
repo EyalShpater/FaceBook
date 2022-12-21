@@ -68,7 +68,9 @@ bool Date::setYear(int year)
 
 /********* Show *********/
 
-void Date::show() const
+ostream& operator<<(ostream& os, const Date& d)
 {
-    cout << day << "/" << month << "/" << year;
+    os << d.day << "/" << d.month << "/" << d.year;
+
+    return os;
 }

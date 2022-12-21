@@ -140,26 +140,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
-    <ClCompile Include="billboard.cpp" />
     <ClCompile Include="consoleUI.cpp" />
     <ClCompile Include="date.cpp" />
     <ClCompile Include="fansPage.cpp" />
-    <ClCompile Include="fansPageArray.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member.cpp" />
-    <ClCompile Include="memberArray.cpp" />
     <ClCompile Include="status.cpp" />
     <ClCompile Include="time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
-    <ClInclude Include="billboard.h" />
     <ClInclude Include="consoleUI.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="fansPage.h" />
-    <ClInclude Include="fansPageArray.h" />
     <ClInclude Include="member.h" />
-    <ClInclude Include="memberArray.h" />
     <ClInclude Include="status.h" />
     <ClInclude Include="time.h" />
   </ItemGroup>

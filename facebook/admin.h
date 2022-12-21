@@ -1,19 +1,19 @@
 #ifndef __ADMIN_H
 #define __ADMIN_H
 
-#include "memberArray.h"
-#include "fansPageArray.h"
+#include <list>
+#include "member.h"
+#include "fansPage.h"
 
 class Date;
 
 class Admin
 {
-	MemberArray allMembers;
-	FansPageArray allPages;
+	std::list<Member> allMembers;
+	std::list<FansPage> allPages;
 
 public:
 	Admin() = default;
-	~Admin();
 
 	bool addFriend(const char* name, const Date& date);
 	bool addFansPage(const char* name);

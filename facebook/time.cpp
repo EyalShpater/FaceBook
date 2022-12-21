@@ -65,12 +65,14 @@ bool Time::setSeconds(int seconds)
 
 /********* Show *********/
 
-void Time::show() const
+ostream& operator<<(ostream& os, const Time& t)
 {
-    cout << (hour < 10 ? "0" : "")
-        << hour << ":"
-        << (minutes < 10 ? "0" : "")
-        << minutes << ":"
-        << (seconds < 10 ? "0" : "")
-        << seconds;
+    os << (t.hour < 10 ? "0" : "")
+        << t.hour << ":"
+        << (t.minutes < 10 ? "0" : "")
+        << t.minutes << ":"
+        << (t.seconds < 10 ? "0" : "")
+        << t.seconds;
+
+    return os;
 }

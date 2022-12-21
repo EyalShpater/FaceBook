@@ -1,33 +1,39 @@
 #ifndef __FANSPAGE_H
 #define __FANSPAGE_H
 
-#include "memberArray.h"
-#include "billboard.h"
+#include <vector>
+#include <string>
+#include "status.h"
 
+class Member;
 
 class FansPage 
 {
-    const char* name;
-    Billboard theBillboard; 
-    MemberArray members;
+    std::string name;
+    std::vector<Status> theBillboard;
+    std::vector<Member*> members;
 
 public:
-    FansPage(const char* name);
-    ~FansPage();
-
-    const char* getName() const { return name; }
-    int getNumOfFans() const { return members.getLogSize(); }
+    FansPage(const std::string& name) : name(name) {}
+   
+    const std::string& getName() const { return name; }
+    int getNumOfFans() const { return members.size(); }
 
     bool operator>(const FansPage& other)const;
     bool operator>(const Member& other) const;
     const FansPage& operator+=(Member& newFriend);
 
-    void addStatus(const char* newStatus);
+    void addStatus(const std::string& newStatus);
     void deleteFriend(Member& other);
 
     void showAllStatus() const;
     void showAllFans() const;
-    void show() const;
+
+    // This function returns iterator to the FansPage adress in allMembers if found, 
+    // else returns the last place in the vector.
+    friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage);
+    friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
+    friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
 
 private:
     FansPage(const FansPage&);
