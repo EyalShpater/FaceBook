@@ -16,8 +16,10 @@ public:
     ~FansPage();
 
     const char* getName() const { return name; }
+    int getNumOfFans() const { return members.getLogSize(); }
 
     bool operator>(const FansPage& other)const;
+    bool operator>(const Member& other) const;
     const FansPage& operator+=(Member& newFriend);
 
     void addStatus(const char* newStatus);

@@ -43,6 +43,11 @@ bool Member::operator>(const Member& other)const
 	return (members.getLogSize() > other.members.getLogSize());
 }
 
+bool Member::operator>(const FansPage& other) const
+{
+	return members.getLogSize() > other.getNumOfFans();
+}
+
 /********* Member's functions *********/
 
 void Member::addStatusToBillboard(const char* text)

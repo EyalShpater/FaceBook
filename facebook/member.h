@@ -22,9 +22,11 @@ public:
 
 	const char* getName() const { return name; }
 	const Date& getDateOfBirth() const { return dateOfBirth; }
+	int getNumOfFriends() const { return members.getLogSize(); }
 
 	const Member& operator+= (Member& newFriend);
-	bool operator>(const Member& other)const;
+	bool operator>(const Member& other) const;
+	bool operator>(const FansPage& other) const;
 	
 	void addStatusToBillboard(const char* text);
 	void cancelFriendship(Member& other); 

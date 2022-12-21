@@ -25,6 +25,11 @@ bool FansPage::operator>(const FansPage& other)const
 	return (members.getLogSize() > other.members.getLogSize());
 }
 
+bool FansPage::operator>(const Member& other) const
+{
+	return members.getLogSize() > other.getNumOfFriends();
+}
+
 const FansPage& FansPage::operator+=(Member& newFriend)
 {
 	if (members.findMemberByName(newFriend.getName()) == MemberArray::NOT_FOUND)
