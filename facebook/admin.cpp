@@ -73,15 +73,17 @@ bool Admin::makeFriendship(const string& nameFirst, const string& nameSecond)
 
 bool Admin::addFanToPage(const string& member, const string& page)
 {
-	int mIndex, pIndex;
+	
+	Member* mCurr;
+	FansPage* pCurr;
 	bool isValid;
 
-	mIndex = allMembers.findMemberByName(member);
-	pIndex = allPages.findPageByName(page);
-	isValid = (mIndex != MemberArray::NOT_FOUND && pIndex != FansPageArray::NOT_FOUND);
+	mCurr = findMemberByName(member, allMembers);
+	pCurr = findFansPageByName(page, allPages);
+	isValid = (mCurr != nullptr && pCurr != nullptr);
 
 	if (isValid)
-		allMembers.getMemberByIndex(mIndex).likePage(allPages.getPageByIndex(pIndex));
+		mCurr->likePage(*pCurr);
 
 	return isValid;
 }
