@@ -110,16 +110,12 @@ bool Admin::cancelFriendship(const string& nameFirst, const string& nameSecond)
 {
 	bool isValid;
 
-	int index1 = allMembers.findMemberByName(nameFirst);
-	int index2 = allMembers.findMemberByName(nameSecond);
+	Member* member1 = findMemberByName(nameFirst, allMembers);
+	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	isValid = (index1 != MemberArray::NOT_FOUND && index2 != MemberArray::NOT_FOUND);
+	isValid = (member1 != nullptr && member2 != nullptr);
 	if (isValid)
-	{
-		Member& firstMember = allMembers.getMemberByIndex(index1);
-		Member& secondMember = allMembers.getMemberByIndex(index2);
-		firstMember.cancelFriendship(secondMember);
-	}
+		member1->cancelFriendship(*member2);
 
 	return isValid;
 }
