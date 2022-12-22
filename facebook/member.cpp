@@ -189,7 +189,7 @@ void Member::showAllFriends() const
 	cout << "**********" << name << "'s Friends **********" << endl << endl;
 
 	for (; itr != itrEnd; ++itr)
-		cout << *itr << endl << endl;
+		cout << *(*itr) << endl << endl;
 
 	cout << "********************" << endl;
 }
@@ -202,6 +202,6 @@ void Member::showAllFansPage() const
 	cout << "**********" << name << "'s Fans-Pages **********" << endl << endl;
 
 	for (; itr != itrEnd; ++itr)
-		cout << *itr << endl << endl;
+		cout << *(*itr) << endl << endl;
 	cout << "********************" << endl;
 }
