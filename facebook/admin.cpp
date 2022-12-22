@@ -124,18 +124,26 @@ bool Admin::cancelFriendship(const string& nameFirst, const string& nameSecond)
 
 void Admin::showAllUsers() const
 {
-	allMembers.showAllMembers();
-	allPages.showAllPages();
+	showAllMembers();
+	showAllFansPages();
 }
 
 void Admin::showAllMembers() const
 {
-	allMembers.showAllMembers();
+	list<Member>::const_iterator mItr = allMembers.begin();
+	list<Member>::const_iterator mItrEnd = allMembers.end();
+
+	for (; mItr != mItrEnd; ++mItr)
+		cout << *mItr << endl;
 }
 
 void Admin::showAllFansPages() const
 {
-	allPages.showAllPages();
+	list<FansPage>::const_iterator pItr = allPages.begin();
+	list<FansPage>::const_iterator pItrEnd = allPages.end();
+
+	for (; pItr != pItrEnd; ++pItr)
+		cout << *pItr << endl;
 }
 
 bool Admin::showAllMemberFriends(const string& name) const
