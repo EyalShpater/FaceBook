@@ -86,6 +86,23 @@ list<Member>::iterator findMemberIteratorByName(const std::string& name, std::li
 	return itr;
 }
 
+list<Member>::const_iterator findMemberIteratorByName(const std::string& name, const std::list<Member>& allMembers)
+{
+	bool isFound = false;
+	list<Member>::const_iterator itr = allMembers.begin();
+	list<Member>::const_iterator itrEnd = allMembers.end();
+
+	while (itr != itrEnd && !isFound)
+	{
+		if ((*itr).getName() == name)
+			isFound = true;
+		else
+			++itr;
+	}
+
+	return itr;
+}
+
 Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 {
 	vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
@@ -100,6 +117,16 @@ Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 Member* findMemberByName(const std::string& name, std::list<Member>& allMembers)
 {
 	list<Member>::iterator res = findMemberIteratorByName(name, allMembers);
+
+	if (res == allMembers.end() && (*res).getName() != name) //not found
+		return nullptr;
+
+	return &(*res);
+}
+
+const Member* findMemberByName(const std::string& name, const std::list<Member>& allMembers)
+{
+	list<Member>::const_iterator res = findMemberIteratorByName(name, allMembers);
 
 	if (res == allMembers.end() && (*res).getName() != name) //not found
 		return nullptr;

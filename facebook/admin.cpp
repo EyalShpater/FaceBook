@@ -148,67 +148,70 @@ void Admin::showAllFansPages() const
 
 bool Admin::showAllMemberFriends(const string& name) const
 {
-	int index;
-	bool isValid;
+	bool isValid = false;
+	const Member* member = findMemberByName(name, allMembers);
 
-	index = allMembers.findMemberByName(name);
-	isValid = (index != MemberArray::NOT_FOUND);
-
-	if (isValid)
-		allMembers.getMemberByIndex(index).showAllFriends();
-
+	if (member != nullptr)
+	{
+		member->showAllFriends();
+		isValid = true;
+	}
+		
 	return isValid;
 }
 
 bool Admin::showAllFansPageFans(const string& name) const
 {
-	int index;
-	bool isValid;
-
-	index = allPages.findPageByName(name);
-	isValid = (index != FansPageArray::NOT_FOUND);
+	bool isValid = false;
+	const FansPage* fansPage = findFansPageByName(name, allPages);
 	
-	if(isValid)
-		allPages.getPageByIndex(index).showAllFans();
-
+	if (fansPage != nullptr)
+	{
+		fansPage->showAllFans();
+		isValid = true;
+	}
+		
 	return isValid;
 }
 
 bool Admin::showAllMemberStatuses(const string& name) const
 {
-	bool isValid;
-	int index;
-	
-	index = allMembers.findMemberByName(name);
-	isValid = (index != MemberArray::NOT_FOUND);
+	bool isValid = false;
+	const Member* member = findMemberByName(name, allMembers);
 
-	if (isValid)
-		allMembers.getMemberByIndex(index).showAllStatus();
+	if (member != nullptr)
+	{
+		member->showAllStatus();
+		isValid = true;
+	}
 
 	return isValid;
 }
 
 bool Admin::showAllFansPageStatuses(const string& name) const
 {
-	bool isValid;
-	int index;
-	
-	index = allPages.findPageByName(name);
-	isValid = (index != FansPageArray::NOT_FOUND);
-	if (isValid)
-		allPages.getPageByIndex(index).showAllStatus();
+	bool isValid = false;
+	const FansPage* fansPage = findFansPageByName(name, allPages);
+
+	if (fansPage != nullptr)
+	{
+		fansPage->showAllStatus();
+		isValid = true;
+	}
 
 	return isValid;
 }
 
 bool Admin::showUpdatedFriendsStatuses(const string& name) const
 {
-	bool isValid;
-	int index = allMembers.findMemberByName(name);
+	bool isValid = false;
+	const Member* member = findMemberByName(name, allMembers);
 
-	isValid = (index != MemberArray::NOT_FOUND);
-	if(isValid)
-		allMembers.getMemberByIndex(index).showUpdatedFriendsStatuses();
+	if (member != nullptr)
+	{
+		member->showUpdatedFriendsStatuses();
+		isValid = true;
+	}
 
 	return isValid;
 }
