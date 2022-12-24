@@ -21,10 +21,8 @@ public:
     bool operator==(const Status& other)const;
     bool operator!=(const Status& other)const;
 
-    //friend class vector;
-
-//private:
-    //Status(const Status& other) = default;
+private:
+    Status(const Status& other);
 };
 
 #endif //__STATUS_H
