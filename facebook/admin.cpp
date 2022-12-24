@@ -7,6 +7,22 @@
 #include <iostream>
 using namespace std;
 
+/********* Distructor **********/
+
+Admin::~Admin()
+{
+	vector<Member*>::iterator mItr = allMembers.begin();
+	vector<Member*>::iterator mItrEnd = allMembers.end();
+	vector<FansPage*>::iterator pItr = allPages.begin();
+	vector<FansPage*>::iterator pItrEnd = allPages.end();
+
+	for (; mItr != mItrEnd; ++mItr)
+		delete &(*mItr);
+
+	for (; pItr != pItrEnd; ++pItr)
+		delete &(*pItr);
+}
+
 /********* Add and Connect functions *********/
 
 bool Admin::addFriend(const string& name, const Date& date)

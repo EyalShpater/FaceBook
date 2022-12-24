@@ -16,6 +16,7 @@ class Admin
 
 public:
 	Admin() = default;
+	~Admin();
 
 	bool addFriend(const std::string& name, const Date& date);
 	bool addFansPage(const std::string& name);
