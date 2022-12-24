@@ -17,10 +17,10 @@ Admin::~Admin()
 	vector<FansPage*>::iterator pItrEnd = allPages.end();
 
 	for (; mItr != mItrEnd; ++mItr)
-		delete &(*mItr);
+		delete *mItr;
 
 	for (; pItr != pItrEnd; ++pItr)
-		delete &(*pItr);
+		delete *pItr;
 }
 
 /********* Add and Connect functions *********/
