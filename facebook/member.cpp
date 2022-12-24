@@ -69,7 +69,7 @@ vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Me
 	return itr;
 }
 
-list<Member>::iterator findMemberIteratorByName(const std::string& name, std::list<Member>& allMembers)
+list<Member>::iterator findMemberIteratorByName(const string& name, list<Member>& allMembers)
 {
 	bool isFound = false;
 	list<Member>::iterator itr = allMembers.begin();
@@ -86,15 +86,15 @@ list<Member>::iterator findMemberIteratorByName(const std::string& name, std::li
 	return itr;
 }
 
-list<Member>::const_iterator findMemberIteratorByName(const std::string& name, const std::list<Member>& allMembers)
+vector<Member*>::const_iterator findMemberIteratorByName(const string& name, const vector<Member*>& allMembers)
 {
 	bool isFound = false;
-	list<Member>::const_iterator itr = allMembers.begin();
-	list<Member>::const_iterator itrEnd = allMembers.end();
+	vector<Member*>::const_iterator itr = allMembers.begin();
+	vector<Member*>::const_iterator itrEnd = allMembers.end();
 
 	while (itr != itrEnd && !isFound)
 	{
-		if ((*itr).getName() == name)
+		if ((*itr)->getName() == name)
 			isFound = true;
 		else
 			++itr;
@@ -107,7 +107,7 @@ Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 {
 	vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
 
-	if (res == allMembers.end() && (*res)->getName() != name) //not found
+	if (res == allMembers.end()/* && (*res)->getName() != name*/) //not found
 		return nullptr;
 
 	return *res;
@@ -118,20 +118,20 @@ Member* findMemberByName(const std::string& name, std::list<Member>& allMembers)
 {
 	list<Member>::iterator res = findMemberIteratorByName(name, allMembers);
 
-	if (res == allMembers.end() && (*res).getName() != name) //not found
+	if (res == allMembers.end()/* && (*res).getName() != name*/) //not found
 		return nullptr;
 
 	return &(*res);
 }
 
-const Member* findMemberByName(const std::string& name, const std::list<Member>& allMembers)
+const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers)
 {
-	list<Member>::const_iterator res = findMemberIteratorByName(name, allMembers);
+	vector<Member*>::const_iterator res = findMemberIteratorByName(name, allMembers);
 
-	if (res == allMembers.end() && (*res).getName() != name) //not found
+	if (res == allMembers.end()/* && (*res)->getName() != name*/) //not found
 		return nullptr;
 
-	return &(*res);
+	return *res;
 }
 
 /********* Member's functions *********/
@@ -180,16 +180,16 @@ void Member::showAllStatus() const
 	vector<Status>::const_iterator itrEnd = theBillboard.end();
 	
 	for (; itr != itrEnd; ++itr)
-		cout << *itr;
+		cout << *itr << endl;
 }
 
 void Member::showLatest10thStatus() const
 {
 	vector<Status>::const_iterator itr = theBillboard.begin();
-	vector<Status>::const_iterator itrEnd = theBillboard.end();
+	vector<Status>::const_iterator itrEnd = --theBillboard.end(); // note the --
 
-	for (int i = 0; i < DEFAULT_NUM_OF_STATUS_TO_SHOW && itr != itrEnd; i++, --itrEnd)
-		cout << *itrEnd;
+	for (int i = 1; i <= DEFAULT_NUM_OF_STATUS_TO_SHOW && itr != itrEnd; i++, --itrEnd)
+		cout << *itrEnd << endl << endl;
 	
 
 }

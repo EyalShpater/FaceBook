@@ -1,7 +1,7 @@
 #ifndef __ADMIN_H
 #define __ADMIN_H
 
-#include <list>
+#include <vector>
 #include <string>
 
 #include "member.h"
@@ -11,8 +11,8 @@ class Date;
 
 class Admin
 {
-	std::list<Member> allMembers;
-	std::list<FansPage> allPages;
+	std::vector<Member*> allMembers;
+	std::vector<FansPage*> allPages;
 
 public:
 	Admin() = default;

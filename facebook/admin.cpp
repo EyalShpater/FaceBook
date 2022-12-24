@@ -14,7 +14,7 @@ bool Admin::addFriend(const string& name, const Date& date)
 	bool isValid = findMemberByName(name, allMembers) == nullptr;
 
 	if (isValid)
-		allMembers.push_back(Member(name, date));
+		allMembers.push_back(new Member(name, date));
 
 	return isValid;
 }
@@ -24,7 +24,7 @@ bool Admin::addFansPage(const string& name)
 	bool isValid = findFansPageByName(name, allPages) == nullptr;
 
 	if (isValid)
-		allPages.push_back(FansPage(name));
+		allPages.push_back(new FansPage(name));
 
 	return isValid;
 }
@@ -125,25 +125,26 @@ bool Admin::cancelFriendship(const string& nameFirst, const string& nameSecond)
 void Admin::showAllUsers() const
 {
 	showAllMembers();
+	cout << endl;
 	showAllFansPages();
 }
 
 void Admin::showAllMembers() const
 {
-	list<Member>::const_iterator mItr = allMembers.begin();
-	list<Member>::const_iterator mItrEnd = allMembers.end();
+	vector<Member*>::const_iterator itr = allMembers.begin();
+	vector<Member*>::const_iterator itrEnd = allMembers.end();
 
-	for (; mItr != mItrEnd; ++mItr)
-		cout << *mItr << endl;
+	for (; itr != itrEnd; ++itr)
+		cout << *(*itr) << endl << endl;
 }
 
 void Admin::showAllFansPages() const
 {
-	list<FansPage>::const_iterator pItr = allPages.begin();
-	list<FansPage>::const_iterator pItrEnd = allPages.end();
+	vector<FansPage*>::const_iterator itr = allPages.begin();
+	vector<FansPage*>::const_iterator itrEnd = allPages.end();
 
-	for (; pItr != pItrEnd; ++pItr)
-		cout << *pItr << endl;
+	for (; itr != itrEnd; ++itr)
+		cout << *(*itr) << endl << endl;
 }
 
 bool Admin::showAllMemberFriends(const string& name) const

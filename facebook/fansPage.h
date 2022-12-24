@@ -35,12 +35,11 @@ public:
     // else returns the last place in the vector.
     friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage);
     friend std::list<FansPage>::iterator findFansPageIteratorByName(const std::string& name, std::list<FansPage>& allFansPage);
-    friend std::list<FansPage>::const_iterator findFansPageIteratorByName(const std::string& name, const std::list<FansPage>& allFansPage);
+    friend std::vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
 
     friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
     friend FansPage* findFansPageByName(const std::string& name, std::list<FansPage>& allFansPage);
-    friend const FansPage* findFansPageByName(const std::string& name, const std::list<FansPage>& allFansPage);
-
+    friend const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
     
 private:
     FansPage(const FansPage&);

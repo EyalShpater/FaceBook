@@ -66,9 +66,8 @@ void FansPage::showAllFans() const
 	cout << "**********" << name << "'s Fans **********" << endl << endl;
 
 	for (; itr != itrEnd; ++itr)
-		cout << *itr << endl << endl;
+		cout << *(*itr) << endl << endl;
 
-	cout << "********************" << endl;
 	cout << "********************" << endl;
 }
 ostream& operator<<(ostream& os, const FansPage& f)
@@ -99,7 +98,7 @@ FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
 {
 	vector<FansPage*>::iterator res = findFansPageIteratorByName(name, allFansPage);
 
-	if (res == allFansPage.end() && (*res)->getName() != name) //not found
+	if (res == allFansPage.end() /* && (*res)->getName() != name*/) //not found
 		return nullptr;
 
 	return *res;
@@ -115,14 +114,14 @@ FansPage* findFansPageByName(const string& name, list<FansPage>& allFansPage)
 	return &(*res);
 }
 
-const FansPage* findFansPageByName(const std::string& name, const std::list<FansPage>& allFansPage)
+const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
 {
-	list<FansPage>::const_iterator res = findFansPageIteratorByName(name, allFansPage);
+	vector<FansPage*>::const_iterator res = findFansPageIteratorByName(name, allFansPage);
 
-	if (res == allFansPage.end() && (*res).getName() != name) //not found
+	if (res == allFansPage.end() && (*res)->getName() != name) //not found
 		return nullptr;
 
-	return &(*res);
+	return *res;
 }
 
 
@@ -143,15 +142,15 @@ list<FansPage>::iterator findFansPageIteratorByName(const string& name, list<Fan
 	return itr;
 }
 
-list<FansPage>::const_iterator findFansPageIteratorByName(const std::string& name, const std::list<FansPage>& allFansPage)
+vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
 {
 	bool isFound = false;
-	list<FansPage>::const_iterator itr = allFansPage.begin();
-	list<FansPage>::const_iterator itrEnd = allFansPage.end();
+	vector<FansPage*>::const_iterator itr = allFansPage.begin();
+	vector<FansPage*>::const_iterator itrEnd = allFansPage.end();
 
 	while (itr != itrEnd && !isFound)
 	{
-		if ((*itr).getName() == name)
+		if ((*itr)->getName() == name)
 			isFound = true;
 		else
 			++itr;
