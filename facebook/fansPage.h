@@ -11,11 +11,12 @@ class Member;
 class FansPage 
 {
     std::string name;
-    std::vector<Status> theBillboard;
+    std::vector<Status*> theBillboard;
     std::vector<Member*> members;
 
 public:
     FansPage(const std::string& name) : name(name) {}
+    ~FansPage();
    
     const std::string& getName() const { return name; }
     int getNumOfFans() const { return members.size(); }
@@ -43,6 +44,8 @@ public:
     
 private:
     FansPage(const FansPage&);
+    void myMembersRealloc();
+    void myStatusRealloc();
 };
 
 #endif // __FANSPAGE_H

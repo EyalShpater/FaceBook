@@ -14,12 +14,13 @@ class Member
 {
 	std::string name;
 	const Date dateOfBirth;
-	std::vector<Status> theBillboard;
+	std::vector<Status*> theBillboard;
 	std::vector<Member*> members;
 	std::vector<FansPage*> fansPages;
 
 public:
 	Member(const std::string& name, const Date& birthDate);
+	~Member();
 	
 	const std::string& getName() const { return name; }
 	const Date& getDateOfBirth() const { return dateOfBirth; }
@@ -30,14 +31,9 @@ public:
 	bool operator>(const FansPage& other) const;
 	friend std::ostream& operator<<(std::ostream& os, const Member& s);
 	
-	// This function returns iterator to the Member adress in allMembers if found, 
-	// else returns the last place in the vector.
 	friend std::vector<Member*>::iterator findMemberIteratorByName(const std::string& name, std::vector<Member*>& allMembers);
-	friend std::list<Member>::iterator findMemberIteratorByName(const std::string& name, std::list<Member>& allMembers);
 	friend std::vector<Member*>::const_iterator findMemberIteratorByName(const std::string& name, const std::vector<Member*>& allMembers);
-
 	friend Member* findMemberByName(const std::string& name, std::vector<Member*> &allMembers);
-	//friend Member* findMemberByName(const std::string& name, std::list<Member>& allMembers);
 	friend const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers);
 
 	void addStatusToBillboard(const std::string& text);
@@ -53,6 +49,9 @@ public:
 	
 private:
 	Member(const Member&);
+	void myMemberRealloc();
+	void myFansPageRealloc();
+	void myStatusRealloc();
 };
 
 #endif // __MEMBER_H

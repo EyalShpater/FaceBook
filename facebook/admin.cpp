@@ -28,6 +28,11 @@ Admin::~Admin()
 bool Admin::addFriend(const string& name, const Date& date)
 {
 	bool isValid = findMemberByName(name, allMembers) == nullptr;
+	int logSize = allMembers.size();
+	int physSize = allMembers.capacity();
+
+	if (logSize == physSize)
+		allMembers.reserve(physSize * 2);
 
 	if (isValid)
 		allMembers.push_back(new Member(name, date));
@@ -38,6 +43,12 @@ bool Admin::addFriend(const string& name, const Date& date)
 bool Admin::addFansPage(const string& name)
 {
 	bool isValid = findFansPageByName(name, allPages) == nullptr;
+
+	int logSize = allPages.size();
+	int physSize = allPages.capacity();
+
+	if (logSize == physSize)
+		allPages.reserve(physSize * 2);
 
 	if (isValid)
 		allPages.push_back(new FansPage(name));

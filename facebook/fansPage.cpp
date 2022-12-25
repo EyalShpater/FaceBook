@@ -7,6 +7,16 @@
 using namespace std;
 
 /**********************************************/
+FansPage::~FansPage()
+{
+	vector<Status*>::iterator itr = theBillboard.begin();
+	vector<Status*>::iterator itrEnd = theBillboard.end();
+
+	for (; itr != itrEnd; ++itr)
+		delete* itr;
+}
+
+/**********************************************/
 
 bool FansPage::operator>(const FansPage& other)const
 {
@@ -22,6 +32,7 @@ const FansPage& FansPage::operator+=(Member& newFriend)
 {
 	if (findMemberByName(newFriend.getName(), members) == nullptr)
 	{
+		myMembersRealloc();
 		members.push_back(&newFriend);
 		newFriend.likePage(*this);
 	}
@@ -33,14 +44,15 @@ const FansPage& FansPage::operator+=(Member& newFriend)
 
 void FansPage::addStatus(const string& newStatus)
 {
-	theBillboard.push_back(Status(newStatus));
+	myStatusRealloc();
+	theBillboard.push_back(new Status(newStatus));
 }
 
 void FansPage::deleteFriend(Member& other)
 {
 	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
 
-	if ((*itrMy)->getName() == other.getName())
+	if (itrMy != members.end())
 	{
 		members.erase(itrMy);
 		other.dislikePage(*this);
@@ -51,11 +63,11 @@ void FansPage::deleteFriend(Member& other)
 
 void FansPage::showAllStatus() const
 {
-	vector<Status>::const_iterator itr = theBillboard.begin();
-	vector<Status>::const_iterator itrEnd = theBillboard.end();
+	vector<Status*>::const_iterator itr = theBillboard.begin();
+	vector<Status*>::const_iterator itrEnd = theBillboard.end();
 
 	for (; itr != itrEnd; ++itr)
-		cout << *itr;
+		cout << *(*itr) << endl << endl;
 }
 
 void FansPage::showAllFans() const
@@ -98,7 +110,7 @@ FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
 {
 	vector<FansPage*>::iterator res = findFansPageIteratorByName(name, allFansPage);
 
-	if (res == allFansPage.end() /* && (*res)->getName() != name*/) //not found
+	if (res == allFansPage.end()) //not found
 		return nullptr;
 
 	return *res;
@@ -159,3 +171,22 @@ vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& 
 	return itr;
 }
 
+/**********************/
+
+void FansPage::myMembersRealloc()
+{
+	int logSize = members.size();
+	int physSize = members.capacity();
+
+	if (logSize == physSize)
+		members.reserve(physSize * 2);
+}
+
+void FansPage::myStatusRealloc()
+{
+	int logSize = theBillboard.size();
+	int physSize = theBillboard.capacity();
+
+	if (logSize == physSize)
+		theBillboard.reserve(physSize * 2);
+}
