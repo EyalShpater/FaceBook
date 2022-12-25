@@ -49,6 +49,8 @@ public:
 	
 private:
 	Member(const Member&);
+	void operator=(const Member&); // need to add it to all h files
+
 	void myMemberRealloc();
 	void myFansPageRealloc();
 	void myStatusRealloc();
