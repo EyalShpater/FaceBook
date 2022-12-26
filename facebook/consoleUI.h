@@ -2,7 +2,7 @@
 #define __CONSOLE_UI_H
 
 #include "admin.h"
-
+#include <string>
 class ConsoleUI
 {
 public:
@@ -27,8 +27,8 @@ private:
 	ConsoleUI(const ConsoleUI&);
 
 	int printMenu() const;
-	void askForMemberDetails(char name[]) const;
-	void askForFansPageDetails(char name[]) const;
+	void askForMemberDetails(std::string& name) const;
+	void askForFansPageDetails(std::string& name) const;
 	int askForUserType() const;
 
 	void addFriend();

@@ -3,6 +3,7 @@
 #include "consoleUI.h"
 #include "member.h"
 #include "fansPage.h"
+#include <string>
 
 #include <iostream>
 using namespace std;
@@ -143,18 +144,18 @@ int ConsoleUI::printMenu() const
 	return choice;
 }
 
-void ConsoleUI::askForMemberDetails(char name[]) const
+void ConsoleUI::askForMemberDetails(string& name) const
 {
 	cout << "Enter the member's name: " << endl;
 
-	cin.getline(name, MAX_NAME_LEN);
+	getline(cin, name);
 }
 
-void ConsoleUI::askForFansPageDetails(char name[]) const
+void ConsoleUI::askForFansPageDetails(string& name) const
 {
 	cout << "Enter the fansPage's name: " << endl;
 
-	cin.getline(name, MAX_NAME_LEN);
+	getline(cin, name);
 }
 
 int ConsoleUI::askForUserType() const
@@ -182,7 +183,7 @@ int ConsoleUI::askForUserType() const
 void ConsoleUI::addFriend()
 {
 	int day, month, year;
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -191,7 +192,7 @@ void ConsoleUI::addFriend()
 	cout << "******************** Add A Friend To The System ********************" << endl;
 
 	cout << "Please enter the friend's name: " << endl;
-	cin.getline(name, MAX_NAME_LEN);
+	getline(cin, name);
 	cout << "Please enter the friend's birthday: " << endl;
 	cin >> day >> month >> year;
 	
@@ -203,7 +204,7 @@ void ConsoleUI::addFriend()
 
 void ConsoleUI::addFansPage()
 {
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -212,7 +213,7 @@ void ConsoleUI::addFansPage()
 	cout << "******************** Add A Fans-Page To The System ********************" << endl;
 
 	cout << "Please enter the fans page's name: " << endl;
-	cin.getline(name, MAX_NAME_LEN);
+	getline(cin, name);
 	
 	isValid = faceBook.addFansPage(name);
 
@@ -246,8 +247,8 @@ void ConsoleUI::addStatusToUser()
 
 void ConsoleUI::addStatusToMember() // add input check
 {
-	char text[MAX_STATUS_LEN];
-	char name[MAX_NAME_LEN];
+	string text;
+	string name;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -255,7 +256,7 @@ void ConsoleUI::addStatusToMember() // add input check
 	askForMemberDetails(name);
 
 	cout << "Enter your status" << endl;
-	cin.getline(text, MAX_STATUS_LEN);
+	getline(cin, text);
 
 	isValid = faceBook.addNewStatusToMember(name, text);
 
@@ -265,8 +266,8 @@ void ConsoleUI::addStatusToMember() // add input check
 
 void ConsoleUI::addStatusToFansPage()
 {
-	char text[MAX_STATUS_LEN];
-	char name[MAX_NAME_LEN];
+	string text;
+	string name;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -274,7 +275,7 @@ void ConsoleUI::addStatusToFansPage()
 	askForFansPageDetails(name);
 
 	cout << "Enter your status" << endl;
-	cin.getline(text, MAX_STATUS_LEN);
+	getline(cin, text);
 
 	isValid = faceBook.addNewStatusToFansPage(name, text);
 
@@ -284,8 +285,8 @@ void ConsoleUI::addStatusToFansPage()
 
 void ConsoleUI::addFanToPage()
 {
-	char memberName[MAX_NAME_LEN];
-	char fansPageName[MAX_NAME_LEN];
+	string memberName;
+	string fansPageName;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -303,8 +304,8 @@ void ConsoleUI::addFanToPage()
 
 void ConsoleUI::friendshipBetweenTwoMembers()
 {
-	char firstMemberName[MAX_NAME_LEN];
-	char secondMemberName[MAX_NAME_LEN];
+	string firstMemberName;
+	string secondMemberName;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -326,8 +327,8 @@ void ConsoleUI::friendshipBetweenTwoMembers()
 
 void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 {
-	char firstMemberName[MAX_NAME_LEN];
-	char secondMemberName[MAX_NAME_LEN];
+	string firstMemberName;
+	string secondMemberName;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -348,8 +349,8 @@ void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 
 void ConsoleUI::removeFanFromPage()
 {
-	char memberName[MAX_NAME_LEN];
-	char fansPageName[MAX_NAME_LEN];
+	string memberName;
+	string fansPageName;
 	bool isValid;
 
 	getchar(); // clear buffer
@@ -394,7 +395,7 @@ void ConsoleUI::showAllUserStatuses() const
 
 void ConsoleUI::showAllMemberStatuses() const
 {
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	askForMemberDetails(name);
@@ -409,7 +410,7 @@ void ConsoleUI::showAllMemberStatuses() const
 
 void ConsoleUI::showAllFansPageStatuses() const
 {
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	askForFansPageDetails(name);
@@ -424,7 +425,7 @@ void ConsoleUI::showAllFansPageStatuses() const
 
 void ConsoleUI::showUpdatedFriendsStatuses() const
 {
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 	
 	getchar(); // clear buffer
@@ -476,7 +477,7 @@ void ConsoleUI::showUserFriends() const
 
 void ConsoleUI::showMemberFriends() const
 {	
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	askForMemberDetails(name);
@@ -492,7 +493,7 @@ void ConsoleUI::showMemberFriends() const
 
 void ConsoleUI::showFansPageFans() const
 {
-	char name[MAX_NAME_LEN];
+	string name;
 	bool isValid;
 
 	askForFansPageDetails(name);
