@@ -143,13 +143,14 @@ const Member* findMemberByName(const std::string& name, const std::vector<Member
 
 void Member::addStatusToBillboard(const string& text) noexcept(false)
 {
-		Status* temp = new Status(text);
+	if (text == "")
+		throw EmptyTextException();
 
-		myStatusRealloc();
-		theBillboard.push_back(temp);
+	myStatusRealloc();
+	theBillboard.push_back(new Status(text));
 }
 
-void Member::cancelFriendship(Member& other) noexcept(false)
+void Member::cancelFriendship(Member& other) noexcept(false) // throw?
 {
 	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
 	vector<Member*>::iterator itrOther = findMemberIteratorByName(name, other.members);
@@ -171,7 +172,7 @@ void Member::likePage(FansPage& newPage)
 	}
 }
 
-void Member::dislikePage(FansPage& other) noexcept(false)
+void Member::dislikePage(FansPage& other) noexcept(false) // throw?
 {
 	vector<FansPage*>::iterator itr = findFansPageIteratorByName(other.getName(), fansPages);
 

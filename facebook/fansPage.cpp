@@ -13,7 +13,7 @@ FansPage::~FansPage()
 	vector<Status*>::iterator itrEnd = theBillboard.end();
 
 	for (; itr != itrEnd; ++itr)
-		delete* itr;
+		delete *itr;
 }
 
 /**********************************************/
@@ -89,7 +89,7 @@ ostream& operator<<(ostream& os, const FansPage& f)
 	return os;
 }
 
-vector<FansPage*>::iterator findFansPageIteratorByName(const string& name, vector<FansPage*>& allFansPage)
+vector<FansPage*>::iterator findFansPageIteratorByName(const string& name, vector<FansPage*>& allFansPage) noexcept(false)
 {
 	bool isFound = false;
 	vector<FansPage*>::iterator itr = allFansPage.begin();
@@ -103,31 +103,13 @@ vector<FansPage*>::iterator findFansPageIteratorByName(const string& name, vecto
 			++itr;
 	}
 
+	if (!isFound)
+		throw NotExistException();
+
 	return itr;
 }
 
-FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
-{
-	vector<FansPage*>::iterator res = findFansPageIteratorByName(name, allFansPage);
-
-	if (res == allFansPage.end()) //not found
-		return nullptr;
-
-	return *res;
-}
-
-const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
-{
-	vector<FansPage*>::const_iterator res = findFansPageIteratorByName(name, allFansPage);
-
-	if (res == allFansPage.end() && (*res)->getName() != name) //not found
-		return nullptr;
-
-	return *res;
-}
-
-
-vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
+vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage) noexcept(false)
 {
 	bool isFound = false;
 	vector<FansPage*>::const_iterator itr = allFansPage.begin();
@@ -141,7 +123,37 @@ vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& 
 			++itr;
 	}
 
+	if (!isFound)
+		throw NotExistException();
+
 	return itr;
+}
+
+FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
+{
+	try
+	{
+		vector<FansPage*>::iterator res = findFansPageIteratorByName(name, allFansPage);
+		return *res;
+	}
+	catch (NotExistException&)
+	{
+		return nullptr;
+	}
+
+}
+
+const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
+{
+	try
+	{
+		vector<FansPage*>::const_iterator res = findFansPageIteratorByName(name, allFansPage);
+		return *res;
+	}
+	catch (NotExistException&)
+	{
+		return nullptr;
+	}	
 }
 
 /**********************/

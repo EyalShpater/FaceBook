@@ -31,15 +31,15 @@ public:
 	bool operator>(const FansPage& other) const;
 	friend std::ostream& operator<<(std::ostream& os, const Member& s);
 	
-	friend std::vector<Member*>::iterator findMemberIteratorByName(const std::string& name, std::vector<Member*>& allMembers);
-	friend std::vector<Member*>::const_iterator findMemberIteratorByName(const std::string& name, const std::vector<Member*>& allMembers);
+	friend std::vector<Member*>::iterator findMemberIteratorByName(const std::string& name, std::vector<Member*>& allMembers) noexcept(false);
+	friend std::vector<Member*>::const_iterator findMemberIteratorByName(const std::string& name, const std::vector<Member*>& allMembers) noexcept(false);
 	friend Member* findMemberByName(const std::string& name, std::vector<Member*> &allMembers);
 	friend const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers);
 
-	void addStatusToBillboard(const std::string& text);
-	void cancelFriendship(Member& other); 
+	void addStatusToBillboard(const std::string& text) noexcept(false);
+	void cancelFriendship(Member& other) noexcept(false); // throw?
 	void likePage(FansPage& newPage); 
-	void dislikePage(FansPage& other);
+	void dislikePage(FansPage& other) noexcept(false); // throw?
 
 	void showAllStatus() const; 
 	void showLatest10thStatus() const;

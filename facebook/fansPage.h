@@ -28,16 +28,14 @@ public:
     const FansPage& operator+=(Member& newFriend);
     friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
 
-    void addStatus(const std::string& newStatus);
-    void deleteFriend(Member& other);
+    void addStatus(const std::string& newStatus) noexcept(false);
+    void deleteFriend(Member& other) noexcept(false); //throw?
 
     void showAllStatus() const;
     void showAllFans() const;
 
-    // This function returns iterator to the FansPage adress in allMembers if found, 
-    // else returns the last place in the vector.
-    friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage);
-    friend std::vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
+    friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage) noexcept(false);
+    friend std::vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage) noexcept(false);
 
     friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
     friend const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
