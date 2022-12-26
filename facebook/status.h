@@ -6,6 +6,7 @@
 
 #include "date.h"
 #include "time.h"
+#include "statusException.h"
 
 class Status 
 {
@@ -14,7 +15,7 @@ class Status
     std::string text;
 
 public:
-    Status(const std::string& text) : text(text) {}
+    Status(const std::string& text) : text(text) { if (text == "") throw EmptyTextException(); }
 
     friend std::ostream& operator<<(std::ostream& os, const Status& s);
 

@@ -2,12 +2,24 @@
 
 #include "consoleUI.h"
 
+#include <iostream>
+using namespace std;
+
 int main()
 {
-    ConsoleUI out;
+    try 
+    {
+        ConsoleUI out;
 
-    out.addDefaultMembersToFacebook();
-    out.menu();
+        out.addDefaultMembersToFacebook();
+        out.menu();
+
+        return 0;
+    }
+
+    catch (...)
+    {
+        cout << "General error occured!" << endl;
+    }
     
-    return 0;
 }

@@ -155,7 +155,9 @@
     <ClInclude Include="fansPage.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="status.h" />
+    <ClInclude Include="statusException.h" />
     <ClInclude Include="time.h" />
+    <ClInclude Include="timeException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

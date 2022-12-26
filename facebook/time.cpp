@@ -17,7 +17,7 @@ const int MAX_SEC = 59;
 
 /********* Constructors *********/
 
-Time::Time(int hour, int minutes, int seconds)
+Time::Time(int hour, int minutes, int seconds) noexcept(false)
 {
     setHour(hour);
     setMinutes(minutes);
@@ -36,31 +36,28 @@ Time::Time()
 
 /********* Setters *********/
 
-bool Time::setHour(int hour)
+void Time::setHour(int hour) noexcept(false)
 {
     if (hour < MIN_HOUR || hour > MAX_HOUR)
-        return false;
+        throw WrongHourException();
 
     this->hour = hour;
-    return true;
 }
 
-bool Time::setMinutes(int minutes)
+void Time::setMinutes(int minutes) noexcept(false)
 {
     if (minutes < MIN_MIN || minutes > MAX_MIN)
-        return false;
+        throw WrongMinuteException();
 
     this->minutes = minutes;
-    return true;
 }
 
-bool Time::setSeconds(int seconds)
+void Time::setSeconds(int seconds) noexcept(false) 
 {
     if (seconds < MIN_SEC || seconds > MAX_SEC)
-        return false;
+        throw WrongSecondException();
 
     this->seconds = seconds;
-    return true;
 }
 
 /********* Show *********/

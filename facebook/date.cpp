@@ -1,7 +1,7 @@
 #pragma warning (disable:4996)
 
 #include "date.h"
-
+#include "timeException.h"
 #include <ctime>
 #include <iostream>
 using namespace std;
@@ -29,7 +29,7 @@ Date::Date()
     day = temp->tm_mday;
 }
 
-Date::Date(int day, int month, int year)
+Date::Date(int day, int month, int year) noexcept(false)
 {
     setDay(day);
     setMonth(month);
@@ -38,31 +38,28 @@ Date::Date(int day, int month, int year)
 
 /********* Setters *********/
 
-bool Date::setDay(int day)
+void Date::setDay(int day) noexcept(false)
 {
     if (day < MIN_DAY || day > MAX_DAY)
-        return false;
+        throw WrongDayException();
 
     this->day = day;
-    return true;
 }
 
-bool Date::setMonth(int month)
+void Date::setMonth(int month) noexcept(false)
 {
     if (month < MIN_MONTH || month > MAX_MONTH)
-        return false;
+        throw WrongMonthException();
 
     this->month = month;
-    return true;
 }
 
-bool Date::setYear(int year)
+void Date::setYear(int year) noexcept(false)
 {
     if (year < MIN_YEAR || year > MAX_YEAR)
-        return false;
+        throw WrongYearException();
 
     this->year = year;
-    return true;
 }
 
 

@@ -21,7 +21,6 @@ std::ostream& operator<<(std::ostream& os, const Status& s)
 bool Status::operator==(const Status& other)const
 {
 	return text == other.text;
-
 }
 
 bool Status::operator!=(const Status& other)const

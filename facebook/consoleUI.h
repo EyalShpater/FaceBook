@@ -25,6 +25,7 @@ public:
 
 private:
 	ConsoleUI(const ConsoleUI&);
+	const ConsoleUI& operator=(const ConsoleUI&);
 
 	int printMenu() const;
 	void askForMemberDetails(std::string& name) const;
