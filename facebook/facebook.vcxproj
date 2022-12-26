@@ -154,6 +154,7 @@
     <ClInclude Include="date.h" />
     <ClInclude Include="fansPage.h" />
     <ClInclude Include="member.h" />
+    <ClInclude Include="userException.h" />
     <ClInclude Include="status.h" />
     <ClInclude Include="statusException.h" />
     <ClInclude Include="time.h" />

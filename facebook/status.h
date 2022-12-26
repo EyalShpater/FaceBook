@@ -15,7 +15,8 @@ class Status
     std::string text;
 
 public:
-    Status(const std::string& text) : text(text) { if (text == "") throw EmptyTextException(); }
+    Status(const std::string& text) noexcept(false) 
+        : text(text) { if (text == "") throw EmptyTextException(); }
 
     friend std::ostream& operator<<(std::ostream& os, const Status& s);
 

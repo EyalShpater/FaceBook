@@ -19,7 +19,7 @@ class Member
 	std::vector<FansPage*> fansPages;
 
 public:
-	Member(const std::string& name, const Date& birthDate);
+	Member(const std::string& name, const Date& birthDate) noexcept(false);
 	~Member();
 	
 	const std::string& getName() const { return name; }

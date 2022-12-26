@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include "status.h"
+#include "userException.h"
 
 class Member;
 
@@ -15,7 +16,8 @@ class FansPage
     std::vector<Member*> members;
 
 public:
-    FansPage(const std::string& name) : name(name) {}
+    FansPage(const std::string& name) noexcept(false)
+        : name(name) { if (name == "") throw EmptyNameException(); }
     ~FansPage();
    
     const std::string& getName() const { return name; }
@@ -35,11 +37,9 @@ public:
     // This function returns iterator to the FansPage adress in allMembers if found, 
     // else returns the last place in the vector.
     friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage);
-    friend std::list<FansPage>::iterator findFansPageIteratorByName(const std::string& name, std::list<FansPage>& allFansPage);
     friend std::vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
 
     friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
-    friend FansPage* findFansPageByName(const std::string& name, std::list<FansPage>& allFansPage);
     friend const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
     
 private:

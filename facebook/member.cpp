@@ -3,6 +3,7 @@
 #include "member.h"
 #include "fansPage.h"
 #include "status.h"
+#include "userException.h"
 
 #include <iostream>
 using namespace std;
@@ -14,8 +15,11 @@ const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
 
 /********* Constructors *********/
 
-Member::Member(const string& name, const Date& birthDate) : dateOfBirth(birthDate)
+Member::Member(const string& name, const Date& birthDate) noexcept(false) : dateOfBirth(birthDate)
 {
+	if (name == "")
+		throw EmptyNameException();
+
 	this->name = name;
 }
 
@@ -68,7 +72,7 @@ ostream& operator<<(ostream& os, const Member& s)
 }
 
 /***********/
-vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Member*>& allMembers)
+vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Member*>& allMembers) noexcept(false)
 {
 	bool isFound = false;
 	vector<Member*>::iterator itr = allMembers.begin();
@@ -82,27 +86,13 @@ vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Me
 			++itr;
 	}
 
-	return itr;
-}
-
-list<Member>::iterator findMemberIteratorByName(const string& name, list<Member>& allMembers)
-{
-	bool isFound = false;
-	list<Member>::iterator itr = allMembers.begin();
-	list<Member>::iterator itrEnd = allMembers.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr).getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
+	if (!isFound)
+		throw NotExistException();
 
 	return itr;
 }
 
-vector<Member*>::const_iterator findMemberIteratorByName(const string& name, const vector<Member*>& allMembers)
+vector<Member*>::const_iterator findMemberIteratorByName(const string& name, const vector<Member*>& allMembers) noexcept(false)
 {
 	bool isFound = false;
 	vector<Member*>::const_iterator itr = allMembers.begin();
@@ -116,53 +106,53 @@ vector<Member*>::const_iterator findMemberIteratorByName(const string& name, con
 			++itr;
 	}
 
+	if (!isFound)
+		throw NotExistException();
+
 	return itr;
 }
 
 Member* findMemberByName(const string& name, vector<Member*>& allMembers)
 {
-	vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
-
-	if (res == allMembers.end()) //not found
+	try
+	{
+		vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
+		return *res;
+	}
+	catch (NotExistException&)
+	{
 		return nullptr;
-
-	return *res;
+	}
 }
 
-
-Member* findMemberByName(const std::string& name, std::list<Member>& allMembers)
+const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers) 
 {
-	list<Member>::iterator res = findMemberIteratorByName(name, allMembers);
+	try
+	{
+		vector<Member*>::const_iterator res = findMemberIteratorByName(name, allMembers);
 
-	if (res == allMembers.end()) //not found
+		return *res;
+	}
+	catch (NotExistException&)
+	{
 		return nullptr;
-
-	return &(*res);
-}
-
-const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers)
-{
-	vector<Member*>::const_iterator res = findMemberIteratorByName(name, allMembers);
-
-	if (res == allMembers.end()) //not found
-		return nullptr;
-
-	return *res;
+	}
 }
 
 /********* Member's functions *********/
 
-void Member::addStatusToBillboard(const string& text)
+void Member::addStatusToBillboard(const string& text) noexcept(false)
 {
-	myStatusRealloc();
-	theBillboard.push_back(new Status(text));
+		Status* temp = new Status(text);
+
+		myStatusRealloc();
+		theBillboard.push_back(temp);
 }
 
-void Member::cancelFriendship(Member& other)
+void Member::cancelFriendship(Member& other) noexcept(false)
 {
 	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
 	vector<Member*>::iterator itrOther = findMemberIteratorByName(name, other.members);
-
 
 	if ((*itrMy)->getName() == other.getName())
 		members.erase(itrMy);
@@ -181,7 +171,7 @@ void Member::likePage(FansPage& newPage)
 	}
 }
 
-void Member::dislikePage(FansPage& other) //WTF
+void Member::dislikePage(FansPage& other) noexcept(false)
 {
 	vector<FansPage*>::iterator itr = findFansPageIteratorByName(other.getName(), fansPages);
 

@@ -21,7 +21,7 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFansPage("Computer Science");
 	faceBook.addFansPage("Coming From Love");
 
-	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
+ 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
 	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
 	faceBook.addFriend("Yehudit Ravitz", Date(29, 12, 1956));

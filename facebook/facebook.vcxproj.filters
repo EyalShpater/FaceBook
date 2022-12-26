@@ -64,5 +64,8 @@
     <ClInclude Include="statusException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="userException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -42,21 +42,21 @@ const FansPage& FansPage::operator+=(Member& newFriend)
 
 /********* Fans-Page's functions *********/
 
-void FansPage::addStatus(const string& newStatus)
+void FansPage::addStatus(const string& newStatus) noexcept(false)
 {
+	if (newStatus == "")
+		throw EmptyTextException();
+
 	myStatusRealloc();
 	theBillboard.push_back(new Status(newStatus));
 }
 
-void FansPage::deleteFriend(Member& other)
+void FansPage::deleteFriend(Member& other) noexcept(false)
 {
 	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
 
-	if (itrMy != members.end())
-	{
-		members.erase(itrMy);
-		other.dislikePage(*this);
-	}
+	members.erase(itrMy);
+	other.dislikePage(*this);
 }
 
 /********* Show functions *********/
@@ -116,16 +116,6 @@ FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
 	return *res;
 }
 
-FansPage* findFansPageByName(const string& name, list<FansPage>& allFansPage)
-{
-	list<FansPage>::iterator res = findFansPageIteratorByName(name, allFansPage);
-
-	if (res == allFansPage.end() && (*res).getName() != name) //not found
-		return nullptr;
-
-	return &(*res);
-}
-
 const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
 {
 	vector<FansPage*>::const_iterator res = findFansPageIteratorByName(name, allFansPage);
@@ -136,23 +126,6 @@ const FansPage* findFansPageByName(const std::string& name, const std::vector<Fa
 	return *res;
 }
 
-
-list<FansPage>::iterator findFansPageIteratorByName(const string& name, list<FansPage>& allFansPage)
-{
-	bool isFound = false;
-	list<FansPage>::iterator itr = allFansPage.begin();
-	list<FansPage>::iterator itrEnd = allFansPage.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr).getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
-
-	return itr;
-}
 
 vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
 {
