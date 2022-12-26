@@ -49,7 +49,7 @@ public:
 	
 private:
 	Member(const Member&);
-	void operator=(const Member&); // need to add it to all h files
+	const Member& operator=(const Member&);
 
 	void myMemberRealloc();
 	void myFansPageRealloc();

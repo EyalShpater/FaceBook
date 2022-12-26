@@ -39,6 +39,7 @@ public:
 
 private:
 	Admin(const Admin&);
+	const Admin& operator=(const Admin&);
 };
 
 #endif // __ADMIN_H

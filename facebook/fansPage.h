@@ -44,6 +44,8 @@ public:
     
 private:
     FansPage(const FansPage&);
+    const FansPage& operator=(const FansPage&);
+
     void myMembersRealloc();
     void myStatusRealloc();
 };

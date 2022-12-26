@@ -23,6 +23,7 @@ public:
 
 private:
     Status(const Status& other);
+    const Status& operator=(const Status&);
 };
 
 #endif //__STATUS_H
