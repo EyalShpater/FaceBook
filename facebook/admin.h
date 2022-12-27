@@ -18,15 +18,15 @@ public:
 	Admin() = default;
 	~Admin();
 
-	bool addFriend(const std::string& name, const Date& date);
-	bool addFansPage(const std::string& name);
-	bool addNewStatusToMember(const std::string& name, const std::string& newStatus);
-	bool addNewStatusToFansPage(const std::string& name, const std::string& newStatus);
-	bool makeFriendship(const std::string& nameFirst, const std::string& nameSecond);
-	bool addFanToPage(const std::string& member, const std::string& page);
+	void addFriend(const std::string& name, const Date& date) noexcept(false);
+	void addFansPage(const std::string& name) noexcept(false);
+	void addNewStatusToMember(const std::string& name, const std::string& newStatus) noexcept(false);
+	void addNewStatusToFansPage(const std::string& name, const std::string& newStatus) noexcept(false);
+	void makeFriendship(const std::string& nameFirst, const std::string& nameSecond) noexcept(false);
+	void addFanToPage(const std::string& member, const std::string& page) noexcept(false);
 
-	bool removeFanFromPage(const std::string& member, const std::string& page);
-	bool cancelFriendship(const std::string& nameFirst, const std::string& nameSecond);
+	void removeFanFromPage(const std::string& member, const std::string& page) noexcept(false);
+	void cancelFriendship(const std::string& nameFirst, const std::string& nameSecond) noexcept(false);
 
 	void showAllUsers() const;
 	void showAllMembers() const;
@@ -40,6 +40,9 @@ public:
 private:
 	Admin(const Admin&);
 	const Admin& operator=(const Admin&);
+
+	void myMemberRealloc();
+	void myFansPageRealloc();
 };
 
 #endif // __ADMIN_H

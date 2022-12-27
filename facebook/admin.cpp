@@ -3,6 +3,7 @@
 #include "fansPage.h"
 #include "date.h"
 #include "status.h"
+#include "userException.h"
 
 #include <iostream>
 using namespace std;
@@ -25,126 +26,93 @@ Admin::~Admin()
 
 /********* Add and Connect functions *********/
 
-bool Admin::addFriend(const string& name, const Date& date)
+void Admin::addFriend(const string& name, const Date& date) noexcept(false)
 {
 	bool isValid = findMemberByName(name, allMembers) == nullptr;
-	int logSize = allMembers.size();
-	int physSize = allMembers.capacity();
+	
+	if(!isValid)
+		throw ExistException();
 
-	if (logSize == physSize)
-		allMembers.reserve(physSize * 2);
-
-	if (isValid)
-		allMembers.push_back(new Member(name, date));
-
-	return isValid;
+	myMemberRealloc();
+	allMembers.push_back(new Member(name, date));
 }
 
-bool Admin::addFansPage(const string& name)
+void Admin::addFansPage(const string& name) noexcept(false)
 {
 	bool isValid = findFansPageByName(name, allPages) == nullptr;
+	
+	if (!isValid)
+		throw ExistException();
 
-	int logSize = allPages.size();
-	int physSize = allPages.capacity();
-
-	if (logSize == physSize)
-		allPages.reserve(physSize * 2);
-
-	if (isValid)
-		allPages.push_back(new FansPage(name));
-
-	return isValid;
+	myFansPageRealloc();
+	allPages.push_back(new FansPage(name));
 }
 
-bool Admin::addNewStatusToMember(const string& name, const string& newStatus)
+void Admin::addNewStatusToMember(const string& name, const string& newStatus) noexcept(false)
 {
-	Member* curr;
-	bool isValid;
+	Member* curr = findMemberByName(name, allMembers);
 
-	curr = findMemberByName(name, allMembers);
-	isValid = (curr != nullptr);
+	if (curr == nullptr)
+		throw NotExistException();
 
-	if (isValid)
-		curr->addStatusToBillboard(newStatus);
+	curr->addStatusToBillboard(newStatus);
 
-	return isValid;
 }
 
-bool Admin::addNewStatusToFansPage(const string& name, const string& newStatus)
+void Admin::addNewStatusToFansPage(const string& name, const string& newStatus) noexcept(false)
 {
-	FansPage* curr;
-	bool isValid;
+	FansPage* curr = findFansPageByName(name, allPages);
 
-	curr = findFansPageByName(name, allPages);
-	isValid = (curr != nullptr);
+	if (curr == nullptr)
+		throw NotExistException();
 
-	if (isValid)
-		curr->addStatus(newStatus);
-
-	return isValid;
+	curr->addStatus(newStatus);
 }
 
-bool Admin::makeFriendship(const string& nameFirst, const string& nameSecond)
+void Admin::makeFriendship(const string& nameFirst, const string& nameSecond) noexcept(false)
 {
-	bool isValid;
-
 	Member* member1 = findMemberByName(nameFirst, allMembers);
 	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	isValid = (member1 != nullptr && member2 != nullptr);
-	if (isValid)
-		*member1 += *member2;
+	if (member1 == nullptr || member2 == nullptr)
+		throw NotExistException();
 
-	return isValid;
+	*member1 += *member2;
 }
 
-bool Admin::addFanToPage(const string& member, const string& page)
+void Admin::addFanToPage(const string& member, const string& page) noexcept(false)
 {
+	Member* mCurr = findMemberByName(member, allMembers);
+	FansPage* pCurr = findFansPageByName(page, allPages);
+
+	if(mCurr == nullptr || pCurr == nullptr)
+		throw NotExistException();
 	
-	Member* mCurr;
-	FansPage* pCurr;
-	bool isValid;
-
-	mCurr = findMemberByName(member, allMembers);
-	pCurr = findFansPageByName(page, allPages);
-	isValid = (mCurr != nullptr && pCurr != nullptr);
-
-	if (isValid)
-		mCurr->likePage(*pCurr);
-
-	return isValid;
+	*pCurr += *mCurr;
 }
 
 /********* Disconnect functions *********/
 
-bool Admin::removeFanFromPage(const string& member, const string& page)
+void Admin::removeFanFromPage(const string& member, const string& page) noexcept(false)
 {
-	Member* mCurr;
-	FansPage* pCurr;
-	bool isValid;
+	Member* mCurr = findMemberByName(member, allMembers);
+	FansPage* pCurr = findFansPageByName(page, allPages);
 
-	mCurr = findMemberByName(member, allMembers);
-	pCurr = findFansPageByName(page, allPages);
-	isValid = (mCurr != nullptr && pCurr != nullptr);
+	if (mCurr == nullptr || pCurr == nullptr)
+		throw NotExistException();
 
-	if (isValid)
-		mCurr->dislikePage(*pCurr);
-
-	return isValid;
+	mCurr->dislikePage(*pCurr);
 }
 
-bool Admin::cancelFriendship(const string& nameFirst, const string& nameSecond)
+void Admin::cancelFriendship(const string& nameFirst, const string& nameSecond) noexcept(false)
 {
-	bool isValid;
-
 	Member* member1 = findMemberByName(nameFirst, allMembers);
 	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	isValid = (member1 != nullptr && member2 != nullptr);
-	if (isValid)
-		member1->cancelFriendship(*member2);
+	if (member1 == nullptr || member2 == nullptr)
+		throw NotExistException();
 
-	return isValid;
+	member1->cancelFriendship(*member2);
 }
 
 /********* Show functions *********/
@@ -242,4 +210,22 @@ bool Admin::showUpdatedFriendsStatuses(const string& name) const
 	}
 
 	return isValid;
+}
+
+void Admin::myMemberRealloc()
+{
+	int logSize = allMembers.size();
+	int physSize = allMembers.capacity();
+
+	if (logSize == physSize)
+		allMembers.reserve(physSize * 2);
+}
+
+void Admin::myFansPageRealloc()
+{
+	int logSize = allPages.size();
+	int physSize = allPages.capacity();
+
+	if (logSize == physSize)
+		allPages.reserve(physSize * 2);
 }

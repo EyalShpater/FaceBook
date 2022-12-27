@@ -20,4 +20,11 @@ class NotExistException : public UserException
 public:
 	const char* what() { return "User not exist\n"; }
 };
+
+class ExistException : public UserException
+{
+public:
+	const char* what() { return "User is already exist!\n"; }
+};
+
 #endif //USER_EXCEPTION
