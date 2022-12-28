@@ -28,15 +28,15 @@ private:
 	const ConsoleUI& operator=(const ConsoleUI&);
 
 	int printMenu() const;
-	void askForMemberDetails(std::string& name) const;
-	void askForFansPageDetails(std::string& name) const;
+	void askForMemberDetails(std::string& name) const noexcept(false);
+	void askForFansPageDetails(std::string& name) const noexcept(false);
 	int askForUserType() const;
 
 	void addFriend();
 	void addFansPage();
 	void addStatusToUser();
 	void addStatusToMember();
-	void addStatusToFansPage();
+	void addStatusToFansPage() noexcept(false);
 	void addFanToPage();
 	void friendshipBetweenTwoMembers();
 
@@ -44,8 +44,8 @@ private:
 	void removeFanFromPage();
 
 	void showAllUserStatuses() const;
-	void showAllMemberStatuses() const;
-	void showAllFansPageStatuses() const;
+	void showAllMemberStatuses() const noexcept(false);
+	void showAllFansPageStatuses() const noexcept(false);
 	void showUpdatedFriendsStatuses() const;
 	void showAllUsers() const;
 	void showUserFriends() const;

@@ -19,14 +19,18 @@ public:
 
 class NotExistException : public UserException
 {
+	string name;
 public:
-	void show() { std::cout << "User not exist\n"; }
+	NotExistException(const string& name): name(name) {}
+	void show() { std::cout << name << " is not exist\n"; }
 };
 
 class ExistException : public UserException
 {
+	string name;
 public:
-	void show() { std::cout << "User is already exist!\n"; }
+	ExistException(const string& name) : name(name) {}
+	void show() { std::cout << name << " is already exist!\n"; }
 };
 
 #endif //USER_EXCEPTION

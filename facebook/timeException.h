@@ -15,7 +15,7 @@ class WrongHourException : public TimeException
 	int hour;
 public:
 	WrongHourException(int hour) : hour(hour) {}
-	void show() const { std::cout << hour << " invalid hour value!\n"; }
+	void show() const { std::cout << hour << " is invalid hour value!\n"; }
 };
 
 class WrongMinuteException : public TimeException
@@ -23,31 +23,39 @@ class WrongMinuteException : public TimeException
 	int min;
 public:
 	WrongMinuteException(int min) : min(min) {}
-	void show() const { std::cout << min << "invalid minute value!\n"; }
+	void show() const { std::cout << min << " is invalid minute value!\n"; }
 };
 
 class WrongSecondException : public TimeException
 {
+	int sec;
 public:
-	 void show() const { std::cout << "invalid second value!\n"; }
+	WrongSecondException(int sec) :sec(sec) {}
+	void show() const { std::cout << sec << " is invalid second value!\n"; }
 };
 
 class WrongDayException : public TimeException
 {
+	int day;
 public:
-	void show() const { std::cout << "invalid day value!\n"; }
+	WrongDayException(int day) :day(day) {}
+	void show() const { std::cout << day << " is invalid day value!\n"; }
 };
 
 class WrongMonthException : public TimeException
 {
+	int month;
 public:
-	void show() const { std::cout << "invalid month value!\n"; }
+	WrongMonthException(int month) :month(month) {}
+	void show() const { std::cout << month << "invalid month value!\n"; }
 };
 
 class WrongYearException : public TimeException
 {
+	int year;
 public:
-	void show() const { std::cout << "invalid year value!\n"; }
+	WrongYearException(int year) :year(year) {}
+	void show() const { std::cout << year << "invalid year value!\n"; }
 };
 
 #endif // __TIME_EXCEPTION_H
