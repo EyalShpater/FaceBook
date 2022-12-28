@@ -39,7 +39,7 @@ Time::Time()
 void Time::setHour(int hour) noexcept(false)
 {
     if (hour < MIN_HOUR || hour > MAX_HOUR)
-        throw WrongHourException();
+        throw WrongHourException(hour);
 
     this->hour = hour;
 }
@@ -47,7 +47,7 @@ void Time::setHour(int hour) noexcept(false)
 void Time::setMinutes(int minutes) noexcept(false)
 {
     if (minutes < MIN_MIN || minutes > MAX_MIN)
-        throw WrongMinuteException();
+        throw WrongMinuteException(minutes);
 
     this->minutes = minutes;
 }

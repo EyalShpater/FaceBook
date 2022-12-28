@@ -2,47 +2,52 @@
 #define __TIME_EXCEPTION_H
 
 #include <exception>
+#include <iostream>
 
 class TimeException : public std::exception
 {
 public:
-	const char* what() const { return "General Error creating a date\n"; }
+	void show() const { std::cout << "General Error creating a date\n"; }
 };
 
 class WrongHourException : public TimeException
 {
+	int hour;
 public:
-	const char* what() const { return "invalid hour value!\n"; }
+	WrongHourException(int hour) : hour(hour) {}
+	void show() const { std::cout << hour << " invalid hour value!\n"; }
 };
 
 class WrongMinuteException : public TimeException
 {
+	int min;
 public:
-	const char* what() const { return "invalid minute value!\n"; }
+	WrongMinuteException(int min) : min(min) {}
+	void show() const { std::cout << min << "invalid minute value!\n"; }
 };
 
 class WrongSecondException : public TimeException
 {
 public:
-	const char* what() const { return "invalid second value!\n"; }
+	 void show() const { std::cout << "invalid second value!\n"; }
 };
 
 class WrongDayException : public TimeException
 {
 public:
-	const char* what() const { return "invalid day value!\n"; }
+	void show() const { std::cout << "invalid day value!\n"; }
 };
 
 class WrongMonthException : public TimeException
 {
 public:
-	const char* what() const { return "invalid month value!\n"; }
+	void show() const { std::cout << "invalid month value!\n"; }
 };
 
 class WrongYearException : public TimeException
 {
 public:
-	const char* what() const { return "invalid year value!\n"; }
+	void show() const { std::cout << "invalid year value!\n"; }
 };
 
 #endif // __TIME_EXCEPTION_H

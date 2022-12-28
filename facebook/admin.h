@@ -31,11 +31,11 @@ public:
 	void showAllUsers() const;
 	void showAllMembers() const;
 	void showAllFansPages() const;
-	bool showAllMemberFriends(const std::string& name) const;
-	bool showAllFansPageFans(const std::string& name) const;
-	bool showAllMemberStatuses(const std::string& name) const;
-	bool showAllFansPageStatuses(const std::string& name) const;
-	bool showUpdatedFriendsStatuses(const std::string& name) const;
+	void showAllMemberFriends(const std::string& name) const noexcept(false);
+	void showAllFansPageFans(const std::string& name) const noexcept(false);
+	void showAllMemberStatuses(const std::string& name) const noexcept(false);
+	void showAllFansPageStatuses(const std::string& name) const noexcept(false);
+	void showUpdatedFriendsStatuses(const std::string& name) const noexcept(false);
 
 private:
 	Admin(const Admin&);

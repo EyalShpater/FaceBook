@@ -4,6 +4,7 @@
 #include "member.h"
 #include "fansPage.h"
 #include <string>
+#include "statusException.h"
 
 #include <iostream>
 using namespace std;
@@ -144,18 +145,24 @@ int ConsoleUI::printMenu() const
 	return choice;
 }
 
-void ConsoleUI::askForMemberDetails(string& name) const
+void ConsoleUI::askForMemberDetails(string& name) const noexcept(false)
 {
 	cout << "Enter the member's name: " << endl;
-
+	
 	getline(cin, name);
+	
+	if (name == "")
+		throw EmptyNameException();
 }
 
-void ConsoleUI::askForFansPageDetails(string& name) const
+void ConsoleUI::askForFansPageDetails(string& name) const noexcept(false)
 {
 	cout << "Enter the fansPage's name: " << endl;
 
 	getline(cin, name);
+
+	if (name == "")
+		throw EmptyNameException();
 }
 
 int ConsoleUI::askForUserType() const
@@ -182,74 +189,137 @@ int ConsoleUI::askForUserType() const
 
 void ConsoleUI::addFriend()
 {
-	int day, month, year;
-	string name;
-	bool isValid;
+	try
+	{
+		int day, month, year;
+		string name;
 
-	getchar(); // clear buffer
+		getchar(); // clear buffer
 
-	system("cls");
-	cout << "******************** Add A Friend To The System ********************" << endl;
+		system("cls");
+		cout << "******************** Add A Friend To The System ********************" << endl;
 
-	cout << "Please enter the friend's name: " << endl;
-	getline(cin, name);
-	cout << "Please enter the friend's birthday: " << endl;
-	cin >> day >> month >> year;
-	
-	isValid = faceBook.addFriend(name, Date(day, month, year));
+		cout << "Please enter the friend's name: " << endl;
+		getline(cin, name);
+		cout << "Please enter the friend's birthday: " << endl;
+		cin >> day >> month >> year;
 
-	if (!isValid)
-		cout << "\nName already exist!" << endl << endl;
+		faceBook.addFriend(name, Date(day, month, year));
+	}
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (ExistException& e)
+	{
+		e.show();
+	}
+	catch (WrongDayException& d)
+	{
+		d.show();
+	}
+	catch (WrongMonthException& m)
+	{
+		m.show();
+	}
+	catch (WrongYearException& y)
+	{
+		y.show();
+	}
+	catch (UserException& u)
+	{
+		u.show();
+	}
+	catch (TimeException& t)
+	{
+		t.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 void ConsoleUI::addFansPage()
 {
-	string name;
-	bool isValid;
+	try 
+	{
+		string name;
 
-	getchar(); // clear buffer
+		getchar(); // clear buffer
 
-	system("cls");
-	cout << "******************** Add A Fans-Page To The System ********************" << endl;
+		system("cls");
+		cout << "******************** Add A Fans-Page To The System ********************" << endl;
 
-	cout << "Please enter the fans page's name: " << endl;
-	getline(cin, name);
-	
-	isValid = faceBook.addFansPage(name);
+		cout << "Please enter the fans page's name: " << endl;
+		getline(cin, name);
 
-	if (!isValid)
-		cout << "\nName already exist!" << endl << endl;
+		faceBook.addFansPage(name);
+	}
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (ExistException& e)
+	{
+		e.show();
+	}
+	catch (UserException& u)
+	{
+		u.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 void ConsoleUI::addStatusToUser()
 {
-	int type;
+	try {
+		int type;
 
-	system("cls");
-	cout << "******************** Add Status To User ********************" << endl;
+		system("cls");
+		cout << "******************** Add Status To User ********************" << endl;
 
-	type = askForUserType();
+		type = askForUserType();
 
-	switch (type)
+		switch (type)
+		{
+		case (int)eUserType::MEMBER:
+			addStatusToMember();
+			cout << endl;
+			break;
+		case (int)eUserType::FANS_PAGE:
+			addStatusToFansPage();
+			cout << endl;
+			break;
+		default:
+			break;
+		}
+	}
+	catch (NotExistException& e)
 	{
-	case (int)eUserType::MEMBER:
-		addStatusToMember();
-		cout << endl;
-		break;
-	case (int)eUserType::FANS_PAGE:
-		addStatusToFansPage();
-		cout << endl;
-		break;
-	default:
-		break;
+		e.show();
+	}
+	catch (EmptyTextException& e)
+	{
+		e.show();
+	}
+	catch (EmptyNameException& e)
+	{
+		e.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
 	}
 }
 
-void ConsoleUI::addStatusToMember() // add input check
+void ConsoleUI::addStatusToMember() noexcept(false)
 {
 	string text;
 	string name;
-	bool isValid;
 
 	getchar(); // clear buffer
 
@@ -258,17 +328,13 @@ void ConsoleUI::addStatusToMember() // add input check
 	cout << "Enter your status" << endl;
 	getline(cin, text);
 
-	isValid = faceBook.addNewStatusToMember(name, text);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl;
+	faceBook.addNewStatusToMember(name, text);
 }
 
-void ConsoleUI::addStatusToFansPage()
+void ConsoleUI::addStatusToFansPage() noexcept(false)
 {
 	string text;
 	string name;
-	bool isValid;
 
 	getchar(); // clear buffer
 
@@ -277,169 +343,222 @@ void ConsoleUI::addStatusToFansPage()
 	cout << "Enter your status" << endl;
 	getline(cin, text);
 
-	isValid = faceBook.addNewStatusToFansPage(name, text);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl;
+	faceBook.addNewStatusToFansPage(name, text);
 }
 
 void ConsoleUI::addFanToPage()
 {
-	string memberName;
-	string fansPageName;
-	bool isValid;
+	try {
+		string memberName;
+		string fansPageName;
 
-	getchar(); // clear buffer
-	system("cls");
-	cout << "******************** Add Fan To Like A Page ********************" << endl;
+		getchar(); // clear buffer
+		system("cls");
+		cout << "******************** Add Fan To Like A Page ********************" << endl;
 
-	askForMemberDetails(memberName);
-	askForFansPageDetails(fansPageName);
+		askForMemberDetails(memberName);
+		askForFansPageDetails(fansPageName);
 
-	isValid = faceBook.addFanToPage(memberName, fansPageName);
-
-	if (!isValid)
-		cout << endl << "Unable to add " << memberName << " to " << fansPageName << endl << endl;
+		faceBook.addFanToPage(memberName, fansPageName);
+	}
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (NotExistException& u)
+	{
+		u.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 void ConsoleUI::friendshipBetweenTwoMembers()
 {
-	string firstMemberName;
-	string secondMemberName;
-	bool isValid;
+	try {
+		string firstMemberName;
+		string secondMemberName;
 
-	getchar(); // clear buffer
+		getchar(); // clear buffer
 
-	system("cls");
-	cout << "******************** Friendship Link ********************" << endl;
+		system("cls");
+		cout << "******************** Friendship Link ********************" << endl;
 
-	askForMemberDetails(firstMemberName);
-	askForMemberDetails(secondMemberName);
+		askForMemberDetails(firstMemberName);
+		askForMemberDetails(secondMemberName);
 
-	isValid = faceBook.makeFriendship(firstMemberName, secondMemberName);
+		faceBook.makeFriendship(firstMemberName, secondMemberName);
+	}
 
-	if (!isValid)
-		cout << "\nUnable to make " << firstMemberName << " and "
-		<< secondMemberName << " friends :(" << endl << endl;
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (NotExistException& u)
+	{
+		u.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 /********* Disconnect functions *********/
 
 void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 {
-	string firstMemberName;
-	string secondMemberName;
-	bool isValid;
+	try {
+		string firstMemberName;
+		string secondMemberName;
 
-	getchar(); // clear buffer
+		getchar(); // clear buffer
 
-	system("cls");
-	cout << "******************** Cancel Friendship ********************" << endl;
+		system("cls");
+		cout << "******************** Cancel Friendship ********************" << endl;
 
-	askForMemberDetails(firstMemberName);
-	askForMemberDetails(secondMemberName);
+		askForMemberDetails(firstMemberName);
+		askForMemberDetails(secondMemberName);
 
-	isValid = faceBook.cancelFriendship(firstMemberName, secondMemberName);
+		faceBook.cancelFriendship(firstMemberName, secondMemberName);
+	}
 
-	if (!isValid)
-		cout << "\nUnable to cancel friendship between " << firstMemberName << " and "
-		<< secondMemberName << endl << endl;
-
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (NotExistException& u)
+	{
+		u.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 void ConsoleUI::removeFanFromPage()
 {
-	string memberName;
-	string fansPageName;
-	bool isValid;
+	try {
+		string memberName;
+		string fansPageName;
 
-	getchar(); // clear buffer
+		getchar(); // clear buffer
 
-	system("cls");
-	cout << "******************** Remove A Friend From A Page ********************" << endl;
+		system("cls");
+		cout << "******************** Remove A Friend From A Page ********************" << endl;
 
-	askForMemberDetails(memberName);
-	askForFansPageDetails(fansPageName);
+		askForMemberDetails(memberName);
+		askForFansPageDetails(fansPageName);
 
-	isValid = faceBook.removeFanFromPage(memberName, fansPageName);
+		faceBook.removeFanFromPage(memberName, fansPageName);
+	}
 
-	if (!isValid)
-		cout << endl << "Unable to remove " << memberName << " from " << fansPageName << endl << endl;
+	catch (EmptyNameException& n)
+	{
+		n.show();
+	}
+	catch (NotExistException& u)
+	{
+		u.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 /********* Show functions *********/
 
 void ConsoleUI::showAllUserStatuses() const
 {
-	int type;
-	
-	system("cls");
-	cout << "******************** Display All The Statuses Of A User ********************" << endl;
+	try {
+		int type;
 
-	type = askForUserType();
+		system("cls");
+		cout << "******************** Display All The Statuses Of A User ********************" << endl;
 
-	getchar(); // clear buffer
+		type = askForUserType();
 
-	switch (type)
+		getchar(); // clear buffer
+
+		switch (type)
+		{
+		case (int)eUserType::MEMBER:
+			showAllMemberStatuses();
+			break;
+		case (int)eUserType::FANS_PAGE:
+			showAllFansPageStatuses();
+			break;
+		default:
+			break;
+		}
+	}
+	catch (NotExistException& n)
 	{
-	case (int)eUserType::MEMBER:
-		showAllMemberStatuses();
-		break;
-	case (int)eUserType::FANS_PAGE:
-		showAllFansPageStatuses();
-		break;
-	default:
-		break;
+		n.show();
+	}
+	catch (EmptyNameException& e)
+	{
+		e.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
 	}
 }
 
-void ConsoleUI::showAllMemberStatuses() const
+void ConsoleUI::showAllMemberStatuses() const noexcept(false)
 {
 	string name;
-	bool isValid;
 
 	askForMemberDetails(name);
-	
 	cout << endl;
 
-	isValid = faceBook.showAllMemberStatuses(name);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl << endl;
+	faceBook.showAllMemberStatuses(name);
 }
 
-void ConsoleUI::showAllFansPageStatuses() const
+void ConsoleUI::showAllFansPageStatuses() const noexcept(false)
 {
 	string name;
-	bool isValid;
 
 	askForFansPageDetails(name);
-
 	cout << endl;
 
-	isValid = faceBook.showAllFansPageStatuses(name);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl << endl;
+	faceBook.showAllFansPageStatuses(name);
 }
 
 void ConsoleUI::showUpdatedFriendsStatuses() const
 {
-	string name;
-	bool isValid;
-	
-	getchar(); // clear buffer
+	try 
+	{
+		string name;
+		bool isValid;
 
-	system("cls");
-	cout << "******************** Display The 10 Most Recent Statuses ********************" << endl;
+		getchar(); // clear buffer
 
-	askForMemberDetails(name);
+		system("cls");
+		cout << "******************** Display The 10 Most Recent Statuses ********************" << endl;
 
-	cout << endl;
-	isValid = faceBook.showUpdatedFriendsStatuses(name);
+		askForMemberDetails(name);
 
-	if (!isValid)
-		cout << endl << name << " not found!" << endl << endl;
+		cout << endl;
+		faceBook.showUpdatedFriendsStatuses(name);
+	}
+	catch (NotExistException& n)
+	{
+		n.show();
+	}
+	catch (EmptyNameException& e)
+	{
+		e.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
+	}
 }
 
 void ConsoleUI::showAllUsers() const
@@ -453,55 +572,59 @@ void ConsoleUI::showAllUsers() const
 
 void ConsoleUI::showUserFriends() const
 {
-	int type;
-
-	system("cls");
-	cout << "******************** Show All User's Friends ********************" << endl;
-	
-	type = askForUserType();
-
-	getchar(); // clear buffer
-
-	switch (type)
+	try
 	{
-	case (int)eUserType::MEMBER:
-		showMemberFriends();
-		break;
-	case (int)eUserType::FANS_PAGE:
-		showFansPageFans();
-		break;
-	default:
-		break;
+		int type;
+
+		system("cls");
+		cout << "******************** Show All User's Friends ********************" << endl;
+
+		type = askForUserType();
+
+		getchar(); // clear buffer
+
+		switch (type)
+		{
+		case (int)eUserType::MEMBER:
+			showMemberFriends();
+			break;
+		case (int)eUserType::FANS_PAGE:
+			showFansPageFans();
+			break;
+		default:
+			break;
+		}
+	}
+	catch (NotExistException& n)
+	{
+		n.show();
+	}
+	catch (EmptyNameException& e)
+	{
+		e.show();
+	}
+	catch (...)
+	{
+		cout << "General Error" << endl;
 	}
 }
 
 void ConsoleUI::showMemberFriends() const
 {	
 	string name;
-	bool isValid;
 
 	askForMemberDetails(name);
-
 	cout << endl;
 
-	isValid = faceBook.showAllMemberFriends(name);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl << endl;
-
+	faceBook.showAllMemberFriends(name);
 }
 
 void ConsoleUI::showFansPageFans() const
 {
 	string name;
-	bool isValid;
 
 	askForFansPageDetails(name);
-
 	cout << endl;
 
-	isValid = faceBook.showAllFansPageFans(name);
-
-	if (!isValid)
-		cout << endl << name << " not found!" << endl << endl;
+	faceBook.showAllFansPageFans(name);
 }

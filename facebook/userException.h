@@ -2,29 +2,31 @@
 #define __USER_EXCEPTION_H
 
 #include <exception>
+#include <iostream>
+
 
 class UserException : public std::exception
 {
 public:
-	const char* what() { return "User general error\n"; }
+	void show() { std::cout << "User general error\n"; }
 };
 
 class EmptyNameException : public UserException
 {
 public:
-	const char* what() { return "User can not be empty\n"; }
+	void show() { std::cout << "User name can not be empty\n"; }
 };
 
 class NotExistException : public UserException
 {
 public:
-	const char* what() { return "User not exist\n"; }
+	void show() { std::cout << "User not exist\n"; }
 };
 
 class ExistException : public UserException
 {
 public:
-	const char* what() { return "User is already exist!\n"; }
+	void show() { std::cout << "User is already exist!\n"; }
 };
 
 #endif //USER_EXCEPTION

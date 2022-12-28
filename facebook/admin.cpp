@@ -56,7 +56,6 @@ void Admin::addNewStatusToMember(const string& name, const string& newStatus) no
 		throw NotExistException();
 
 	curr->addStatusToBillboard(newStatus);
-
 }
 
 void Admin::addNewStatusToFansPage(const string& name, const string& newStatus) noexcept(false)
@@ -142,74 +141,54 @@ void Admin::showAllFansPages() const
 		cout << *(*itr) << endl << endl;
 }
 
-bool Admin::showAllMemberFriends(const string& name) const
+void Admin::showAllMemberFriends(const string& name) const noexcept(false)
 {
-	bool isValid = false;
 	const Member* member = findMemberByName(name, allMembers);
 
-	if (member != nullptr)
-	{
-		member->showAllFriends();
-		isValid = true;
-	}
-		
-	return isValid;
+	if (member == nullptr)
+		throw NotExistException();
+
+	member->showAllFriends();
 }
 
-bool Admin::showAllFansPageFans(const string& name) const
+void Admin::showAllFansPageFans(const string& name) const noexcept(false)
 {
-	bool isValid = false;
-	const FansPage* fansPage = findFansPageByName(name, allPages);
-	
-	if (fansPage != nullptr)
-	{
-		fansPage->showAllFans();
-		isValid = true;
-	}
-		
-	return isValid;
-}
-
-bool Admin::showAllMemberStatuses(const string& name) const
-{
-	bool isValid = false;
-	const Member* member = findMemberByName(name, allMembers);
-
-	if (member != nullptr)
-	{
-		member->showAllStatus();
-		isValid = true;
-	}
-
-	return isValid;
-}
-
-bool Admin::showAllFansPageStatuses(const string& name) const
-{
-	bool isValid = false;
 	const FansPage* fansPage = findFansPageByName(name, allPages);
 
-	if (fansPage != nullptr)
-	{
-		fansPage->showAllStatus();
-		isValid = true;
-	}
+	if (fansPage == nullptr)
+		throw NotExistException();
 
-	return isValid;
+	fansPage->showAllFans();
 }
 
-bool Admin::showUpdatedFriendsStatuses(const string& name) const
+void Admin::showAllMemberStatuses(const string& name) const noexcept(false)
 {
-	bool isValid = false;
+	const Member* member = findMemberByName(name, allMembers);
+
+	if (member == nullptr)
+		throw NotExistException();
+
+	member->showAllStatus();
+}
+
+void Admin::showAllFansPageStatuses(const string& name) const
+{
+	const FansPage* fansPage = findFansPageByName(name, allPages);
+
+	if (fansPage == nullptr)
+		throw NotExistException();
+
+	fansPage->showAllStatus();
+}
+
+void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
+{
 	const Member* member = findMemberByName(name, allMembers);
 
 	if (member != nullptr)
-	{
-		member->showUpdatedFriendsStatuses();
-		isValid = true;
-	}
+		throw NotExistException();
 
-	return isValid;
+	member->showUpdatedFriendsStatuses();
 }
 
 void Admin::myMemberRealloc()

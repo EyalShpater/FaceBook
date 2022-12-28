@@ -10,7 +10,6 @@ int main()
     try 
     {
         ConsoleUI out;
-
         out.addDefaultMembersToFacebook();
         out.menu();
 

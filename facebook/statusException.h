@@ -2,15 +2,18 @@
 #define __STATUS_EXCEPTION_H
 
 #include <exception>
+#include <iostream>
 
 class StatusException : public std::exception
 {
-	const char* what() { return "General Error creating a Status\n"; }
+public:
+	void show() const { std::cout << "General Error creating a Status\n"; }
 };
 
 class EmptyTextException : public StatusException
 {
-	const char* what() { return "status can not be empty!\n"; }
+public:
+	void show() const { std::cout << "status can not be empty!\n"; }
 };
 
 #endif
