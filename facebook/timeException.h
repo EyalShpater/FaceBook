@@ -7,7 +7,7 @@
 class TimeException : public std::exception
 {
 public:
-	void show() const { std::cout << "General Error creating a date\n"; }
+	void show() const { std::cout << "Date general error\n"; }
 };
 
 class WrongHourException : public TimeException

@@ -53,10 +53,17 @@ void FansPage::addStatus(const string& newStatus) noexcept(false)
 
 void FansPage::deleteFriend(Member& other) noexcept(false)
 {
-	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
+	try
+	{
+		vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
 
-	members.erase(itrMy);
-	other.dislikePage(*this);
+		members.erase(itrMy);
+		other.dislikePage(*this);
+	}
+	catch (NotExistException&)
+	{
+		return;
+	}
 }
 
 /********* Show functions *********/

@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 
-
 class UserException : public std::exception
 {
 public:
@@ -15,7 +14,7 @@ public:
 class EmptyNameException : public UserException
 {
 public:
-	void show() { std::cout << "User name can not be empty\n"; }
+	void show() { std::cout << "User name can not be empty!\n"; }
 };
 
 class NotExistException : public UserException
@@ -23,7 +22,7 @@ class NotExistException : public UserException
 	std::string name;
 public:
 	NotExistException(const std::string& name): name(name) {}
-	void show() { std::cout << name << " is not exist\n"; }
+	void show() { std::cout << name << " is not exist!\n"; }
 };
 
 class ExistException : public UserException

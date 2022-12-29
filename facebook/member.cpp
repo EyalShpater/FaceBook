@@ -150,16 +150,23 @@ void Member::addStatusToBillboard(const string& text) noexcept(false)
 	theBillboard.push_back(new Status(text));
 }
 
-void Member::cancelFriendship(Member& other) noexcept(false) // throw?
+void Member::cancelFriendship(Member& other) noexcept(false)
 {
-	vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
-	vector<Member*>::iterator itrOther = findMemberIteratorByName(name, other.members);
+	try
+	{
+		vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
+		vector<Member*>::iterator itrOther = findMemberIteratorByName(name, other.members);
 
-	if ((*itrMy)->getName() == other.getName())
-		members.erase(itrMy);
+		if ((*itrMy)->getName() == other.getName())
+			members.erase(itrMy);
 
-	if ((*itrOther)->getName() == name)
-		other.members.erase(itrOther);
+		if ((*itrOther)->getName() == name)
+			other.members.erase(itrOther);
+	}
+	catch (NotExistException&)
+	{
+		return;
+	}
 }
 
 void Member::likePage(FansPage& newPage)
@@ -174,12 +181,19 @@ void Member::likePage(FansPage& newPage)
 
 void Member::dislikePage(FansPage& other) noexcept(false) // throw?
 {
-	vector<FansPage*>::iterator itr = findFansPageIteratorByName(other.getName(), fansPages);
-
-	if (itr != fansPages.end())
+	try
 	{
-		fansPages.erase(itr);
-		other.deleteFriend(*this);
+		vector<FansPage*>::iterator itr = findFansPageIteratorByName(other.getName(), fansPages);
+
+		if (itr != fansPages.end())
+		{
+			fansPages.erase(itr);
+			other.deleteFriend(*this);
+		}
+	}
+	catch (NotExistException&)
+	{
+		return;
 	}
 }
 
@@ -191,7 +205,7 @@ void Member::showAllStatus() const
 	vector<Status*>::const_iterator itrEnd = theBillboard.end();
 	
 	for (; itr != itrEnd; ++itr)
-		cout << *(*itr) << endl;
+		cout << *(*itr) << endl << endl;
 }
 
 void Member::showLatest10thStatus() const

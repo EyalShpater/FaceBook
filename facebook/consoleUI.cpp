@@ -73,40 +73,40 @@ void ConsoleUI::menu()
 
 		switch (choice)
 		{
-		case ADD_MEMBER:
+		case (int)eChoice::ADD_MEMBER:
 			addFriend();
 			break;
-		case ADD_PAGE:
+		case (int)eChoice::ADD_PAGE:
 			addFansPage();
 			break;
-		case ADD_STATUS:
+		case (int)eChoice::ADD_STATUS:
 			addStatusToUser();
 			break;
-		case PRINT_STATUSES:
+		case (int)eChoice::PRINT_STATUSES:
 			showAllUserStatuses();
 			break;
-		case PRINT_TEN_STATUSES:
+		case (int)eChoice::PRINT_TEN_STATUSES:
 			showUpdatedFriendsStatuses();
 			break;
-		case FRIENDSHIP:
+		case (int)eChoice::FRIENDSHIP:
 			friendshipBetweenTwoMembers();
 			break;
-		case CANCEL_FRIENDSHIP:
+		case (int)eChoice::CANCEL_FRIENDSHIP:
 			cancelFriendshipBetweenTwoMembers();
 			break;
-		case ADD_FAN_TO_PAGE:
+		case (int)eChoice::ADD_FAN_TO_PAGE:
 			addFanToPage();
 			break;
-		case REMOVE_FAN_FROM_PAGE:
+		case (int)eChoice::REMOVE_FAN_FROM_PAGE:
 			removeFanFromPage();
 			break;
-		case PRINT_FACEBOOK_USERS:
+		case (int)eChoice::PRINT_FACEBOOK_USERS:
 			showAllUsers();
 			break;
-		case PRINT_FRIENDS_OF_USER:
+		case (int)eChoice::PRINT_FRIENDS_OF_USER:
 			showUserFriends();
 			break;
-		case EXIT:
+		case (int)eChoice::EXIT:
 			cout << "\nbye!\n";
 			break;
 		default:
@@ -114,7 +114,7 @@ void ConsoleUI::menu()
 			break;
 		}
 
-	} while (choice != eChoice::EXIT);
+	} while (choice != (int)eChoice::EXIT);
 
 }
 
@@ -126,18 +126,18 @@ int ConsoleUI::printMenu() const
 
 	cout << "~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~" << endl;
 	cout << "Please enter your choice from the menu:" << endl
-		<< ADD_MEMBER << "- Add member" << endl
-		<< ADD_PAGE << "- Add fans page" << endl
-		<< ADD_STATUS << "- Add status to member/fans page" << endl
-		<< PRINT_STATUSES << "- Display all the statuses of a member/fans page" << endl
-		<< PRINT_TEN_STATUSES << "- Display the 10 most recent statuses of a certain member's friends" << endl
-		<< FRIENDSHIP << "- Friendship link between two friends" << endl
-		<< CANCEL_FRIENDSHIP << "- Cancellation of membership between two members" << endl
-		<< ADD_FAN_TO_PAGE << "- Add a fan to a fans-page" << endl
-		<< REMOVE_FAN_FROM_PAGE << "- Remove a fan from a page" << endl
-		<< PRINT_FACEBOOK_USERS << "- Display all members registered to faceBook" << endl
-		<< PRINT_FRIENDS_OF_USER << "- Show all the friends of a certain member/page" << endl
-		<< EXIT << "- Exit" << endl;
+		<< (int)eChoice::ADD_MEMBER << "- Add member" << endl
+		<< (int)eChoice::ADD_PAGE << "- Add fans page" << endl
+		<< (int)eChoice::ADD_STATUS << "- Add status to member/fans page" << endl
+		<< (int)eChoice::PRINT_STATUSES << "- Display all the statuses of a member/fans page" << endl
+		<< (int)eChoice::PRINT_TEN_STATUSES << "- Display the 10 most recent statuses of a certain member's friends" << endl
+		<< (int)eChoice::FRIENDSHIP << "- Friendship link between two friends" << endl
+		<< (int)eChoice::CANCEL_FRIENDSHIP << "- Cancellation of membership between two members" << endl
+		<< (int)eChoice::ADD_FAN_TO_PAGE << "- Add a fan to a fans-page" << endl
+		<< (int)eChoice::REMOVE_FAN_FROM_PAGE << "- Remove a fan from a page" << endl
+		<< (int)eChoice::PRINT_FACEBOOK_USERS << "- Display all members registered to faceBook" << endl
+		<< (int)eChoice::PRINT_FRIENDS_OF_USER << "- Show all the friends of a certain member/page" << endl
+		<< (int)eChoice::EXIT << "- Exit" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
 	cin >> choice;
@@ -180,7 +180,7 @@ int ConsoleUI::askForUserType() const
 		cin >> type;
 
 		flag = true;
-	} while (type != eUserType::MEMBER && type != eUserType::FANS_PAGE);
+	} while (type != (int)eUserType::MEMBER && type != (int)eUserType::FANS_PAGE);
 
 	return type;
 }
@@ -276,7 +276,8 @@ void ConsoleUI::addFansPage()
 
 void ConsoleUI::addStatusToUser()
 {
-	try {
+	try 
+	{
 		int type;
 
 		system("cls");
@@ -377,7 +378,8 @@ void ConsoleUI::addFanToPage()
 
 void ConsoleUI::friendshipBetweenTwoMembers()
 {
-	try {
+	try 
+	{
 		string firstMemberName;
 		string secondMemberName;
 
@@ -410,7 +412,8 @@ void ConsoleUI::friendshipBetweenTwoMembers()
 
 void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 {
-	try {
+	try 
+	{
 		string firstMemberName;
 		string secondMemberName;
 
@@ -474,7 +477,8 @@ void ConsoleUI::removeFanFromPage()
 
 void ConsoleUI::showAllUserStatuses() const
 {
-	try {
+	try 
+	{
 		int type;
 
 		system("cls");
@@ -535,7 +539,6 @@ void ConsoleUI::showUpdatedFriendsStatuses() const
 	try 
 	{
 		string name;
-		bool isValid;
 
 		getchar(); // clear buffer
 
@@ -543,8 +546,8 @@ void ConsoleUI::showUpdatedFriendsStatuses() const
 		cout << "******************** Display The 10 Most Recent Statuses ********************" << endl;
 
 		askForMemberDetails(name);
-
 		cout << endl;
+
 		faceBook.showUpdatedFriendsStatuses(name);
 	}
 	catch (NotExistException& n)

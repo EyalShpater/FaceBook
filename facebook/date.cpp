@@ -11,7 +11,7 @@ using namespace std;
 const int MIN_DAY = 1;
 const int MAX_DAY = 31;
 const int MIN_MONTH = 1;
-const int MAX_MONTH = 31;
+const int MAX_MONTH = 12;
 const int MIN_YEAR = 1900;
 const int MAX_YEAR = 2022;
 const int CTIME_START_YEAR_COUNT = 1900;

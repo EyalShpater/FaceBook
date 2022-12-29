@@ -5,7 +5,6 @@
 #include "date.h"
 
 #include <vector>
-#include <list>
 #include <string>
 
 class FansPage;
@@ -37,9 +36,9 @@ public:
 	friend const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers);
 
 	void addStatusToBillboard(const std::string& text) noexcept(false);
-	void cancelFriendship(Member& other) noexcept(false); // throw?
+	void cancelFriendship(Member& other) noexcept(false);
 	void likePage(FansPage& newPage); 
-	void dislikePage(FansPage& other) noexcept(false); // throw?
+	void dislikePage(FansPage& other) noexcept(false);
 
 	void showAllStatus() const; 
 	void showLatest10thStatus() const;

@@ -3,11 +3,12 @@
 
 #include "admin.h"
 #include <string>
+
 class ConsoleUI
 {
 public:
-	enum eUserType { MEMBER, FANS_PAGE };
-	enum eChoice
+	enum class eUserType { MEMBER, FANS_PAGE };
+	enum class eChoice
 	{
 		ADD_MEMBER = 1, ADD_PAGE, ADD_STATUS, PRINT_STATUSES, PRINT_TEN_STATUSES,
 		FRIENDSHIP, CANCEL_FRIENDSHIP, ADD_FAN_TO_PAGE, REMOVE_FAN_FROM_PAGE,

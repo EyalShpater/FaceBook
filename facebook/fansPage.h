@@ -1,11 +1,11 @@
 #ifndef __FANSPAGE_H
 #define __FANSPAGE_H
 
-#include <vector>
-#include <string>
-#include <list>
 #include "status.h"
 #include "userException.h"
+
+#include <vector>
+#include <string>
 
 class Member;
 
@@ -29,14 +29,13 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
 
     void addStatus(const std::string& newStatus) noexcept(false);
-    void deleteFriend(Member& other) noexcept(false); //throw?
+    void deleteFriend(Member& other) noexcept(false); 
 
     void showAllStatus() const;
     void showAllFans() const;
 
     friend std::vector<FansPage*>::iterator findFansPageIteratorByName(const std::string& name, std::vector<FansPage*>& allFansPage) noexcept(false);
     friend std::vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& name, const std::vector<FansPage*>& allFansPage) noexcept(false);
-
     friend FansPage* findFansPageByName(const std::string& name, std::vector<FansPage*>& allFansPage);
     friend const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage);
     

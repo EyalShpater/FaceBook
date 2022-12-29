@@ -196,7 +196,7 @@ void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
 {
 	const Member* member = findMemberByName(name, allMembers);
 
-	if (member != nullptr)
+	if (member == nullptr)
 		throw NotExistException(name);
 
 	member->showUpdatedFriendsStatuses();
