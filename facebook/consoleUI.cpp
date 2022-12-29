@@ -3,16 +3,13 @@
 #include "consoleUI.h"
 #include "member.h"
 #include "fansPage.h"
-#include <string>
-#include "statusException.h"
 
+#include "statusException.h"
+#include "timeException.h"
+
+#include <string>
 #include <iostream>
 using namespace std;
-
-/********* Const variables declaration *********/
-
-const int MAX_NAME_LEN = 50;
-const int MAX_STATUS_LEN = 300;
 
 /********* Main functions *********/
 
@@ -349,7 +346,8 @@ void ConsoleUI::addStatusToFansPage() noexcept(false)
 
 void ConsoleUI::addFanToPage()
 {
-	try {
+	try 
+	{
 		string memberName;
 		string fansPageName;
 

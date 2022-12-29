@@ -8,7 +8,7 @@
 #include <iostream>
 using namespace std;
 
-/********* Distructor **********/
+/********* Destructor **********/
 
 Admin::~Admin()
 {
@@ -201,6 +201,8 @@ void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
 
 	member->showUpdatedFriendsStatuses();
 }
+
+/********* Utilities functions *********/
 
 void Admin::myMemberRealloc()
 {

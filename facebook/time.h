@@ -2,7 +2,6 @@
 #define __TIME_H
 
 #include <iostream>
-#include "timeException.h"
 
 class Time 
 {

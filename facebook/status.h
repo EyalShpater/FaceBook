@@ -1,12 +1,12 @@
 #ifndef __STATUS_H
 #define __STATUS_H
 
-#include <iostream>
-#include <string>
-
 #include "date.h"
 #include "time.h"
 #include "statusException.h"
+
+#include <iostream>
+#include <string>
 
 class Status 
 {

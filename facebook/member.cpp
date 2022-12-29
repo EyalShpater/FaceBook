@@ -32,7 +32,7 @@ Member::~Member()
 		delete* itr;
 }
 
-/**********************/
+/********* Operators *********/
 const Member& Member::operator+=(Member& newFriend)
 {
 	if (&newFriend != this)
@@ -71,7 +71,7 @@ ostream& operator<<(ostream& os, const Member& s)
 	return os;
 }
 
-/***********/
+/********* Find functions *********/
 vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Member*>& allMembers) noexcept(false)
 {
 	bool isFound = false;
@@ -179,7 +179,7 @@ void Member::likePage(FansPage& newPage)
 	}
 }
 
-void Member::dislikePage(FansPage& other) noexcept(false) // throw?
+void Member::dislikePage(FansPage& other) noexcept(false)
 {
 	try
 	{
@@ -257,7 +257,7 @@ void Member::showAllFansPage() const
 	cout << "********************" << endl;
 }
 
-/****************/
+/********* Utilites functions *********/
 void Member::myMemberRealloc()
 {
 	int logSize = members.size();

@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-/**********************************************/
+/********* Destructors *********/
 FansPage::~FansPage()
 {
 	vector<Status*>::iterator itr = theBillboard.begin();
@@ -16,7 +16,7 @@ FansPage::~FansPage()
 		delete *itr;
 }
 
-/**********************************************/
+/********* Operators *********/
 
 bool FansPage::operator>(const FansPage& other)const
 {
@@ -96,6 +96,8 @@ ostream& operator<<(ostream& os, const FansPage& f)
 	return os;
 }
 
+/********* Find functions *********/
+
 vector<FansPage*>::iterator findFansPageIteratorByName(const string& name, vector<FansPage*>& allFansPage) noexcept(false)
 {
 	bool isFound = false;
@@ -147,7 +149,6 @@ FansPage* findFansPageByName(const string& name, vector<FansPage*>& allFansPage)
 	{
 		return nullptr;
 	}
-
 }
 
 const FansPage* findFansPageByName(const std::string& name, const std::vector<FansPage*>& allFansPage)
@@ -163,7 +164,7 @@ const FansPage* findFansPageByName(const std::string& name, const std::vector<Fa
 	}	
 }
 
-/**********************/
+/********* Utilities functions *********/
 
 void FansPage::myMembersRealloc()
 {
