@@ -3,6 +3,7 @@
 
 #include <exception>
 #include <iostream>
+#include <string>
 
 
 class UserException : public std::exception
@@ -19,17 +20,17 @@ public:
 
 class NotExistException : public UserException
 {
-	string name;
+	std::string name;
 public:
-	NotExistException(const string& name): name(name) {}
+	NotExistException(const std::string& name): name(name) {}
 	void show() { std::cout << name << " is not exist\n"; }
 };
 
 class ExistException : public UserException
 {
-	string name;
+	std::string name;
 public:
-	ExistException(const string& name) : name(name) {}
+	ExistException(const std::string& name) : name(name) {}
 	void show() { std::cout << name << " is already exist!\n"; }
 };
 

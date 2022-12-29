@@ -104,7 +104,7 @@ vector<FansPage*>::iterator findFansPageIteratorByName(const string& name, vecto
 	}
 
 	if (!isFound)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	return itr;
 }
@@ -124,7 +124,7 @@ vector<FansPage*>::const_iterator findFansPageIteratorByName(const std::string& 
 	}
 
 	if (!isFound)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	return itr;
 }

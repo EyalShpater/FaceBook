@@ -87,7 +87,7 @@ vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Me
 	}
 
 	if (!isFound)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	return itr;
 }
@@ -107,7 +107,7 @@ vector<Member*>::const_iterator findMemberIteratorByName(const string& name, con
 	}
 
 	if (!isFound)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	return itr;
 }

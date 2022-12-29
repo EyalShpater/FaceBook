@@ -1,6 +1,7 @@
 #pragma warning (disable:4996)
 
 #include "time.h"
+#include "timeException.h"
 
 #include <ctime>
 #include <iostream>
@@ -55,7 +56,7 @@ void Time::setMinutes(int minutes) noexcept(false)
 void Time::setSeconds(int seconds) noexcept(false) 
 {
     if (seconds < MIN_SEC || seconds > MAX_SEC)
-        throw WrongSecondException();
+        throw WrongSecondException(seconds);
 
     this->seconds = seconds;
 }

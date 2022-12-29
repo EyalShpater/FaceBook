@@ -30,7 +30,7 @@ class WrongSecondException : public TimeException
 {
 	int sec;
 public:
-	WrongSecondException(int sec) :sec(sec) {}
+	WrongSecondException(int sec) : sec(sec) {}
 	void show() const { std::cout << sec << " is invalid second value!\n"; }
 };
 
@@ -38,7 +38,7 @@ class WrongDayException : public TimeException
 {
 	int day;
 public:
-	WrongDayException(int day) :day(day) {}
+	WrongDayException(int day) : day(day) {}
 	void show() const { std::cout << day << " is invalid day value!\n"; }
 };
 
@@ -46,16 +46,20 @@ class WrongMonthException : public TimeException
 {
 	int month;
 public:
-	WrongMonthException(int month) :month(month) {}
-	void show() const { std::cout << month << "invalid month value!\n"; }
+	WrongMonthException(int month) : month(month) {}
+	void show() const { std::cout << month << " is invalid month value!\n"; }
 };
 
 class WrongYearException : public TimeException
 {
-	int year;
+	int year, lowRange, upperRange;
 public:
-	WrongYearException(int year) :year(year) {}
-	void show() const { std::cout << year << "invalid year value!\n"; }
+	WrongYearException(int year, int low, int upper) : year(year), lowRange(low), upperRange(upper) {}
+	void show() const 
+	{ 
+		std::cout << year << " is invalid year value!\n"; 
+		std::cout << "year value must be between " << lowRange << " to " << upperRange << "\n";
+	}
 };
 
 #endif // __TIME_EXCEPTION_H

@@ -31,7 +31,7 @@ void Admin::addFriend(const string& name, const Date& date) noexcept(false)
 	bool isValid = findMemberByName(name, allMembers) == nullptr;
 	
 	if(!isValid)
-		throw ExistException();
+		throw ExistException(name);
 
 	myMemberRealloc();
 	allMembers.push_back(new Member(name, date));
@@ -42,7 +42,7 @@ void Admin::addFansPage(const string& name) noexcept(false)
 	bool isValid = findFansPageByName(name, allPages) == nullptr;
 	
 	if (!isValid)
-		throw ExistException();
+		throw ExistException(name);
 
 	myFansPageRealloc();
 	allPages.push_back(new FansPage(name));
@@ -53,7 +53,7 @@ void Admin::addNewStatusToMember(const string& name, const string& newStatus) no
 	Member* curr = findMemberByName(name, allMembers);
 
 	if (curr == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	curr->addStatusToBillboard(newStatus);
 }
@@ -63,7 +63,7 @@ void Admin::addNewStatusToFansPage(const string& name, const string& newStatus) 
 	FansPage* curr = findFansPageByName(name, allPages);
 
 	if (curr == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	curr->addStatus(newStatus);
 }
@@ -73,8 +73,11 @@ void Admin::makeFriendship(const string& nameFirst, const string& nameSecond) no
 	Member* member1 = findMemberByName(nameFirst, allMembers);
 	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	if (member1 == nullptr || member2 == nullptr)
-		throw NotExistException();
+	if (member1 == nullptr) 
+		throw NotExistException(nameFirst);
+
+	if (member2 == nullptr)
+		throw NotExistException(nameSecond);
 
 	*member1 += *member2;
 }
@@ -84,8 +87,10 @@ void Admin::addFanToPage(const string& member, const string& page) noexcept(fals
 	Member* mCurr = findMemberByName(member, allMembers);
 	FansPage* pCurr = findFansPageByName(page, allPages);
 
-	if(mCurr == nullptr || pCurr == nullptr)
-		throw NotExistException();
+	if(mCurr == nullptr)
+		throw NotExistException(member);
+	if(pCurr == nullptr)
+		throw NotExistException(page);
 	
 	*pCurr += *mCurr;
 }
@@ -97,8 +102,11 @@ void Admin::removeFanFromPage(const string& member, const string& page) noexcept
 	Member* mCurr = findMemberByName(member, allMembers);
 	FansPage* pCurr = findFansPageByName(page, allPages);
 
-	if (mCurr == nullptr || pCurr == nullptr)
-		throw NotExistException();
+	if (mCurr == nullptr) 
+		throw NotExistException(member);
+
+	if (pCurr == nullptr)
+		throw NotExistException(page);
 
 	mCurr->dislikePage(*pCurr);
 }
@@ -108,8 +116,11 @@ void Admin::cancelFriendship(const string& nameFirst, const string& nameSecond) 
 	Member* member1 = findMemberByName(nameFirst, allMembers);
 	Member* member2 = findMemberByName(nameSecond, allMembers);
 
-	if (member1 == nullptr || member2 == nullptr)
-		throw NotExistException();
+	if (member1 == nullptr) 
+		throw NotExistException(nameFirst);
+
+	if (member2 == nullptr)
+		throw NotExistException(nameSecond);
 
 	member1->cancelFriendship(*member2);
 }
@@ -146,7 +157,7 @@ void Admin::showAllMemberFriends(const string& name) const noexcept(false)
 	const Member* member = findMemberByName(name, allMembers);
 
 	if (member == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	member->showAllFriends();
 }
@@ -156,7 +167,7 @@ void Admin::showAllFansPageFans(const string& name) const noexcept(false)
 	const FansPage* fansPage = findFansPageByName(name, allPages);
 
 	if (fansPage == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	fansPage->showAllFans();
 }
@@ -166,7 +177,7 @@ void Admin::showAllMemberStatuses(const string& name) const noexcept(false)
 	const Member* member = findMemberByName(name, allMembers);
 
 	if (member == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	member->showAllStatus();
 }
@@ -176,7 +187,7 @@ void Admin::showAllFansPageStatuses(const string& name) const
 	const FansPage* fansPage = findFansPageByName(name, allPages);
 
 	if (fansPage == nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	fansPage->showAllStatus();
 }
@@ -186,7 +197,7 @@ void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
 	const Member* member = findMemberByName(name, allMembers);
 
 	if (member != nullptr)
-		throw NotExistException();
+		throw NotExistException(name);
 
 	member->showUpdatedFriendsStatuses();
 }

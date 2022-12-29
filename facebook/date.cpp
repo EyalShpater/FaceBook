@@ -12,8 +12,8 @@ const int MIN_DAY = 1;
 const int MAX_DAY = 31;
 const int MIN_MONTH = 1;
 const int MAX_MONTH = 31;
-const int MIN_YEAR = 1000;
-const int MAX_YEAR = 3000;
+const int MIN_YEAR = 1900;
+const int MAX_YEAR = 2022;
 const int CTIME_START_YEAR_COUNT = 1900;
 const int CTIME_START_MONTH_COUNT = 1;
 
@@ -41,7 +41,7 @@ Date::Date(int day, int month, int year) noexcept(false)
 void Date::setDay(int day) noexcept(false)
 {
     if (day < MIN_DAY || day > MAX_DAY)
-        throw WrongDayException();
+        throw WrongDayException(day);
 
     this->day = day;
 }
@@ -49,7 +49,7 @@ void Date::setDay(int day) noexcept(false)
 void Date::setMonth(int month) noexcept(false)
 {
     if (month < MIN_MONTH || month > MAX_MONTH)
-        throw WrongMonthException();
+        throw WrongMonthException(month);
 
     this->month = month;
 }
@@ -57,7 +57,7 @@ void Date::setMonth(int month) noexcept(false)
 void Date::setYear(int year) noexcept(false)
 {
     if (year < MIN_YEAR || year > MAX_YEAR)
-        throw WrongYearException();
+        throw WrongYearException(year, MIN_YEAR, MAX_YEAR);
 
     this->year = year;
 }
