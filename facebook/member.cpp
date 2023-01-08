@@ -147,7 +147,7 @@ void Member::addStatusToBillboard(const string& text) noexcept(false)
 		throw EmptyTextException();
 
 	myStatusRealloc();
-	theBillboard.push_back(new Status(text));
+//	theBillboard.push_back(new Status(text));
 }
 
 void Member::cancelFriendship(Member& other) noexcept(false)
@@ -237,7 +237,7 @@ void Member::showAllFriends() const
 	vector<Member*>::const_iterator itr = members.begin();
 	vector<Member*>::const_iterator itrEnd = members.end();
 
-	cout << "**********" << name << "'s Friends **********" << endl << endl;
+	cout << "********** " << name << "'s Friends **********" << endl << endl;
 
 	for (; itr != itrEnd; ++itr)
 		cout << *(*itr) << endl << endl;

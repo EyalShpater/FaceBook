@@ -143,22 +143,28 @@
     <ClCompile Include="consoleUI.cpp" />
     <ClCompile Include="date.cpp" />
     <ClCompile Include="fansPage.cpp" />
+    <ClCompile Include="imageStatus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member.cpp" />
     <ClCompile Include="status.cpp" />
+    <ClCompile Include="textStatus.cpp" />
     <ClCompile Include="time.cpp" />
+    <ClCompile Include="videoStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
     <ClInclude Include="consoleUI.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="fansPage.h" />
+    <ClInclude Include="imageStatus.h" />
     <ClInclude Include="member.h" />
+    <ClInclude Include="textStatus.h" />
     <ClInclude Include="userException.h" />
     <ClInclude Include="status.h" />
     <ClInclude Include="statusException.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="timeException.h" />
+    <ClInclude Include="videoStatus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

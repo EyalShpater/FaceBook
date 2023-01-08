@@ -60,12 +60,12 @@ void Admin::addNewStatusToMember(const string& name, const string& newStatus) no
 
 void Admin::addNewStatusToFansPage(const string& name, const string& newStatus) noexcept(false)
 {
-	FansPage* curr = findFansPageByName(name, allPages);
+	/*FansPage* curr = findFansPageByName(name, allPages);
 
 	if (curr == nullptr)
 		throw NotExistException(name);
 
-	curr->addStatus(newStatus);
+	curr->addStatus(newStatus); */
 }
 
 void Admin::makeFriendship(const string& nameFirst, const string& nameSecond) noexcept(false)

@@ -6,26 +6,33 @@
 #include "statusException.h"
 
 #include <iostream>
-#include <string>
 
 class Status 
 {
+public:
+    enum class eColor { BLACK_AND_WHITE, COLORS };
+    enum class eSoftware { SIMPLE, PLAYBACK };
+    enum class eStatusType { TEXT, IMAGE, VIDEO };
+
+protected:
     const Date theDate;
     const Time theTime;
-    std::string text;
+    eColor color;
+    eSoftware software;
 
 public:
-    Status(const std::string& text) noexcept(false) 
-        : text(text) { if (text == "") throw EmptyTextException(); }
+    Status(eColor color, eSoftware software) : color(color), software(software) {}
+    ~Status() {}
+
+    const char* openWith() const { return (software == Status::eSoftware::SIMPLE ? "simple" : "playback"); }
+
+    virtual bool operator==(const Status& other) const = 0;
+    virtual bool operator!=(const Status& other)const = 0;
 
     friend std::ostream& operator<<(std::ostream& os, const Status& s);
 
-    bool operator==(const Status& other)const;
-    bool operator!=(const Status& other)const;
-
-private:
-    Status(const Status& other);
-    const Status& operator=(const Status&);
+protected:
+    virtual void toOs(std::ostream& os) const {}
 };
 
 #endif //__STATUS_H
