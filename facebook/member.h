@@ -35,7 +35,7 @@ public:
 	friend Member* findMemberByName(const std::string& name, std::vector<Member*> &allMembers);
 	friend const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers);
 
-	void addStatusToBillboard(const std::string& text) noexcept(false);
+	void addStatusToBillboard(const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
 	void cancelFriendship(Member& other) noexcept(false);
 	void likePage(FansPage& newPage); 
 	void dislikePage(FansPage& other) noexcept(false);

@@ -2,8 +2,10 @@
 
 #include "fansPage.h"
 #include "member.h"
-#include "textStatus.h"
+#include "status.h"
 #include "imageStatus.h"
+#include "videoStatus.h"
+
 #include <iostream>
 using namespace std;
 
@@ -43,30 +45,25 @@ const FansPage& FansPage::operator+=(Member& newFriend)
 
 /********* Fans-Page's functions *********/
 
-void FansPage::addStatus(const string& newStatus, Status::eStatusType type) noexcept(false)
+void FansPage::addStatus(const string& newStatus, int type, const string& filePath) noexcept(false)
 {
-	/*
-	if (newStatus == "")
-		throw EmptyTextException();
-
 	myStatusRealloc();
-	//theBillboard.push_back(new Status(newStatus));
 
 	switch (type)
 	{
-	case Status::eStatusType::TEXT: 
-		theBillboard.push_back(new TextStatus(newStatus));
+	case (int)Status::eStatusType::TEXT:  
+		theBillboard.push_back(new Status(newStatus));
 		break;
-	case Status::eStatusType::IMAGE:
-		theBillboard.push_back(new ImageStatus(newStatus));
+	case (int)Status::eStatusType::IMAGE:
+		theBillboard.push_back(new ImageStatus(newStatus, filePath));
 		break;
-	case Status::eStatusType::VIDEO:
-		theBillboard.push_back(new VideoStatus(newStatus));
+	case (int)Status::eStatusType::VIDEO:
+		theBillboard.push_back(new VideoStatus(newStatus, filePath));
 		break;
 
 	default:
 		throw StatusException();
-	}*/
+	}
 }
 
 void FansPage::deleteFriend(Member& other) noexcept(false)

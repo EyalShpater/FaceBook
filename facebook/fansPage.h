@@ -28,7 +28,7 @@ public:
     const FansPage& operator+=(Member& newFriend);
     friend std::ostream& operator<<(std::ostream& os, const FansPage& f);
 
-    void addStatus(const std::string& newStatus, Status::eStatusType type) noexcept(false);
+    void addStatus(const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
     void deleteFriend(Member& other) noexcept(false); 
 
     void showAllStatus() const;

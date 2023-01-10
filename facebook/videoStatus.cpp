@@ -15,23 +15,14 @@ void VideoStatus::toOs(ostream& os) const
 
 /******** Operators *******/
 
-bool VideoStatus::operator==(const VideoStatus& other)const
-{
-	return filePath == other.filePath;
-}
-
-bool VideoStatus::operator!=(const VideoStatus& other)const
-{
-	return !(filePath == other.filePath);
-}
-
 bool VideoStatus::operator==(const Status& other) const
 {
-	const VideoStatus* temp = dynamic_cast<const VideoStatus*>(&other);
+	if (Status::operator!=(other))
+		return false;
 
+	const VideoStatus* temp = dynamic_cast<const VideoStatus*>(&other);
 	if (temp)
 		return filePath == temp->filePath;
-
 	return false;
 }
 

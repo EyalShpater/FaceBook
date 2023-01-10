@@ -6,6 +6,7 @@
 #include "statusException.h"
 
 #include <iostream>
+#include <string>
 
 class Status 
 {
@@ -19,15 +20,16 @@ protected:
     const Time theTime;
     eColor color;
     eSoftware software;
+    std::string text;
 
 public:
-    Status(eColor color, eSoftware software) : color(color), software(software) {}
-    ~Status() {}
+    Status(const std::string& text, eColor color = eColor::BLACK_AND_WHITE, eSoftware software = eSoftware::SIMPLE) noexcept(false);
+    virtual ~Status() {} // support polymorphism
 
     const char* openWith() const { return (software == Status::eSoftware::SIMPLE ? "simple" : "playback"); }
 
-    virtual bool operator==(const Status& other) const = 0;
-    virtual bool operator!=(const Status& other)const = 0;
+    virtual bool operator==(const Status& other) const;
+    virtual bool operator!=(const Status& other) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Status& s);
 

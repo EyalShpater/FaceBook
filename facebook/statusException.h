@@ -7,13 +7,13 @@
 class StatusException : public std::exception
 {
 public:
-	void show() const { std::cout << "General Error creating a Status\n"; }
+	virtual void show() const { std::cout << "General Error creating a Status\n"; }
 };
 
 class EmptyTextException : public StatusException
 {
 public:
-	void show() const { std::cout << "status can not be empty!\n"; }
+	virtual void show() const override { std::cout << "status can not be empty!\n"; }
 };
 
 #endif

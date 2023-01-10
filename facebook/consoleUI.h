@@ -32,6 +32,7 @@ private:
 	void askForMemberDetails(std::string& name) const noexcept(false);
 	void askForFansPageDetails(std::string& name) const noexcept(false);
 	int askForUserType() const;
+	int askForStatusType() const;
 
 	void addFriend();
 	void addFansPage();

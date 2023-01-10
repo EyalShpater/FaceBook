@@ -36,29 +36,29 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFanToPage("Nitzan Sde Or", "Computer Science");
 	faceBook.addFanToPage("Yehudit Ravitz", "Coming From Love");
 
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir");
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!");
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3");
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToMember("Eyal Shpater", "Hello it's me.");
-	faceBook.addNewStatusToMember("Eyal Shpater", "I was wondering...");
-	faceBook.addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?");
+	faceBook.addNewStatusToMember("Eyal Shpater", "Hello it's me.", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Eyal Shpater", "I was wondering...", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la");
-	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala");
+	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.");
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?");
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl");
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToFansPage("MTA College", "Welcome all new students!");
-	faceBook.addNewStatusToFansPage("MTA College", "If you want to pass you have to get at least 60 points.");
+	faceBook.addNewStatusToFansPage("MTA College", "Welcome all new students!", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToFansPage("MTA College", "If you want to pass you have to get at least 60 points.", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToFansPage("Coming From Love", "Peace and Love");
-	faceBook.addNewStatusToFansPage("Coming From Love", "Maybe one day she would taste the taste of love...");
+	faceBook.addNewStatusToFansPage("Coming From Love", "Peace and Love", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToFansPage("Coming From Love", "Maybe one day she would taste the taste of love...", (int)Status::eStatusType::TEXT);
 
-	faceBook.addNewStatusToFansPage("Computer Science", "C Plus Plus");
-	faceBook.addNewStatusToFansPage("Computer Science", "Java Script");
+	faceBook.addNewStatusToFansPage("Computer Science", "C Plus Plus", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToFansPage("Computer Science", "Java Script", (int)Status::eStatusType::TEXT);
 }
 
 void ConsoleUI::menu()
@@ -182,6 +182,27 @@ int ConsoleUI::askForUserType() const
 	return type;
 }
 
+int ConsoleUI::askForStatusType() const
+{
+	int type;
+	bool flag = false;
+
+	do
+	{
+		if (flag)
+			cout << "Invalid input! try again" << endl;
+
+		cout << "Press:\n" << (int)Status::eStatusType::TEXT << " - to add a text status" << endl
+			<< (int)Status::eStatusType::IMAGE << " - to add an image" << endl
+			<< (int)Status::eStatusType::VIDEO << " - to add a video" << endl;
+		cin >> type;
+
+		flag = true;
+	} while (type != (int)Status::eStatusType::TEXT && type != (int)Status::eStatusType::IMAGE && type != (int)Status::eStatusType::VIDEO);
+
+	return type;
+}
+
 /********* Add and Connect functions *********/
 
 void ConsoleUI::addFriend()
@@ -203,29 +224,10 @@ void ConsoleUI::addFriend()
 
 		faceBook.addFriend(name, Date(day, month, year));
 	}
-	catch (EmptyNameException& n)
-	{
-		n.show();
-	}
-	catch (ExistException& e)
+
+	catch (UserException& e)
 	{
 		e.show();
-	}
-	catch (WrongDayException& d)
-	{
-		d.show();
-	}
-	catch (WrongMonthException& m)
-	{
-		m.show();
-	}
-	catch (WrongYearException& y)
-	{
-		y.show();
-	}
-	catch (UserException& u)
-	{
-		u.show();
 	}
 	catch (TimeException& t)
 	{
@@ -253,14 +255,7 @@ void ConsoleUI::addFansPage()
 
 		faceBook.addFansPage(name);
 	}
-	catch (EmptyNameException& n)
-	{
-		n.show();
-	}
-	catch (ExistException& e)
-	{
-		e.show();
-	}
+
 	catch (UserException& u)
 	{
 		u.show();
@@ -275,14 +270,14 @@ void ConsoleUI::addStatusToUser()
 {
 	try 
 	{
-		int type;
+		int userType;
 
 		system("cls");
 		cout << "******************** Add Status To User ********************" << endl;
 
-		type = askForUserType();
+		userType = askForUserType();
 
-		switch (type)
+		switch (userType)
 		{
 		case (int)eUserType::MEMBER:
 			addStatusToMember();
@@ -296,15 +291,12 @@ void ConsoleUI::addStatusToUser()
 			break;
 		}
 	}
-	catch (NotExistException& e)
+
+	catch (StatusException& e)
 	{
 		e.show();
 	}
-	catch (EmptyTextException& e)
-	{
-		e.show();
-	}
-	catch (EmptyNameException& e)
+	catch (UserException& e)
 	{
 		e.show();
 	}
@@ -316,32 +308,53 @@ void ConsoleUI::addStatusToUser()
 
 void ConsoleUI::addStatusToMember() noexcept(false)
 {
+	int statusType;
 	string text;
+	string filePath = "";
 	string name;
 
 	getchar(); // clear buffer
 
 	askForMemberDetails(name);
+	statusType = askForStatusType();
+
+	getchar(); // clear buffer
 
 	cout << "Enter your status" << endl;
 	getline(cin, text);
 
-	faceBook.addNewStatusToMember(name, text);
+	if (statusType != (int)Status::eStatusType::TEXT)
+	{
+		cout << "Enter the  " << (statusType == (int)Status::eStatusType::IMAGE ? "image" : "video") << " name" << endl;
+		getline(cin, filePath);
+	}
+	faceBook.addNewStatusToMember(name, text, statusType, filePath);
 }
 
 void ConsoleUI::addStatusToFansPage() noexcept(false)
 {
+	int statusType;
 	string text;
+	string filePath = "";
 	string name;
 
 	getchar(); // clear buffer
 
 	askForFansPageDetails(name);
+	statusType = askForStatusType();
+	
+	getchar(); // clear buffer
 
 	cout << "Enter your status" << endl;
 	getline(cin, text);
 
-	faceBook.addNewStatusToFansPage(name, text);
+	if (statusType != (int)Status::eStatusType::TEXT)
+	{
+		cout << "Enter the  " << (statusType == (int)Status::eStatusType::IMAGE ? "image" : "video") << " name" << endl;
+		getline(cin, filePath);
+	}
+
+	faceBook.addNewStatusToFansPage(name, text, statusType, filePath);
 }
 
 void ConsoleUI::addFanToPage()
@@ -360,13 +373,9 @@ void ConsoleUI::addFanToPage()
 
 		faceBook.addFanToPage(memberName, fansPageName);
 	}
-	catch (EmptyNameException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (NotExistException& u)
-	{
-		u.show();
 	}
 	catch (...)
 	{
@@ -392,13 +401,9 @@ void ConsoleUI::friendshipBetweenTwoMembers()
 		faceBook.makeFriendship(firstMemberName, secondMemberName);
 	}
 
-	catch (EmptyNameException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (NotExistException& u)
-	{
-		u.show();
 	}
 	catch (...)
 	{
@@ -426,13 +431,9 @@ void ConsoleUI::cancelFriendshipBetweenTwoMembers()
 		faceBook.cancelFriendship(firstMemberName, secondMemberName);
 	}
 
-	catch (EmptyNameException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (NotExistException& u)
-	{
-		u.show();
 	}
 	catch (...)
 	{
@@ -457,13 +458,9 @@ void ConsoleUI::removeFanFromPage()
 		faceBook.removeFanFromPage(memberName, fansPageName);
 	}
 
-	catch (EmptyNameException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (NotExistException& u)
-	{
-		u.show();
 	}
 	catch (...)
 	{
@@ -498,13 +495,9 @@ void ConsoleUI::showAllUserStatuses() const
 			break;
 		}
 	}
-	catch (NotExistException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (EmptyNameException& e)
-	{
-		e.show();
 	}
 	catch (...)
 	{
@@ -548,13 +541,9 @@ void ConsoleUI::showUpdatedFriendsStatuses() const
 
 		faceBook.showUpdatedFriendsStatuses(name);
 	}
-	catch (NotExistException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (EmptyNameException& e)
-	{
-		e.show();
 	}
 	catch (...)
 	{
@@ -596,13 +585,9 @@ void ConsoleUI::showUserFriends() const
 			break;
 		}
 	}
-	catch (NotExistException& n)
+	catch (UserException& n)
 	{
 		n.show();
-	}
-	catch (EmptyNameException& e)
-	{
-		e.show();
 	}
 	catch (...)
 	{

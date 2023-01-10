@@ -35,9 +35,6 @@
     <ClCompile Include="consoleUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="textStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imageStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="userException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imageStatus.h">

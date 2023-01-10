@@ -3,6 +3,8 @@
 #include "member.h"
 #include "fansPage.h"
 #include "status.h"
+#include "imageStatus.h"
+#include "videoStatus.h"
 #include "userException.h"
 
 #include <iostream>
@@ -141,13 +143,24 @@ const Member* findMemberByName(const std::string& name, const std::vector<Member
 
 /********* Member's functions *********/
 
-void Member::addStatusToBillboard(const string& text) noexcept(false)
+void Member::addStatusToBillboard(const string& newStatus, int type, const string& filePath) noexcept(false)
 {
-	if (text == "")
-		throw EmptyTextException();
-
 	myStatusRealloc();
-//	theBillboard.push_back(new Status(text));
+
+	switch (type)
+	{
+	case (int)Status::eStatusType::TEXT:
+		theBillboard.push_back(new Status(newStatus));
+		break;
+	case (int)Status::eStatusType::IMAGE:
+		theBillboard.push_back(new ImageStatus(newStatus, filePath));
+		break;
+	case (int)Status::eStatusType::VIDEO:
+		theBillboard.push_back(new VideoStatus(newStatus, filePath));
+		break;
+	default:
+		throw StatusException();
+	}
 }
 
 void Member::cancelFriendship(Member& other) noexcept(false)

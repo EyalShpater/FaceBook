@@ -16,23 +16,14 @@ void ImageStatus::toOs(ostream& os) const
 
 /******** Operators *******/
 
-bool ImageStatus::operator==(const ImageStatus& other)const
-{
-	return filePath == other.filePath;
-}
-
-bool ImageStatus::operator!=(const ImageStatus& other)const
-{
-	return !(filePath == other.filePath);
-}
-
 bool ImageStatus::operator==(const Status& other) const
 {
-	const ImageStatus* temp = dynamic_cast<const ImageStatus*>(&other);
+	if (Status::operator!=(other))
+		return false;
 
+	const ImageStatus* temp = dynamic_cast<const ImageStatus*>(&other);
 	if (temp)
 		return filePath == temp->filePath;
-
 	return false;
 }
 

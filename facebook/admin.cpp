@@ -48,24 +48,24 @@ void Admin::addFansPage(const string& name) noexcept(false)
 	allPages.push_back(new FansPage(name));
 }
 
-void Admin::addNewStatusToMember(const string& name, const string& newStatus) noexcept(false)
+void Admin::addNewStatusToMember(const string& name, const string& newStatus, int type, const string& filePath) noexcept(false)
 {
 	Member* curr = findMemberByName(name, allMembers);
 
 	if (curr == nullptr)
 		throw NotExistException(name);
 
-	curr->addStatusToBillboard(newStatus);
+	curr->addStatusToBillboard(newStatus, type, filePath);
 }
 
-void Admin::addNewStatusToFansPage(const string& name, const string& newStatus) noexcept(false)
+void Admin::addNewStatusToFansPage(const string& name, const string& newStatus, int type, const string& filePath) noexcept(false)
 {
-	/*FansPage* curr = findFansPageByName(name, allPages);
+	FansPage* curr = findFansPageByName(name, allPages);
 
 	if (curr == nullptr)
 		throw NotExistException(name);
 
-	curr->addStatus(newStatus); */
+	curr->addStatus(newStatus, type, filePath); 
 }
 
 void Admin::makeFriendship(const string& nameFirst, const string& nameSecond) noexcept(false)

@@ -20,8 +20,8 @@ public:
 
 	void addFriend(const std::string& name, const Date& date) noexcept(false);
 	void addFansPage(const std::string& name) noexcept(false);
-	void addNewStatusToMember(const std::string& name, const std::string& newStatus) noexcept(false);
-	void addNewStatusToFansPage(const std::string& name, const std::string& newStatus) noexcept(false);
+	void addNewStatusToMember(const std::string& name, const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
+	void addNewStatusToFansPage(const std::string& name, const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
 	void makeFriendship(const std::string& nameFirst, const std::string& nameSecond) noexcept(false);
 	void addFanToPage(const std::string& member, const std::string& page) noexcept(false);
 
