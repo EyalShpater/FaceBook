@@ -148,6 +148,7 @@
     <ClCompile Include="member.cpp" />
     <ClCompile Include="status.cpp" />
     <ClCompile Include="time.cpp" />
+    <ClCompile Include="user.cpp" />
     <ClCompile Include="videoStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="fansPage.h" />
     <ClInclude Include="imageStatus.h" />
     <ClInclude Include="member.h" />
+    <ClInclude Include="user.h" />
     <ClInclude Include="userException.h" />
     <ClInclude Include="status.h" />
     <ClInclude Include="statusException.h" />

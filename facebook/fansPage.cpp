@@ -104,12 +104,6 @@ void FansPage::showAllFans() const
 
 	cout << "********************" << endl;
 }
-ostream& operator<<(ostream& os, const FansPage& f)
-{
-	os << "The fans page name: " << f.name;
-
-	return os;
-}
 
 /********* Find functions *********/
 
