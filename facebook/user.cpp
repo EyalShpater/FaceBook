@@ -10,9 +10,19 @@ using namespace std;
 
 const int DELETE_CALSS = 6;
 
+/********* Contructors *********/
 User::User(const string& name) : name(name)
 {
-    if (name == "") throw EmptyNameException();
+	if (name == "") throw EmptyNameException();
+}
+
+User::~User()
+{
+	vector<Status*>::iterator itr = theBillboard.begin();
+	vector<Status*>::iterator itrEnd = theBillboard.end();
+
+	for (; itr != itrEnd; ++itr)
+		delete* itr;
 }
 
 ostream& operator<<(std::ostream& os, const User& u)
@@ -54,12 +64,12 @@ void User::showAllStatus() const
 		cout << *(*itr) << endl << endl;
 }
 
-void User::showAllConnectedMembers() const
+void User::showAllConnectedMembers() const 
 {
-	vector<Member*>::const_iterator itr = connectedMembers.begin();
-	vector<Member*>::const_iterator itrEnd = connectedMembers.end();
+	/*vector<Member*>::const_iterator*/auto itr = connectedMembers.begin();
+	/*vector<Member*>::const_iterator*/auto itrEnd = connectedMembers.end();
 
-	cout << "**********" << name << " 'connectd members **********" << endl << endl;
+	cout << "**********" << name << "'s connectd members **********" << endl << endl;
 
 	for (; itr != itrEnd; ++itr)
 		cout << *(*itr) << endl << endl;
@@ -68,7 +78,7 @@ void User::showAllConnectedMembers() const
 }
 
 /********* Find functions *********/
-
+/*
 vector<User*>::iterator findUserIteratorByName(const string& name, vector<User*>& allUsers) noexcept(false)
 {
 	bool isFound = false;
@@ -134,6 +144,9 @@ const User* findUserByName(const std::string& name, const std::vector<User*>& al
 		return nullptr;
 	}
 }
+*/
+
+/********* Utilities functions *********/
 
 void User::myMembersRealloc()
 {

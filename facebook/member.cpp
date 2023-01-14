@@ -17,7 +17,7 @@ const int DEFAULT_NUM_OF_STATUS_TO_SHOW = 10;
 
 /********* Constructors *********/
 
-Member::Member(const string& name, const Date& birthDate) noexcept(false) : dateOfBirth(birthDate)
+Member::Member(const string& name, const Date& birthDate) noexcept(false) : User(name), dateOfBirth(birthDate)
 {
 	if (name == "")
 		throw EmptyNameException();
@@ -25,30 +25,21 @@ Member::Member(const string& name, const Date& birthDate) noexcept(false) : date
 	this->name = name;
 }
 
-Member::~Member()
-{
-	vector<Status*>::iterator itr = theBillboard.begin();
-	vector<Status*>::iterator itrEnd = theBillboard.end();
-
-	for (; itr != itrEnd; ++itr)
-		delete* itr;
-}
-
 /********* Operators *********/
 const Member& Member::operator+=(Member& newFriend)
 {
 	if (&newFriend != this)
 	{
-		if (findMemberByName(newFriend.getName(), members) == nullptr)
+		if (findUserByName(newFriend.getName(), (vector<User*>&)connectedMembers) == nullptr)
 		{
-			myMemberRealloc();
-			members.push_back(&newFriend);
+			myMembersRealloc();
+			connectedMembers.push_back(&newFriend);
 		}
 
-		if (findMemberByName(name, newFriend.members) == nullptr)
+		if (findUserByName(name, (vector<User*>&)newFriend.connectedMembers) == nullptr)
 		{
-			newFriend.myMemberRealloc();
-			newFriend.members.push_back(this);
+			newFriend.myMembersRealloc();
+			newFriend.connectedMembers.push_back(this);
 		}
 	}
 
@@ -57,124 +48,28 @@ const Member& Member::operator+=(Member& newFriend)
 
 bool Member::operator>(const Member& other)const
 {
-	return (members.size() > other.members.size());
+	return (connectedMembers.size() > other.connectedMembers.size());
 }
 
 bool Member::operator>(const FansPage& other) const
 {
-	return members.size() > other.getNumOfFans();
-}
-
-ostream& operator<<(ostream& os, const Member& s)
-{
-	os << "Member's name: " << s.name << endl;
-	os << "Member's birthday: " << s.dateOfBirth;
-
-	return os;
-}
-
-/********* Find functions *********/
-vector<Member*>::iterator findMemberIteratorByName(const string& name, vector<Member*>& allMembers) noexcept(false)
-{
-	bool isFound = false;
-	vector<Member*>::iterator itr = allMembers.begin();
-	vector<Member*>::iterator itrEnd = allMembers.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr)->getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
-
-	if (!isFound)
-		throw NotExistException(name);
-
-	return itr;
-}
-
-vector<Member*>::const_iterator findMemberIteratorByName(const string& name, const vector<Member*>& allMembers) noexcept(false)
-{
-	bool isFound = false;
-	vector<Member*>::const_iterator itr = allMembers.begin();
-	vector<Member*>::const_iterator itrEnd = allMembers.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr)->getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
-
-	if (!isFound)
-		throw NotExistException(name);
-
-	return itr;
-}
-
-Member* findMemberByName(const string& name, vector<Member*>& allMembers)
-{
-	try
-	{
-		vector<Member*>::iterator res = findMemberIteratorByName(name, allMembers);
-		return *res;
-	}
-	catch (NotExistException&)
-	{
-		return nullptr;
-	}
-}
-
-const Member* findMemberByName(const std::string& name, const std::vector<Member*>& allMembers) 
-{
-	try
-	{
-		vector<Member*>::const_iterator res = findMemberIteratorByName(name, allMembers);
-
-		return *res;
-	}
-	catch (NotExistException&)
-	{
-		return nullptr;
-	}
+	return connectedMembers.size() > other.getNumOfConnectedMembers();
 }
 
 /********* Member's functions *********/
-
-void Member::addStatusToBillboard(const string& newStatus, int type, const string& filePath) noexcept(false)
-{
-	myStatusRealloc();
-
-	switch (type)
-	{
-	case (int)Status::eStatusType::TEXT:
-		theBillboard.push_back(new Status(newStatus));
-		break;
-	case (int)Status::eStatusType::IMAGE:
-		theBillboard.push_back(new ImageStatus(newStatus, filePath));
-		break;
-	case (int)Status::eStatusType::VIDEO:
-		theBillboard.push_back(new VideoStatus(newStatus, filePath));
-		break;
-	default:
-		throw StatusException();
-	}
-}
 
 void Member::cancelFriendship(Member& other) noexcept(false)
 {
 	try
 	{
-		vector<Member*>::iterator itrMy = findMemberIteratorByName(other.getName(), members);
-		vector<Member*>::iterator itrOther = findMemberIteratorByName(name, other.members);
+		vector<Member*>::iterator itrMy = findUserIteratorByName(other.getName(), connectedMembers);
+		vector<Member*>::iterator itrOther = findUserIteratorByName(name, other.connectedMembers);
 
 		if ((*itrMy)->getName() == other.getName())
-			members.erase(itrMy);
-
+			connectedMembers.erase(itrMy);
+		  
 		if ((*itrOther)->getName() == name)
-			other.members.erase(itrOther);
+			other.connectedMembers.erase(itrOther);
 	}
 	catch (NotExistException&)
 	{
@@ -184,7 +79,7 @@ void Member::cancelFriendship(Member& other) noexcept(false)
 
 void Member::likePage(FansPage& newPage)
 {
-	if (findFansPageByName(newPage.getName(), fansPages) == nullptr)
+	if (findUserByName(newPage.getName(), fansPages) == nullptr)
 	{
 		myFansPageRealloc();
 		fansPages.push_back(&newPage);
@@ -196,7 +91,7 @@ void Member::dislikePage(FansPage& other) noexcept(false)
 {
 	try
 	{
-		vector<FansPage*>::iterator itr = findFansPageIteratorByName(other.getName(), fansPages);
+		/*vector<User*>::iterator*/ auto itr = findUserIteratorByName(other.getName(), fansPages);
 
 		if (itr != fansPages.end())
 		{
@@ -212,15 +107,6 @@ void Member::dislikePage(FansPage& other) noexcept(false)
 
 /********* Show functions *********/
 
-void Member::showAllStatus() const
-{
-	vector<Status*>::const_iterator itr = theBillboard.begin();
-	vector<Status*>::const_iterator itrEnd = theBillboard.end();
-	
-	for (; itr != itrEnd; ++itr)
-		cout << *(*itr) << endl << endl;
-}
-
 void Member::showLatest10thStatus() const
 {
 	vector<Status*>::const_iterator itr = theBillboard.begin();
@@ -233,8 +119,8 @@ void Member::showLatest10thStatus() const
 
 void Member::showUpdatedFriendsStatuses() const
 {
-	vector<Member*>::const_iterator itr = members.begin();
-	vector<Member*>::const_iterator itrEnd = members.end();
+	vector<Member*>::const_iterator itr = connectedMembers.begin();
+	vector<Member*>::const_iterator itrEnd = connectedMembers.end();
 
 	for (;itr!=itrEnd; ++itr)
 	{
@@ -243,19 +129,6 @@ void Member::showUpdatedFriendsStatuses() const
 		cout << "..................................." << endl << endl;
 		(*itr)->showLatest10thStatus();
 	}
-}
-
-void Member::showAllFriends() const
-{
-	vector<Member*>::const_iterator itr = members.begin();
-	vector<Member*>::const_iterator itrEnd = members.end();
-
-	cout << "********** " << name << "'s Friends **********" << endl << endl;
-
-	for (; itr != itrEnd; ++itr)
-		cout << *(*itr) << endl << endl;
-
-	cout << "********************" << endl;
 }
 
 void Member::showAllFansPage() const
@@ -271,13 +144,9 @@ void Member::showAllFansPage() const
 }
 
 /********* Utilites functions *********/
-void Member::myMemberRealloc()
+void Member::toOs(std::ostream& os) const
 {
-	int logSize = members.size();
-	int physSize = members.capacity();
-
-	if (logSize == physSize)
-		members.reserve(physSize * 2);
+	os << endl << "Member's birthday: " << dateOfBirth;
 }
 
 void Member::myFansPageRealloc()
@@ -287,13 +156,4 @@ void Member::myFansPageRealloc()
 
 	if (logSize == physSize)
 		fansPages.reserve(physSize * 2);
-}
-
-void Member::myStatusRealloc()
-{
-	int logSize = theBillboard.size();
-	int physSize = theBillboard.capacity();
-
-	if (logSize == physSize)
-		theBillboard.reserve(physSize * 2);
 }

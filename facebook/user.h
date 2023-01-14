@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 
+#include "userException.h"
+
 class Status;
 class Member;
 
@@ -16,8 +18,8 @@ protected:
     std::vector<Member*> connectedMembers;
 
 public:
-    User(const std::string& name) noexcept(false); 
-    virtual ~User() {}
+    User(const std::string& name) noexcept(false);
+    virtual ~User();
 
     const std::string& getName() const { return name; }
     int getNumOfConnectedMembers() const { return connectedMembers.size(); }
@@ -29,11 +31,46 @@ public:
     void showAllStatus() const;
     void showAllConnectedMembers() const;
 
+    template<class T>
+    friend auto findUserIteratorByName(const std::string& name, T& allUsers) noexcept(false)
+    {
+        bool isFound = false;
+        auto itr = allUsers.begin();
+        auto itrEnd = allUsers.end();
+
+        while (itr != itrEnd && !isFound)
+        {
+            if ((*itr)->getName() == name)
+                isFound = true;
+            else
+                ++itr;
+        }
+
+        if (!isFound)
+            throw NotExistException(name);
+
+        return itr;
+    }
+
+    template <class T>
+    friend void* findUserByName(const std::string& name, T& allUsers)
+    {
+        try
+        {
+            auto res = findUserIteratorByName(name, allUsers);
+            return *res;
+        }
+        catch (NotExistException&)
+        {
+            return nullptr;
+        }
+    }
+    /*
     friend std::vector<User*>::iterator findUserIteratorByName(const std::string& name, std::vector<User*>& allUsers) noexcept(false);
     friend std::vector<User*>::const_iterator findUserIteratorByName(const std::string& name, const std::vector<User*>& allUsers) noexcept(false);
     friend User* findUserByName(const std::string& name, std::vector<User*>& allUsers);
     friend const User* findUserByName(const std::string& name, const std::vector<User*>& allUsers);
-
+    */
 protected:
     User(const User&); // block cpoy c'tor
     User& operator=(const User&); // block operator =
@@ -44,3 +81,5 @@ protected:
 };
 
 #endif // __USER_H
+
+
