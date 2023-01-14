@@ -148,7 +148,7 @@ const User* findUserByName(const std::string& name, const std::vector<User*>& al
 
 /********* Utilities functions *********/
 
-void User::myMembersRealloc()
+void User::myMembersRealloc() 
 {
 	int logSize = connectedMembers.size();
 	int physSize = connectedMembers.capacity();
