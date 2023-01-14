@@ -66,8 +66,8 @@ void User::showAllStatus() const
 
 void User::showAllConnectedMembers() const 
 {
-	/*vector<Member*>::const_iterator*/auto itr = connectedMembers.begin();
-	/*vector<Member*>::const_iterator*/auto itrEnd = connectedMembers.end();
+	auto itr = connectedMembers.begin();
+	auto itrEnd = connectedMembers.end();
 
 	cout << "**********" << name << "'s connectd members **********" << endl << endl;
 
@@ -76,75 +76,6 @@ void User::showAllConnectedMembers() const
 
 	cout << "********************" << endl;
 }
-
-/********* Find functions *********/
-/*
-vector<User*>::iterator findUserIteratorByName(const string& name, vector<User*>& allUsers) noexcept(false)
-{
-	bool isFound = false;
-	vector<User*>::iterator itr = allUsers.begin();
-	vector<User*>::iterator itrEnd = allUsers.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr)->getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
-
-	if (!isFound)
-		throw NotExistException(name);
-
-	return itr;
-}
-
-vector<User*>::const_iterator findUserIteratorByName(const std::string& name, const std::vector<User*>& allUsers) noexcept(false)
-{
-	bool isFound = false;
-	vector<User*>::const_iterator itr = allUsers.begin();
-	vector<User*>::const_iterator itrEnd = allUsers.end();
-
-	while (itr != itrEnd && !isFound)
-	{
-		if ((*itr)->getName() == name)
-			isFound = true;
-		else
-			++itr;
-	}
-
-	if (!isFound)
-		throw NotExistException(name);
-
-	return itr;
-}
-
-User* findUserByName(const string& name, vector<User*>& allUsers)
-{
-	try
-	{
-		vector<User*>::iterator res = findUserIteratorByName(name, allUsers);
-		return *res;
-	}
-	catch (NotExistException&)
-	{
-		return nullptr;
-	}
-}
-
-const User* findUserByName(const std::string& name, const std::vector<User*>& allUsers)
-{
-	try
-	{
-		vector<User*>::const_iterator res = findUserIteratorByName(name, allUsers);
-		return *res;
-	}
-	catch (NotExistException&)
-	{
-		return nullptr;
-	}
-}
-*/
 
 /********* Utilities functions *********/
 

@@ -18,7 +18,7 @@ protected:
     std::vector<Member*> connectedMembers;
 
 public:
-    User(const std::string& name) noexcept(false);
+    User(const std::string& name) noexcept(false); // maybe block?
     virtual ~User();
 
     const std::string& getName() const { return name; }
@@ -31,6 +31,21 @@ public:
     void showAllStatus() const;
     void showAllConnectedMembers() const;
 
+protected:
+    User(const User&); // block cpoy c'tor
+    User& operator=(const User&); // block operator =
+
+    virtual void toOs(std::ostream& os) const {}
+    void myMembersRealloc();
+    void myStatusRealloc();
+
+public: // template friend functions (must be implement inside the class)
+
+    /*
+        T should have the following:
+        iteraot, const_iterator, methods 'begin', 'end',
+        the type inside should be a pointer of object that has 'getName' function.
+    */
     template<class T>
     friend auto findUserIteratorByName(const std::string& name, T& allUsers) noexcept(false)
     {
@@ -52,6 +67,11 @@ public:
         return itr;
     }
 
+    /*
+        T should have the following:
+        iteraot, const_iterator, methods 'begin', 'end',
+        the type inside should be a pointer of object that has 'getName' function.
+    */
     template <class T>
     friend void* findUserByName(const std::string& name, T& allUsers)
     {
@@ -65,21 +85,6 @@ public:
             return nullptr;
         }
     }
-    /*
-    friend std::vector<User*>::iterator findUserIteratorByName(const std::string& name, std::vector<User*>& allUsers) noexcept(false);
-    friend std::vector<User*>::const_iterator findUserIteratorByName(const std::string& name, const std::vector<User*>& allUsers) noexcept(false);
-    friend User* findUserByName(const std::string& name, std::vector<User*>& allUsers);
-    friend const User* findUserByName(const std::string& name, const std::vector<User*>& allUsers);
-    */
-protected:
-    User(const User&); // block cpoy c'tor
-    User& operator=(const User&); // block operator =
-
-    virtual void toOs(std::ostream& os) const {}
-    void myMembersRealloc();
-    void myStatusRealloc();
 };
 
 #endif // __USER_H
-
-
