@@ -16,6 +16,11 @@ User::User(const string& name) : name(name)
 	if (name == "") throw EmptyNameException();
 }
 
+User::User(ifstream& inFile)
+{
+	Status::readString(inFile, name);
+}
+
 User::~User()
 {
 	vector<Status*>::iterator itr = theBillboard.begin();
@@ -25,11 +30,66 @@ User::~User()
 		delete* itr;
 }
 
-ostream& operator<<(std::ostream& os, const User& u)
+ostream& operator<<(ostream& os, const User& u)
 {
 	os << "The " << typeid(u).name() + DELETE_CALSS << " name is: " << u.name;
 	u.toOs(os);
 	return os;
+}
+
+void User::save(ofstream& outFile)
+{
+	Status::saveString(outFile, name);
+}
+
+void User::saveBillBoard(ofstream& outFile)
+{
+	int size = theBillboard.size();
+	outFile.write((const char*)&size, sizeof(size));
+
+	for (int i = 0; i < size; i++)
+	{
+		theBillboard[i]->saveType(outFile);
+		theBillboard[i]->save(outFile);
+	}
+}
+
+void User::saveConnectedMembers(ofstream& outFile)
+{
+	int size = connectedMembers.size();
+	outFile.write((const char*)&size, sizeof(size));
+
+	for (int i = 0; i < size; i++)
+		Status::saveString(outFile, connectedMembers[i]->getName());
+}
+
+void User::readBillBoard(std::ifstream& inFile)
+{
+	char type;
+	int size;
+	inFile.read((char*)&size, sizeof(size));
+
+	theBillboard.reserve(size);
+
+	for (int i = 0; i < size; i++)
+	{
+		inFile.read((char*)&type, sizeof(type));
+
+		switch (type)
+		{
+		case (char)Status::eStatusType::TEXT:
+			theBillboard.push_back(new Status(inFile));
+			break;
+		case (char)Status::eStatusType::IMAGE:
+			theBillboard.push_back(new ImageStatus(inFile));
+			break;
+		case (char)Status::eStatusType::VIDEO:
+			theBillboard.push_back(new VideoStatus(inFile));
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void User::addStatus(const string& newStatus, int type, const string& filePath) noexcept(false)

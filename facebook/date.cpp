@@ -37,6 +37,11 @@ Date::Date(int day, int month, int year) noexcept(false)
     setYear(year);
 }
 
+Date::Date(ifstream& in)
+{
+    in.read((char*)this, sizeof(*this));
+}
+
 /********* Setters *********/
 
 void Date::setDay(int day) noexcept(false)
@@ -63,6 +68,12 @@ void Date::setYear(int year) noexcept(false)
     this->year = year;
 }
 
+/********* File functions *********/
+
+void Date::save(std::ofstream& out) const
+{
+    out.write((const char*)this, sizeof(*this));
+}
 
 /********* Show *********/
 

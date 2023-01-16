@@ -18,6 +18,11 @@ const int MAX_SEC = 59;
 
 /********* Constructors *********/
 
+Time::Time(std::ifstream& in)
+{
+    in.read((char*)this, sizeof(*this));
+}
+
 Time::Time(int hour, int minutes, int seconds) noexcept(false)
 {
     setHour(hour);
@@ -59,6 +64,13 @@ void Time::setSeconds(int seconds) noexcept(false)
         throw WrongSecondException(seconds);
 
     this->seconds = seconds;
+}
+
+/************************/
+
+void Time::save(std::ofstream& out) const
+{
+    out.write((const char*)this, sizeof(*this));
 }
 
 /********* Show *********/

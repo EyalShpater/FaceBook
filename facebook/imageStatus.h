@@ -10,13 +10,12 @@ class ImageStatus :public Status
 {
     std::string filePath;
 public:
-    ImageStatus(const std::string& text, const std::string& filePath) noexcept(false)
-        : filePath(filePath), Status(text, eColor::COLORS, eSoftware::PLAYBACK)
-    {
-        if (filePath == "") throw EmptyTextException();
-    }
+    ImageStatus(const std::string& text, const std::string& filePath) noexcept(false);
+    ImageStatus(std::ifstream& inFile);
 
     virtual void toOs(std::ostream& os) const override;
+
+    virtual void save(std::ofstream& outFile) const override;
 
     virtual bool operator==(const Status& other) const override;
     virtual bool operator!=(const Status& other) const override;

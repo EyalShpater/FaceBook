@@ -17,6 +17,31 @@ Status::Status(const string& text, Status::eColor color, Status::eSoftware softw
 	this->text = text;
 }
 
+Status::Status(ifstream& in) : theDate(in), theTime(in)
+{
+	in.read((char*)&color, sizeof(color));
+	in.read((char*)&software, sizeof(software));
+	Status::readString(in, text);
+}
+
+/********/
+
+void Status::save(ofstream& out) const
+{
+	theDate.save(out);
+	theTime.save(out);
+	out.write((const char*)&color, sizeof(color));
+	out.write((const char*)&software, sizeof(software));
+	Status::saveString(out, text);
+}
+
+void Status::saveType(std::ofstream& out) const
+{
+	char type;
+	type = typeid(*this).name()[6]; //get the first character of the class name.
+	out.write((const char*)&type, sizeof(type));
+}
+
 /********* Operators *********/
 
 ostream& operator<<(ostream& os, const Status& s)
@@ -41,4 +66,27 @@ bool Status::operator==(const Status& other) const
 bool Status::operator!=(const Status& other) const
 {
 	return !(*this == other);
+}
+
+/**********/
+
+void Status::saveString(ofstream& out, const string& str)
+{
+	int sizeOfString = str.size();
+
+	out.write((const char*)&sizeOfString, sizeof(sizeOfString));
+	out.write(str.c_str(), str.size());
+}
+
+void Status::readString(ifstream& in, string& str)
+{
+	int size;
+	in.read((char*)&size, sizeof(size));
+	
+	char* temp = new char[size + 1]; // for '\0'
+	in.read(temp, size);
+	temp[size] = '\0';
+	str = temp;
+
+	delete[]temp;
 }

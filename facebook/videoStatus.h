@@ -10,13 +10,12 @@ class VideoStatus :public Status
 {
     std::string filePath;
 public:
-    VideoStatus(const std::string& text, const std::string& filePath) noexcept(false)
-        : filePath(filePath), Status(text, eColor::COLORS, eSoftware::PLAYBACK)
-    {
-        if (filePath == "") throw EmptyTextException();
-    }
+    VideoStatus(const std::string& text, const std::string& filePath) noexcept(false);
+    VideoStatus(std::ifstream& inFile);
 
     virtual void toOs(std::ostream& os) const override;
+
+    virtual void save(std::ofstream& outFile) const override;
 
     virtual bool operator==(const Status& other) const override;
     virtual bool operator!=(const Status& other) const override;

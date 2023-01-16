@@ -2,6 +2,7 @@
 #define __DATE_H
 
 #include <iostream>
+#include <fstream>
 
 class Date 
 {
@@ -10,6 +11,7 @@ class Date
 public:
     Date();
     Date(int day, int month, int year) noexcept(false);
+    Date(std::ifstream& in);
 
     int getDay()   const { return day; }
     int getMonth() const { return month; }
@@ -18,6 +20,8 @@ public:
     void setDay(int day) noexcept(false);
     void setMonth(int month) noexcept(false);
     void setYear(int year) noexcept(false);
+
+    void save(std::ofstream& out) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Date& d);
 };

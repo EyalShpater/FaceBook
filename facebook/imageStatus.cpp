@@ -5,6 +5,19 @@
 #include <string>
 using namespace std;
 
+/**********/
+
+ImageStatus::ImageStatus(const string& text, const string& filePath) noexcept(false)
+	: filePath(filePath), Status(text, eColor::COLORS, eSoftware::PLAYBACK)
+{
+	if (filePath == "") throw EmptyTextException();
+}
+
+ImageStatus::ImageStatus(ifstream& inFile) : Status(inFile)
+{
+	Status::readString(inFile, filePath);
+}
+
 /********* Show *********/
 
 void ImageStatus::toOs(ostream& os) const
@@ -12,6 +25,14 @@ void ImageStatus::toOs(ostream& os) const
 	string command = "start " + filePath;
 
 	system(command.c_str());
+}
+
+/******/
+
+void ImageStatus::save(std::ofstream& outFile) const
+{
+	Status::save(outFile);
+	Status::saveString(outFile, filePath);
 }
 
 /******** Operators *******/

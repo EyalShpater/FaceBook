@@ -4,13 +4,14 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include "userException.h"
 
 class Status;
 class Member;
 
-class User
+class User // abstract class
 {
 protected:
     std::string name;
@@ -18,7 +19,6 @@ protected:
     std::vector<Member*> connectedMembers;
 
 public:
-    User(const std::string& name) noexcept(false); // maybe block?
     virtual ~User();
 
     const std::string& getName() const { return name; }
@@ -26,12 +26,20 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const User& u);
 
+    void save(std::ofstream& outFile);
+    void saveBillBoard(std::ofstream& outFile);
+    void saveConnectedMembers(std::ofstream& outFile);
+
+    void readBillBoard(std::ifstream& inFile);
+
     void addStatus(const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
 
     void showAllStatus() const;
     void showAllConnectedMembers() const;
 
-protected:
+/*protected:*/ public:
+    User(const std::string& name) noexcept(false); // make User abstract class
+    User(std::ifstream& inFile);
     User(const User&); // block cpoy c'tor
     User& operator=(const User&); // block operator =
 
