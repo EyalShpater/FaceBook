@@ -37,12 +37,12 @@ ostream& operator<<(ostream& os, const User& u)
 	return os;
 }
 
-void User::save(ofstream& outFile)
+void User::save(ofstream& outFile) const
 {
 	Status::saveString(outFile, name);
 }
 
-void User::saveBillBoard(ofstream& outFile)
+void User::saveBillBoard(ofstream& outFile) const
 {
 	int size = theBillboard.size();
 	outFile.write((const char*)&size, sizeof(size));
@@ -54,7 +54,7 @@ void User::saveBillBoard(ofstream& outFile)
 	}
 }
 
-void User::saveConnectedMembers(ofstream& outFile)
+void User::saveConnectedMembers(ofstream& outFile) const
 {
 	int size = connectedMembers.size();
 	outFile.write((const char*)&size, sizeof(size));

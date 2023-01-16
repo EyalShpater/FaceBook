@@ -18,6 +18,7 @@ class Member : public User
 
 public:
 	Member(const std::string& name, const Date& birthDate) noexcept(false);
+	Member(std::ifstream& in): User(in), dateOfBirth(in) {}
 	
 	const Date& getDateOfBirth() const { return dateOfBirth; }
 
@@ -33,6 +34,7 @@ public:
 	void showUpdatedFriendsStatuses() const;
 	void showAllFansPage() const;
 	
+	virtual void save(std::ofstream& outFile) const override;
 private:
 	Member(const Member&);
 	const Member& operator=(const Member&);

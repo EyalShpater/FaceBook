@@ -26,9 +26,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const User& u);
 
-    void save(std::ofstream& outFile);
-    void saveBillBoard(std::ofstream& outFile);
-    void saveConnectedMembers(std::ofstream& outFile);
+    virtual void save(std::ofstream& outFile) const;
+    void saveBillBoard(std::ofstream& outFile) const;
+    void saveConnectedMembers(std::ofstream& outFile) const;
 
     void readBillBoard(std::ifstream& inFile);
 

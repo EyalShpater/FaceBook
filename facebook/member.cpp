@@ -25,6 +25,14 @@ Member::Member(const string& name, const Date& birthDate) noexcept(false) : User
 	this->name = name;
 }
 
+/*****************************/
+
+void Member::save(ofstream& outFile) const
+{
+	User::save(outFile);
+	dateOfBirth.save(outFile);
+}
+
 /********* Operators *********/
 const Member& Member::operator+=(Member& newFriend)
 {
