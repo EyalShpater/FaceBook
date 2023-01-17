@@ -33,6 +33,23 @@ void Member::save(ofstream& outFile) const
 	dateOfBirth.save(outFile);
 }
 
+void Member::saveName(std::ofstream& outFile) const
+{
+	User::save(outFile);
+}
+
+void Member::saveAllFansPages(ofstream& outFile) const
+{
+	auto itr = fansPages.begin();
+	auto itrEnd = fansPages.end();
+	int size = fansPages.size();
+
+	outFile.write((const char*)&size, sizeof(size));
+
+	for (; itr != itrEnd; ++itr)
+		(*itr)->save(outFile);
+}
+
 /********* Operators *********/
 const Member& Member::operator+=(Member& newFriend)
 {
@@ -117,12 +134,15 @@ void Member::dislikePage(FansPage& other) noexcept(false)
 
 void Member::showLatest10thStatus() const
 {
-	vector<Status*>::const_iterator itr = theBillboard.begin();
-	vector<Status*>::const_iterator itrEnd = --theBillboard.end();
+	if (!theBillboard.empty())
+	{
+		vector<Status*>::const_iterator itr = theBillboard.begin();
+		vector<Status*>::const_iterator itrEnd = --theBillboard.end();
 
-	for (int i = 1; i <= DEFAULT_NUM_OF_STATUS_TO_SHOW && itrEnd != itr; i++, --itrEnd)
+		for (int i = 1; i <= DEFAULT_NUM_OF_STATUS_TO_SHOW && itrEnd != itr; i++, --itrEnd)
+			cout << *(*itrEnd) << endl << endl;
 		cout << *(*itrEnd) << endl << endl;
-	cout << *(*itrEnd) << endl << endl;
+	}
 }
 
 void Member::showUpdatedFriendsStatuses() const

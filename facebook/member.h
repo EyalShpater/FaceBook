@@ -26,6 +26,10 @@ public:
 	bool operator>(const Member& other) const;
 	bool operator>(const FansPage& other) const;
 
+	virtual void save(std::ofstream& outFile) const override;
+	void saveName(std::ofstream& outFile) const;
+	void saveAllFansPages(std::ofstream& outFile) const;
+
 	void cancelFriendship(Member& other) noexcept(false);
 	void likePage(FansPage& newPage); 
 	void dislikePage(FansPage& other) noexcept(false);
@@ -33,11 +37,11 @@ public:
 	void showLatest10thStatus() const;
 	void showUpdatedFriendsStatuses() const;
 	void showAllFansPage() const;
-	
-	virtual void save(std::ofstream& outFile) const override;
+
+	friend class Admin;
 private:
-	Member(const Member&);
-	const Member& operator=(const Member&);
+	Member(const Member&); // block copy c'tor
+	const Member& operator=(const Member&); // block operator =
 
 	virtual void toOs(std::ostream& os) const override;
 	void myFansPageRealloc();

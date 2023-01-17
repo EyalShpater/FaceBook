@@ -5,6 +5,7 @@
 #include "status.h"
 #include "userException.h"
 
+#include <fstream>
 #include <string>
 
 class Member;
@@ -13,6 +14,7 @@ class FansPage : public User
 {
 public:
     FansPage(const std::string& name) noexcept(false) : User(name) {}
+    FansPage(std::ifstream& inFile) : User(inFile) {}
 
     bool operator>(const FansPage& other)const;
     bool operator>(const Member& other) const;

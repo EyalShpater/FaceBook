@@ -26,7 +26,7 @@ protected:
 public:
     Status(const std::string& text, eColor color = eColor::BLACK_AND_WHITE, eSoftware software = eSoftware::SIMPLE) noexcept(false);
     Status(std::ifstream& in);
-    virtual ~Status() {} // support polymorphism
+    virtual ~Status() {} // to support polymorphism
 
     const char* openWith() const { return (software == Status::eSoftware::SIMPLE ? "simple" : "playback"); }
 
@@ -37,12 +37,13 @@ public:
     virtual bool operator!=(const Status& other) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Status& s);
-
+    
     static void saveString(std::ofstream& out, const std::string& str);
     static void readString(std::ifstream& in, std::string& str);
 
 protected:
     virtual void toOs(std::ostream& os) const {}
 };
+
 
 #endif //__STATUS_H

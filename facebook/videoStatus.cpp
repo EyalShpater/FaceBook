@@ -14,7 +14,7 @@ VideoStatus::VideoStatus(const string& text, const string& filePath) noexcept(fa
 
 VideoStatus::VideoStatus(ifstream& inFile) : Status(inFile)
 {
-	Status::readString(inFile, filePath);
+	readString(inFile, filePath);
 }
 
 /********* Show *********/
@@ -31,7 +31,7 @@ void VideoStatus::toOs(ostream& os) const
 void VideoStatus::save(std::ofstream& outFile) const
 {
 	Status::save(outFile);
-	Status::saveString(outFile, filePath);
+	saveString(outFile, filePath);
 }
 
 /******** Operators *******/

@@ -92,6 +92,7 @@ void User::readBillBoard(std::ifstream& inFile)
 	}
 }
 
+
 void User::addStatus(const string& newStatus, int type, const string& filePath) noexcept(false)
 {
 	myStatusRealloc();

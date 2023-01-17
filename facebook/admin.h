@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "member.h"
 #include "fansPage.h"
@@ -15,7 +16,7 @@ class Admin
 	std::vector<FansPage*> allPages;
 
 public:
-	Admin() = default;
+	Admin();
 	~Admin();
 
 	void addFriend(const std::string& name, const Date& date) noexcept(false);
@@ -40,6 +41,16 @@ public:
 private:
 	Admin(const Admin&);
 	const Admin& operator=(const Admin&);
+
+	void save(std::ofstream& outFile) const;
+	void saveAllMembers(std::ofstream& outFile) const;
+	void saveAllPages(std::ofstream& outFile) const;
+
+	void load(std::ifstream& inFile);
+	void readAllMembers(std::ifstream& inFile);
+	void readConnectedMembers(std::ifstream& inFile, User& member);
+	void readAllFansPagesToMember(std::ifstream& inFile, Member& member);
+	void readAllPages(std::ifstream& inFile);
 
 	void myMemberRealloc();
 	void myFansPageRealloc();

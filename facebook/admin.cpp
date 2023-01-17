@@ -8,7 +8,16 @@
 #include <iostream>
 using namespace std;
 
-/********* Destructor **********/
+const char* DEFAULT_SYSTEM_FILE_NAME = "system.bin";
+
+/********* Constructor **********/
+
+Admin::Admin()
+{
+	ifstream inFile(DEFAULT_SYSTEM_FILE_NAME, ios::binary);
+	load(inFile);
+	inFile.close();
+}
 
 Admin::~Admin()
 {
@@ -16,6 +25,10 @@ Admin::~Admin()
 	vector<Member*>::iterator mItrEnd = allMembers.end();
 	vector<FansPage*>::iterator pItr = allPages.begin();
 	vector<FansPage*>::iterator pItrEnd = allPages.end();
+
+	ofstream outFile(DEFAULT_SYSTEM_FILE_NAME, ios::binary);
+	save(outFile);
+	outFile.close();
 
 	for (; mItr != mItrEnd; ++mItr)
 		delete *mItr;
@@ -203,6 +216,127 @@ void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
 }
 
 /********* Utilities functions *********/
+
+void Admin::save(std::ofstream& outFile) const
+{
+	auto itr = allMembers.begin();
+	auto itrEnd = allMembers.end();
+
+	saveAllMembers(outFile);
+	saveAllPages(outFile);
+
+	for (; itr != itrEnd; ++itr)
+		(*itr)->saveAllFansPages(outFile);
+}
+
+void Admin::saveAllMembers(ofstream& outFile) const // doesn't save the fansPages array.
+{
+	auto itr = allMembers.begin();
+	auto itrEnd = allMembers.end();
+	int size = allMembers.size();
+
+	outFile.write((const char*)&size, sizeof(size));
+	for (; itr != itrEnd; ++itr) 
+	{
+		(*itr)->save(outFile);
+		(*itr)->saveBillBoard(outFile);
+	}
+
+	for (itr = allMembers.begin(); itr != itrEnd; ++itr)
+		(*itr)->saveConnectedMembers(outFile);
+
+}
+
+// Assumption: Members are saved before this function.
+void Admin::saveAllPages(ofstream& outFile) const
+{
+	auto itr = allPages.begin();
+	auto itrEnd = allPages.end();
+	int size = allPages.size();
+
+	outFile.write((const char*)&size, sizeof(size));
+	for (; itr != itrEnd; ++itr)
+	{
+		(*itr)->save(outFile);
+		(*itr)->saveBillBoard(outFile);
+		(*itr)->saveConnectedMembers(outFile);
+	}
+}
+
+void Admin::load(ifstream& inFile) 
+{
+	auto itr = allMembers.begin();
+	auto itrEnd = allMembers.end();
+
+	readAllMembers(inFile);
+	readAllPages(inFile);
+
+	for (; itr != itrEnd; ++itr)
+		readAllFansPagesToMember(inFile, *(*itr));
+}
+
+void Admin::readAllMembers(ifstream& inFile) 
+{
+	int allMembersSize;
+	inFile.read((char*)&allMembersSize, sizeof(allMembersSize));
+
+	allMembers.reserve(allMembersSize);
+
+	for (int i = 0; i < allMembersSize; i++)
+	{
+		allMembers.push_back(new Member(inFile));
+		allMembers[i]->readBillBoard(inFile);
+	}
+
+	for (int i = 0; i < allMembersSize; i++)
+		readConnectedMembers(inFile, *(allMembers[i]));
+
+}
+
+void Admin::readConnectedMembers(ifstream& inFile, User& member)
+{
+	int size;
+	string name;
+	inFile.read((char*)&size, sizeof(size));
+	member.connectedMembers.reserve(size);
+
+	for (int i = 0; i < size; i++)
+	{
+		Status::readString(inFile, name);
+		member.connectedMembers.push_back((Member*)findUserByName(name, allMembers));
+	}
+}
+
+void Admin::readAllFansPagesToMember(ifstream& inFile, Member& member)
+{
+	int size;
+	string name;
+
+	inFile.read((char*)&size, sizeof(size));
+	member.fansPages.reserve(size);
+
+	for (int i = 1; i <= size; ++i)
+	{
+		Status::readString(inFile, name);
+		member.fansPages.push_back((FansPage*)findUserByName(name, allMembers));
+	}
+}
+
+void Admin::readAllPages(ifstream& inFile) 
+{
+	int size;
+	string name;
+
+	inFile.read((char*)&size, sizeof(size));
+	allPages.reserve(size);
+
+	for (int i = 0; i < size; i++)
+	{
+		allPages.push_back(new FansPage(inFile));
+		allPages[i]->readBillBoard(inFile);
+		readConnectedMembers(inFile, *(allPages[i]));
+	}
+}
 
 void Admin::myMemberRealloc()
 {

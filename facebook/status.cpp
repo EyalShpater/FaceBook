@@ -21,7 +21,7 @@ Status::Status(ifstream& in) : theDate(in), theTime(in)
 {
 	in.read((char*)&color, sizeof(color));
 	in.read((char*)&software, sizeof(software));
-	Status::readString(in, text);
+	readString(in, text);
 }
 
 /********/
@@ -32,7 +32,7 @@ void Status::save(ofstream& out) const
 	theTime.save(out);
 	out.write((const char*)&color, sizeof(color));
 	out.write((const char*)&software, sizeof(software));
-	Status::saveString(out, text);
+	saveString(out, text);
 }
 
 void Status::saveType(std::ofstream& out) const
@@ -69,6 +69,7 @@ bool Status::operator!=(const Status& other) const
 }
 
 /**********/
+
 
 void Status::saveString(ofstream& out, const string& str)
 {

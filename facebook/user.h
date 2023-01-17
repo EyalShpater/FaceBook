@@ -37,7 +37,8 @@ public:
     void showAllStatus() const;
     void showAllConnectedMembers() const;
 
-/*protected:*/ public:
+    friend class Admin;
+protected:
     User(const std::string& name) noexcept(false); // make User abstract class
     User(std::ifstream& inFile);
     User(const User&); // block cpoy c'tor
