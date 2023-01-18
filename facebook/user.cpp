@@ -30,12 +30,16 @@ User::~User()
 		delete* itr;
 }
 
+/********* Operators *********/
+
 ostream& operator<<(ostream& os, const User& u)
 {
 	os << "The " << typeid(u).name() + DELETE_CALSS << " name is: " << u.name;
 	u.toOs(os);
 	return os;
 }
+
+/********* File Functions *********/
 
 void User::save(ofstream& outFile) const
 {
@@ -92,6 +96,7 @@ void User::readBillBoard(std::ifstream& inFile)
 	}
 }
 
+/********* User Functions *********/
 
 void User::addStatus(const string& newStatus, int type, const string& filePath) noexcept(false)
 {

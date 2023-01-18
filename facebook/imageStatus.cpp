@@ -5,10 +5,10 @@
 #include <string>
 using namespace std;
 
-/**********/
+/********* Constructors *********/
 
 ImageStatus::ImageStatus(const string& text, const string& filePath) noexcept(false)
-	: filePath(filePath), Status(text, eColor::COLORS, eSoftware::PLAYBACK)
+	: filePath(filePath), Status(text, eColor::COLORS, eSoftware::SIMPLE)
 {
 	if (filePath == "") throw EmptyTextException();
 }
@@ -27,7 +27,7 @@ void ImageStatus::toOs(ostream& os) const
 	system(command.c_str());
 }
 
-/******/
+/********* File Functions *********/
 
 void ImageStatus::save(std::ofstream& outFile) const
 {

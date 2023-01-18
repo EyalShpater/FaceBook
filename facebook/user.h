@@ -11,7 +11,7 @@
 class Status;
 class Member;
 
-class User // abstract class
+class User // Abstract class
 {
 protected:
     std::string name;
@@ -29,7 +29,6 @@ public:
     virtual void save(std::ofstream& outFile) const;
     void saveBillBoard(std::ofstream& outFile) const;
     void saveConnectedMembers(std::ofstream& outFile) const;
-
     void readBillBoard(std::ifstream& inFile);
 
     void addStatus(const std::string& newStatus, int type, const std::string& filePath = "") noexcept(false);
@@ -41,6 +40,7 @@ public:
 protected:
     User(const std::string& name) noexcept(false); // make User abstract class
     User(std::ifstream& inFile);
+
     User(const User&); // block cpoy c'tor
     User& operator=(const User&); // block operator =
 
@@ -48,8 +48,8 @@ protected:
     void myMembersRealloc();
     void myStatusRealloc();
 
-public: // template friend functions (must be implement inside the class)
-
+// template friend functions (must be implement inside the class)
+public: 
     /*
         T should have the following:
         iteraot, const_iterator, methods 'begin', 'end',

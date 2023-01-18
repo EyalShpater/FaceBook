@@ -39,13 +39,17 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Nitzan Sde Or", "lol :)))", (int)Status::eStatusType::IMAGE, "media\\status1.jpg");
 
 	faceBook.addNewStatusToMember("Eyal Shpater", "Hello it's me.", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Eyal Shpater", "I was wondering...", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Eyal Shpater", "lol :)))", (int)Status::eStatusType::VIDEO, "media\\status4.mp4");
 
 	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala", (int)Status::eStatusType::TEXT);
+	faceBook.addNewStatusToMember("Noa Kirel", "The funniest picture!", (int)Status::eStatusType::IMAGE, "media\\status2.jpeg");
+	faceBook.addNewStatusToMember("Noa Kirel", "so cute!", (int)Status::eStatusType::IMAGE, "media\\status3.png");
 
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.", (int)Status::eStatusType::TEXT);
 	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?", (int)Status::eStatusType::TEXT);
@@ -184,7 +188,8 @@ int ConsoleUI::askForUserType() const
 
 int ConsoleUI::askForStatusType() const
 {
-	int type;
+	int type; 
+	
 	bool flag = false;
 
 	do
@@ -192,13 +197,20 @@ int ConsoleUI::askForStatusType() const
 		if (flag)
 			cout << "Invalid input! try again" << endl;
 
-		cout << "Press:\n" << (int)Status::eStatusType::TEXT << " - to add a text status" << endl
-			<< (int)Status::eStatusType::IMAGE << " - to add an image" << endl
-			<< (int)Status::eStatusType::VIDEO << " - to add a video" << endl;
+		cout << "Press:\n" << "0 - to add a text status" << endl
+			<< "1 - to add an image" << endl
+			<< "2 - to add a video" << endl;
 		cin >> type;
 
 		flag = true;
-	} while (type != (int)Status::eStatusType::TEXT && type != (int)Status::eStatusType::IMAGE && type != (int)Status::eStatusType::VIDEO);
+	} while (type != 0 && type != 1 && type != 2);
+
+	switch (type)
+	{
+	case 0: type = (int)Status::eStatusType::TEXT; break;
+	case 1: type = (int)Status::eStatusType::IMAGE; break;
+	case 2: type = (int)Status::eStatusType::VIDEO; break;
+	}
 
 	return type;
 }

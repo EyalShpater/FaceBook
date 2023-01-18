@@ -22,7 +22,7 @@ public:
 
 private:
     ImageStatus(const ImageStatus& other);
-    const ImageStatus& operator=(const ImageStatus&);
+    ImageStatus& operator=(const ImageStatus&);
 };
 
 #endif //__IMAGE_STATUS_H

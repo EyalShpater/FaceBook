@@ -7,6 +7,8 @@
 #include <string>
 using namespace std;
 
+/********* Constructors *********/
+
 Status::Status(const string& text, Status::eColor color, Status::eSoftware software) noexcept(false)
 {
 	if (text == "")
@@ -24,7 +26,7 @@ Status::Status(ifstream& in) : theDate(in), theTime(in)
 	readString(in, text);
 }
 
-/********/
+/********* File Functions *********/
 
 void Status::save(ofstream& out) const
 {
@@ -68,8 +70,7 @@ bool Status::operator!=(const Status& other) const
 	return !(*this == other);
 }
 
-/**********/
-
+/********* Utility Functions *********/
 
 void Status::saveString(ofstream& out, const string& str)
 {

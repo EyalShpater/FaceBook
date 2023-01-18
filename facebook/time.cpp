@@ -18,9 +18,14 @@ const int MAX_SEC = 59;
 
 /********* Constructors *********/
 
-Time::Time(std::ifstream& in)
+Time::Time() 
 {
-    in.read((char*)this, sizeof(*this));
+    time_t now = time(nullptr);
+    tm* temp = localtime(&now);
+
+    hour = temp->tm_hour;
+    minutes = temp->tm_min;
+    seconds = temp->tm_sec;
 }
 
 Time::Time(int hour, int minutes, int seconds) noexcept(false)
@@ -30,14 +35,9 @@ Time::Time(int hour, int minutes, int seconds) noexcept(false)
     setSeconds(seconds);
 }
 
-Time::Time() 
+Time::Time(std::ifstream& in)
 {
-    time_t now = time(nullptr);
-    tm* temp = localtime(&now);
-
-    hour = temp->tm_hour;
-    minutes = temp->tm_min;
-    seconds = temp->tm_sec;
+    in.read((char*)this, sizeof(*this));
 }
 
 /********* Setters *********/
@@ -66,7 +66,7 @@ void Time::setSeconds(int seconds) noexcept(false)
     this->seconds = seconds;
 }
 
-/************************/
+/********* File Functions *********/
 
 void Time::save(std::ofstream& out) const
 {

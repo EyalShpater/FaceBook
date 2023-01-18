@@ -22,7 +22,7 @@ public:
 
 private:
     VideoStatus(const VideoStatus& other);
-    const VideoStatus& operator=(const VideoStatus&);
+    VideoStatus& operator=(const VideoStatus&);
 };
 
 #endif //__VIDEO_STATUS_H

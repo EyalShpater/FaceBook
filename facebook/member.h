@@ -41,7 +41,7 @@ public:
 	friend class Admin;
 private:
 	Member(const Member&); // block copy c'tor
-	const Member& operator=(const Member&); // block operator =
+	Member& operator=(const Member&); // block operator =
 
 	virtual void toOs(std::ostream& os) const override;
 	void myFansPageRealloc();

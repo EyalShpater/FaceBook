@@ -25,7 +25,7 @@ Member::Member(const string& name, const Date& birthDate) noexcept(false) : User
 	this->name = name;
 }
 
-/*****************************/
+/********* File Functions *********/
 
 void Member::save(ofstream& outFile) const
 {
@@ -51,6 +51,7 @@ void Member::saveAllFansPages(ofstream& outFile) const
 }
 
 /********* Operators *********/
+
 const Member& Member::operator+=(Member& newFriend)
 {
 	if (&newFriend != this)
@@ -116,7 +117,7 @@ void Member::dislikePage(FansPage& other) noexcept(false)
 {
 	try
 	{
-		/*vector<User*>::iterator*/ auto itr = findUserIteratorByName(other.getName(), fansPages);
+		auto itr = findUserIteratorByName(other.getName(), fansPages);
 
 		if (itr != fansPages.end())
 		{

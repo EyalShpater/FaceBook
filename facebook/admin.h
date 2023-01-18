@@ -40,7 +40,7 @@ public:
 
 private:
 	Admin(const Admin&);
-	const Admin& operator=(const Admin&);
+	Admin& operator=(const Admin&);
 
 	void save(std::ofstream& outFile) const;
 	void saveAllMembers(std::ofstream& outFile) const;

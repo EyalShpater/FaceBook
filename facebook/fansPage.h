@@ -24,7 +24,7 @@ public:
     
 private:
     FansPage(const FansPage&);
-    const FansPage& operator=(const FansPage&);
+    FansPage& operator=(const FansPage&);
 };
 
 #endif // __FANSPAGE_H

@@ -68,7 +68,7 @@ void Date::setYear(int year) noexcept(false)
     this->year = year;
 }
 
-/********* File functions *********/
+/********* File Functions *********/
 
 void Date::save(std::ofstream& out) const
 {

@@ -15,8 +15,12 @@ const char* DEFAULT_SYSTEM_FILE_NAME = "system.bin";
 Admin::Admin()
 {
 	ifstream inFile(DEFAULT_SYSTEM_FILE_NAME, ios::binary);
-	load(inFile);
-	inFile.close();
+
+	if (inFile.is_open())
+	{
+		load(inFile);
+		inFile.close();
+	}
 }
 
 Admin::~Admin()
@@ -32,7 +36,7 @@ Admin::~Admin()
 
 	for (; mItr != mItrEnd; ++mItr)
 		delete *mItr;
-
+	
 	for (; pItr != pItrEnd; ++pItr)
 		delete *pItr;
 }
@@ -215,7 +219,7 @@ void Admin::showUpdatedFriendsStatuses(const string& name) const noexcept(false)
 	member->showUpdatedFriendsStatuses();
 }
 
-/********* Utilities functions *********/
+/********* File Functions *********/
 
 void Admin::save(std::ofstream& outFile) const
 {
@@ -337,6 +341,8 @@ void Admin::readAllPages(ifstream& inFile)
 		readConnectedMembers(inFile, *(allPages[i]));
 	}
 }
+
+/********* Utilities functions *********/
 
 void Admin::myMemberRealloc()
 {

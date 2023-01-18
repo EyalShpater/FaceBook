@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-/*******/
+/********* Constructors *********/
 
 VideoStatus::VideoStatus(const string& text, const string& filePath) noexcept(false)
 	: filePath(filePath), Status(text, eColor::COLORS, eSoftware::PLAYBACK)
@@ -26,7 +26,7 @@ void VideoStatus::toOs(ostream& os) const
 	system(command.c_str());
 }
 
-/******/
+/********* File Functions *********/
 
 void VideoStatus::save(std::ofstream& outFile) const
 {

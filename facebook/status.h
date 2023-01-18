@@ -42,6 +42,9 @@ public:
     static void readString(std::ifstream& in, std::string& str);
 
 protected:
+    Status(const Status&);
+    Status& operator=(const Status&);
+
     virtual void toOs(std::ostream& os) const {}
 };
 
