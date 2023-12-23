@@ -21,6 +21,10 @@ Admin::Admin()
 		load(inFile);
 		inFile.close();
 	}
+	else
+	{
+		addDefaultMembers();
+	}
 }
 
 Admin::~Admin()
@@ -343,6 +347,57 @@ void Admin::readAllPages(ifstream& inFile)
 }
 
 /********* Utilities functions *********/
+
+void Admin::addDefaultMembers()
+{
+	addFansPage("MTA College");
+	addFansPage("Computer Science");
+	addFansPage("Coming From Love");
+
+	addFriend("Nitzan Sde Or", Date(24, 8, 1998));
+	addFriend("Eyal Shpater", Date(26, 10, 1998));
+	addFriend("Noa Kirel", Date(10, 4, 2001));
+	addFriend("Yehudit Ravitz", Date(29, 12, 1956));
+
+	makeFriendship("Eyal Shpater", "Nitzan Sde Or");
+	makeFriendship("Noa Kirel", "Nitzan Sde Or");
+	makeFriendship("Noa Kirel", "Nitzan Sde Or");
+	makeFriendship("Yehudit Ravitz", "Eyal Shpater");
+
+	addFanToPage("Eyal Shpater", "MTA College");
+	addFanToPage("Nitzan Sde Or", "MTA College");
+	addFanToPage("Noa Kirel", "Coming From Love");
+	addFanToPage("Nitzan Sde Or", "Computer Science");
+	addFanToPage("Yehudit Ravitz", "Coming From Love");
+
+	addNewStatusToMember("Nitzan Sde Or", "N for Nadir", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Nitzan Sde Or", "Hello World!", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Nitzan Sde Or", "lol :)))", (int)Status::eStatusType::IMAGE, "media\\status1.jpg");
+
+	addNewStatusToMember("Eyal Shpater", "Hello it's me.", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Eyal Shpater", "I was wondering...", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Eyal Shpater", "lol :)))", (int)Status::eStatusType::VIDEO, "media\\status4.mp4");
+
+	addNewStatusToMember("Noa Kirel", "la la la la la", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Noa Kirel", "The funniest picture!", (int)Status::eStatusType::IMAGE, "media\\status2.jpeg");
+	addNewStatusToMember("Noa Kirel", "so cute!", (int)Status::eStatusType::IMAGE, "media\\status3.png");
+
+	addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?", (int)Status::eStatusType::TEXT);
+	addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl", (int)Status::eStatusType::TEXT);
+
+	addNewStatusToFansPage("MTA College", "Welcome all new students!", (int)Status::eStatusType::TEXT);
+	addNewStatusToFansPage("MTA College", "If you want to pass you have to get at least 60 points.", (int)Status::eStatusType::TEXT);
+
+	addNewStatusToFansPage("Coming From Love", "Peace and Love", (int)Status::eStatusType::TEXT);
+	addNewStatusToFansPage("Coming From Love", "Maybe one day she would taste the taste of love...", (int)Status::eStatusType::TEXT);
+
+	addNewStatusToFansPage("Computer Science", "C Plus Plus", (int)Status::eStatusType::TEXT);
+	addNewStatusToFansPage("Computer Science", "Java Script", (int)Status::eStatusType::TEXT);
+}
 
 void Admin::myMemberRealloc()
 {

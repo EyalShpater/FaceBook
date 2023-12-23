@@ -13,57 +13,6 @@ using namespace std;
 
 /********* Main functions *********/
 
-void ConsoleUI::addDefaultMembersToFacebook()
-{
-	faceBook.addFansPage("MTA College");
-	faceBook.addFansPage("Computer Science");
-	faceBook.addFansPage("Coming From Love");
-
- 	faceBook.addFriend("Nitzan Sde Or", Date(24, 8, 1998));
-	faceBook.addFriend("Eyal Shpater", Date(26, 10, 1998));
-	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
-	faceBook.addFriend("Yehudit Ravitz", Date(29, 12, 1956));
-
-	faceBook.makeFriendship("Eyal Shpater", "Nitzan Sde Or");
-	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
-	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
-	faceBook.makeFriendship("Yehudit Ravitz", "Eyal Shpater");
-
-	faceBook.addFanToPage("Eyal Shpater", "MTA College");
-	faceBook.addFanToPage("Nitzan Sde Or", "MTA College");
-	faceBook.addFanToPage("Noa Kirel", "Coming From Love");
-	faceBook.addFanToPage("Nitzan Sde Or", "Computer Science");
-	faceBook.addFanToPage("Yehudit Ravitz", "Coming From Love");
-
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "N for Nadir", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "Hello World!", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "1 2 3 check 1 2 3", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Nitzan Sde Or", "lol :)))", (int)Status::eStatusType::IMAGE, "media\\status1.jpg");
-
-	faceBook.addNewStatusToMember("Eyal Shpater", "Hello it's me.", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Eyal Shpater", "I was wondering...", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Eyal Shpater", "If after all these years you'd like to meet?", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Eyal Shpater", "lol :)))", (int)Status::eStatusType::VIDEO, "media\\status4.mp4");
-
-	faceBook.addNewStatusToMember("Noa Kirel", "la la la la la", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Noa Kirel", "Noa Kila keep it reala", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Noa Kirel", "The funniest picture!", (int)Status::eStatusType::IMAGE, "media\\status2.jpeg");
-	faceBook.addNewStatusToMember("Noa Kirel", "so cute!", (int)Status::eStatusType::IMAGE, "media\\status3.png");
-
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't want to sing on stage again.", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "Do you know any song include black gold?", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToMember("Yehudit Ravitz", "I don't understand how you can be sad, when you are the most beautiful girl", (int)Status::eStatusType::TEXT);
-
-	faceBook.addNewStatusToFansPage("MTA College", "Welcome all new students!", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToFansPage("MTA College", "If you want to pass you have to get at least 60 points.", (int)Status::eStatusType::TEXT);
-
-	faceBook.addNewStatusToFansPage("Coming From Love", "Peace and Love", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToFansPage("Coming From Love", "Maybe one day she would taste the taste of love...", (int)Status::eStatusType::TEXT);
-
-	faceBook.addNewStatusToFansPage("Computer Science", "C Plus Plus", (int)Status::eStatusType::TEXT);
-	faceBook.addNewStatusToFansPage("Computer Science", "Java Script", (int)Status::eStatusType::TEXT);
-}
-
 void ConsoleUI::menu()
 {
 	int choice;

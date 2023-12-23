@@ -51,7 +51,8 @@ private:
 	void readConnectedMembers(std::ifstream& inFile, User& member);
 	void readAllFansPagesToMember(std::ifstream& inFile, Member& member);
 	void readAllPages(std::ifstream& inFile);
-
+	
+	void addDefaultMembers();
 	void myMemberRealloc();
 	void myFansPageRealloc();
 };

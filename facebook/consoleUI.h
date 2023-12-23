@@ -22,7 +22,6 @@ public:
 	ConsoleUI() = default;
 
 	void menu();
-	void addDefaultMembersToFacebook();
 
 private:
 	ConsoleUI(const ConsoleUI&);
