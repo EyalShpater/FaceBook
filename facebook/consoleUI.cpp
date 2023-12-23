@@ -24,7 +24,6 @@ void ConsoleUI::addDefaultMembersToFacebook()
 	faceBook.addFriend("Noa Kirel", Date(10, 4, 2001));
 	faceBook.addFriend("Yehudit Ravitz", Date(29, 12, 1956));
 
-
 	faceBook.makeFriendship("Eyal Shpater", "Nitzan Sde Or");
 	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
 	faceBook.makeFriendship("Noa Kirel", "Nitzan Sde Or");
@@ -127,18 +126,18 @@ int ConsoleUI::printMenu() const
 
 	cout << "~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~" << endl;
 	cout << "Please enter your choice from the menu:" << endl
-		<< (int)eChoice::ADD_MEMBER << "- Add member" << endl
-		<< (int)eChoice::ADD_PAGE << "- Add fans page" << endl
-		<< (int)eChoice::ADD_STATUS << "- Add status to member/fans page" << endl
-		<< (int)eChoice::PRINT_STATUSES << "- Display all the statuses of a member/fans page" << endl
-		<< (int)eChoice::PRINT_TEN_STATUSES << "- Display the 10 most recent statuses of a certain member's friends" << endl
-		<< (int)eChoice::FRIENDSHIP << "- Friendship link between two friends" << endl
-		<< (int)eChoice::CANCEL_FRIENDSHIP << "- Cancellation of membership between two members" << endl
-		<< (int)eChoice::ADD_FAN_TO_PAGE << "- Add a fan to a fans-page" << endl
-		<< (int)eChoice::REMOVE_FAN_FROM_PAGE << "- Remove a fan from a page" << endl
-		<< (int)eChoice::PRINT_FACEBOOK_USERS << "- Display all members registered to faceBook" << endl
-		<< (int)eChoice::PRINT_FRIENDS_OF_USER << "- Show all the friends of a certain member/page" << endl
-		<< (int)eChoice::EXIT << "- Exit" << endl;
+		<< (int)eChoice::ADD_MEMBER << "- Add a New Member" << endl
+		<< (int)eChoice::ADD_PAGE << "- Add a New Fan Page" << endl
+		<< (int)eChoice::ADD_STATUS << "- Add a Status to a Member / Fan Page" << endl
+		<< (int)eChoice::PRINT_STATUSES << "- Show All Statuses of a Member / Fan Page" << endl
+		<< (int)eChoice::PRINT_TEN_STATUSES << "- Show 10 of the Most Recent Statuses of a Member / Fan Page" << endl
+		<< (int)eChoice::FRIENDSHIP << "- Connect Two Members - Add a Friendship" << endl
+		<< (int)eChoice::CANCEL_FRIENDSHIP << "- Disconnect Two Members - Remove a Friendship" << endl
+		<< (int)eChoice::ADD_FAN_TO_PAGE << "- Add a Member as a Fan of a Fan Page" << endl
+		<< (int)eChoice::REMOVE_FAN_FROM_PAGE << "- Remove a Member (a Fan) of a Fan Page" << endl
+		<< (int)eChoice::PRINT_FACEBOOK_USERS << "- Show All Members and Fan Pages in the system" << endl
+		<< (int)eChoice::PRINT_FRIENDS_OF_USER << "- Show All Fans / Friends of a Fan Page / Member" << endl
+		<< (int)eChoice::EXIT << "- Finish and Quit" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
 	cin >> choice;

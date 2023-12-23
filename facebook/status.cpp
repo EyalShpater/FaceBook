@@ -53,7 +53,7 @@ ostream& operator<<(ostream& os, const Status& s)
 	os << s.text << endl << endl;
 	os << "published on: " << s.theDate << ", " << s.theTime << endl;
 	os << "This status is printed in " 
-		<< (s.color == Status::eColor::BLACK_AND_WHITE ? "Black & White" : "Coloful") << endl;
+		<< (s.color == Status::eColor::BLACK_AND_WHITE ? "Black & White" : "Colorful") << endl;
 	os << "This status is shown using a "
 		<< s.openWith() << " program";
 
