@@ -46,6 +46,7 @@ Prints to the screen all the statuses of a member / fan page.
 The format will be:
 ```
   {content}
+
    published on: {time of upload}
    This status is printed in {Colorful / Black & White}
    This status is shown using a {simple / playback} program
