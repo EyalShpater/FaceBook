@@ -65,13 +65,12 @@ For example for a `VideoStatus` uploaded by user1:
    published on: 18/1/2023, 18:39:40
    This status is printed in Colorful
    This status is shown using a playback program
-```
-<br />  
+```  
  
 ### 2.5) Show 10 of the Most Recent Statuses of a Member / Fan Page
 Prints the 10 most recent status posts of a member **OR** a fan page.   
 
-> The user will get an option to choose between the options.<br />  
+> The user will get an option to choose between the options.
 
 ### 2.6) Connect Two Members - Add a Friendship
 **Adds** a **friendship** between two **members**.<br />  
@@ -80,19 +79,16 @@ Prints the 10 most recent status posts of a member **OR** a fan page.
 **Remove** a **friendship** that exists between two **members**. 
 
 * If they are not friend - an exception will be thrown
-<br />  
 
 ### 2.8) Add a Member as a Fan of a Fan Page
 Add an existing member as a fan to an existing fan page.
    
 * If at least one was not found - an exception will be thrown
-<br />  
 
 ### 2.9) Remove a Member (a Fan) of a Fan Page
 Remove a fan to an existing fan page.
 
 * If at least one was not found - an exception will be thrown
-<br />  
 
 ### 2.10) Show All Members and Fan Pages in the system
 Print all existing users in the system.  <br />  
